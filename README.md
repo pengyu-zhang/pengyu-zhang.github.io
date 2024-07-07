@@ -14,14 +14,7 @@ Welcome to Pengyu Zhang’s Personal Homepage!
   **Pengyu Zhang**, Congfeng Cao, Paul Groth  
   *ECAI 2024: 27TH EUROPEAN CONFERENCE ON ARTIFICIAL INTELLIGENCE*
 
-  [![Paper](https://img.shields.io/badge/Paper-gray)](https://example.com/paper)
-  [![Appendix](https://img.shields.io/badge/Appendix-gray)](https://example.com/appendix)
-  [![Reviews](https://img.shields.io/badge/Reviews-gray)](https://example.com/reviews)
-  [![Code](https://img.shields.io/badge/Code-gray)](https://example.com/code)
-  [![Video](https://img.shields.io/badge/Video-gray)](https://example.com/video)
-  [![Slides](https://img.shields.io/badge/Slides-gray)](https://example.com/slides)
-  [![Poster](https://img.shields.io/badge/Poster-gray)](https://example.com/poster)
-  [![bibTeX](https://img.shields.io/badge/bibTeX-gray)](https://example.com/bibtex)
+
 
 ## Journal Papers
 
