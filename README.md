@@ -29,7 +29,7 @@ Welcome to Pengyu Zhang’s Personal Homepage!
   **Pengyu Zhang**, Yong Zhang, Xinglin Piao, Yongliang Sun, Baocai Yin  
   *Physica A: Statistical Mechanics and its Applications*
 
-  [![Paper](https://img.shields.io/badge/Paper-gray)](https://pengyu-zhang.github.io/assets/pdf/Relationship updating network with contrastive learning.pdf)
+  [![Paper](https://img.shields.io/badge/Paper-gray)](https://pengyu-zhang.github.io/assets/pdf/Relationship%20updating%20network%20with%20contrastive%20learning.pdf)
   [![Appendix](https://img.shields.io/badge/Appendix-gray)](https://example.com/appendix)
   [![Reviews](https://img.shields.io/badge/Reviews-gray)](https://example.com/reviews)
   [![Code](https://img.shields.io/badge/Code-gray)](https://example.com/code)
