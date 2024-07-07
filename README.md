@@ -29,45 +29,32 @@ Welcome to Pengyu Zhang’s Personal Homepage!
   **Pengyu Zhang**, Yong Zhang, Xinglin Piao, Yongliang Sun, Baocai Yin  
   *Physica A: Statistical Mechanics and its Applications*
 
-  [![Paper](https://img.shields.io/badge/Paper-gray)](https://pengyu-zhang.github.io/assets/pdf/Relationship%20updating%20network%20with%20contrastive%20learning.pdf)
-  [![Appendix](https://img.shields.io/badge/Appendix-gray)](https://example.com/appendix)
-  [![Reviews](https://img.shields.io/badge/Reviews-gray)](https://example.com/reviews)
-  [![Code](https://img.shields.io/badge/Code-gray)](https://example.com/code)
-  [![Video](https://img.shields.io/badge/Video-gray)](https://example.com/video)
-  [![Slides](https://img.shields.io/badge/Slides-gray)](https://example.com/slides)
-  [![Poster](https://img.shields.io/badge/Poster-gray)](https://example.com/poster)
-  [![bibTeX](https://img.shields.io/badge/bibTeX-gray)](https://example.com/bibtex)
+  [![Paper](https://img.shields.io/badge/Paper-gray)](https://pengyu-zhang.github.io/assets/pdf/Relationship_updating_network_with_contrastive_learning.pdf)
+  [![Code](https://img.shields.io/badge/Code-gray)](https://github.com/pengyu-zhang/RUNCL-Relationship-Updating-Network-with-Contrastive-Learning)
 
 - **MVMA-GCN: Multi-view multi-layer attention graph convolutional networks**  
   **Pengyu Zhang**, Yong Zhang, Jingcheng Wang, Baocai Yin  
   *Engineering Applications of Artificial Intelligence*
 
-  [![Paper](https://img.shields.io/badge/Paper-gray)](https://example.com/paper)
-  [![Appendix](https://img.shields.io/badge/Appendix-gray)](https://example.com/appendix)
-  [![Reviews](https://img.shields.io/badge/Reviews-gray)](https://example.com/reviews)
-  [![Code](https://img.shields.io/badge/Code-gray)](https://example.com/code)
-  [![Video](https://img.shields.io/badge/Video-gray)](https://example.com/video)
-  [![Slides](https://img.shields.io/badge/Slides-gray)](https://example.com/slides)
-  [![Poster](https://img.shields.io/badge/Poster-gray)](https://example.com/poster)
-  [![bibTeX](https://img.shields.io/badge/bibTeX-gray)](https://example.com/bibtex)
+  [![Paper](https://img.shields.io/badge/Paper-gray)](https://pengyu-zhang.github.io/assets/pdf/MVMA-GCN_Multi-view_multi-layer_attention_graph_convolutional_networks.pdf)
+  [![Code](https://img.shields.io/badge/Code-gray)](https://github.com/pengyu-zhang/MVMA-GCN)
 
 - **Dual-channel heterogeneous graph network for author name disambiguation**  
   Xin Zheng, **Pengyu Zhang**, Yanjie Cui, Rong Du, Yong Zhang  
   *Information*
 
-  [![Paper](https://img.shields.io/badge/Paper-gray)](https://example.com/paper)
-  [![Appendix](https://img.shields.io/badge/Appendix-gray)](https://example.com/appendix)
-  [![Reviews](https://img.shields.io/badge/Reviews-gray)](https://example.com/reviews)
-  [![Code](https://img.shields.io/badge/Code-gray)](https://example.com/code)
-  [![Video](https://img.shields.io/badge/Video-gray)](https://example.com/video)
-  [![Slides](https://img.shields.io/badge/Slides-gray)](https://example.com/slides)
-  [![Poster](https://img.shields.io/badge/Poster-gray)](https://example.com/poster)
-  [![bibTeX](https://img.shields.io/badge/bibTeX-gray)](https://example.com/bibtex)
+  [![Paper](https://img.shields.io/badge/Paper-gray)](https://pengyu-zhang.github.io/assets/pdf/Dual-Channel_Heterogeneous_Graph_Network_for_Author_Name_Disambiguation.pdf)
+  [![Code](https://img.shields.io/badge/Code-gray)](https://github.com/pengyu-zhang/Dual-channel-Heterogeneous-Graph-Network-for-Author-Name-Disambiguation)
 
 - **Visual Analysis for Name Disambiguation of Academic Papers**  
   **Pengyu Zhang**, Yong Zhang, Yangjie Cui, Baocai Yin  
   *Journal of Computer-Aided Design & Computer Graphics*
 
+  [![Paper](https://img.shields.io/badge/Paper-gray)](https://pengyu-zhang.github.io/assets/pdf/Visual_Analysis_for_Name_Disambiguation_of_Academic_Papers.pdf)
+  [![Video](https://img.shields.io/badge/Video-gray)](https://youtu.be/sZGQ9jVOcU0?si=nXcT5z_ealmEVFUu)
+  [![Video](https://img.shields.io/badge/Video-gray)](https://www.bilibili.com/video/BV1QM4m1k77Q/?share_source=copy_web&vd_source=0f0c53b1336c0b7fd125e87e18787003)
+
+<!--
   [![Paper](https://img.shields.io/badge/Paper-gray)](https://example.com/paper)
   [![Appendix](https://img.shields.io/badge/Appendix-gray)](https://example.com/appendix)
   [![Reviews](https://img.shields.io/badge/Reviews-gray)](https://example.com/reviews)
@@ -76,6 +63,7 @@ Welcome to Pengyu Zhang’s Personal Homepage!
   [![Slides](https://img.shields.io/badge/Slides-gray)](https://example.com/slides)
   [![Poster](https://img.shields.io/badge/Poster-gray)](https://example.com/poster)
   [![bibTeX](https://img.shields.io/badge/bibTeX-gray)](https://example.com/bibtex)
+-->
 
 # Contact Information
 
