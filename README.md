@@ -6,6 +6,12 @@ Welcome to Pengyu Zhang’s Personal Homepage!
 
 **Research Interests**: My research primarily focuses on enhancing Temporal Knowledge Graphs (TKGs) to better capture the dynamic nature of real-world entities and their relationships over time. I am particularly interested in integrating structural and textual information to improve entity linking and address the issue of temporal degradation. Additionally, I am exploring the use of multi-modal data and reinforcement learning for adaptive link prediction in TKGs, aiming to optimize decision-making processes by accurately distinguishing between beneficial and harmful temporal changes. Feel free to reach out if you have any questions or would like to discuss further.
 
+# Contact Information
+
+[p.zhang@uva.nl](mailto:p.zhang@uva.nl)
+[twitter](https://x.com/pengyu_z)
+[Google Scholar](https://scholar.google.com/citations?user=xH7mJ-0AAAAJ&hl=en)
+
 # Publications
 
 ## Conference Papers
@@ -57,7 +63,3 @@ Welcome to Pengyu Zhang’s Personal Homepage!
   [![Poster](https://img.shields.io/badge/Poster-gray)](https://example.com/poster)
   [![bibTeX](https://img.shields.io/badge/bibTeX-gray)](https://example.com/bibtex)
 -->
-
-# Contact Information
-
-[p.zhang@uva.nl](mailto:p.zhang@uva.nl)
