@@ -1,51 +1,84 @@
 # pengyuzhang.github.io
 
-# Data Scientist
+# Pengyu Zhang’s Homepage
 
-#### Technical Skills: Python, SQL, AWS, Snowflake, MATLAB
+Welcome to Pengyu Zhang’s Personal Homepage!
 
-## Education
-- Ph.D., Physics | The University of Texas at Dallas (_May 2022_)								       		
-- M.S., Physics	| The University of Texas at Dallas (_December 2019_)	 			        		
-- B.S., Physics | The University of Texas at Dallas (_May 2017_)
+**Background**: I am a second-year Ph.D. student at the [Informatics Institute](https://ivi.uva.nl/) of the [University of Amsterdam (UvA)](https://www.uva.nl/en) and a member of the [INDE lab](https://indelab.org/), where I am supervised by [Prof. Paul Groth](https://pgroth.com/). Before joining UvA, I obtained my master’s degree from the Faculty of Information Technology at [Beijing University of Technology (BJUT)](https://english.bjut.edu.cn/).
 
-## Work Experience
-**Data Scientist @ Toyota Financial Services (_June 2022 - Present_)**
-- Uncovered and corrected missing step in production data pipeline which impacted over 70% of active accounts
-- Redeveloped loan originations model which resulted in 50% improvement in model performance and saving 1 million dollars in potential losses
+**Research Interests**: My research primarily focuses on enhancing Temporal Knowledge Graphs (TKGs) to better capture the dynamic nature of real-world entities and their relationships over time. I am particularly interested in integrating structural and textual information to improve entity linking and address the issue of temporal degradation. Additionally, I am exploring the use of multi-modal data and reinforcement learning for adaptive link prediction in TKGs, aiming to optimize decision-making processes by accurately distinguishing between beneficial and harmful temporal changes. Feel free to reach out if you have any questions or would like to discuss further.
 
-**Data Science Consultant @ Shawhin Talebi Ventures LLC (_December 2020 - Present_)**
-- Conducted data collection, processing, and analysis for novel study evaluating the impact of over 300 biometrics variables on human performance in hyper-realistic, live-fire training scenarios
-- Applied unsupervised deep learning approaches to longitudinal ICU data to discover novel sepsis sub-phenotypes
+# Publications
 
-## Projects
-### Data-Driven EEG Band Discovery with Decision Trees
-[Publication](https://www.mdpi.com/1424-8220/22/8/3048)
+## Conference Papers
 
-Developed objective strategy for discovering optimal EEG bands based on signal power spectra using **Python**. This data-driven approach led to better characterization of the underlying power spectrum by identifying bands that outperformed the more commonly used band boundaries by a factor of two. The proposed method provides a fully automated and flexible approach to capturing key signal components and possibly discovering new indices of brain activity.
+- **TIGER: Temporally Improved Graph Entity Linker**  
+  **Pengyu Zhang**, Congfeng Cao, Paul Groth  
+  *ECAI 2024: 27TH EUROPEAN CONFERENCE ON ARTIFICIAL INTELLIGENCE*
 
-![EEG Band Discovery](/assets/img/eeg_band_discovery.jpeg)
+  [![Paper](https://img.shields.io/badge/Paper-gray)](https://example.com/paper)
+  [![Appendix](https://img.shields.io/badge/Appendix-gray)](https://example.com/appendix)
+  [![Reviews](https://img.shields.io/badge/Reviews-gray)](https://example.com/reviews)
+  [![Code](https://img.shields.io/badge/Code-gray)](https://example.com/code)
+  [![Video](https://img.shields.io/badge/Video-gray)](https://example.com/video)
+  [![Slides](https://img.shields.io/badge/Slides-gray)](https://example.com/slides)
+  [![Poster](https://img.shields.io/badge/Poster-gray)](https://example.com/poster)
+  [![bibTeX](https://img.shields.io/badge/bibTeX-gray)](https://example.com/bibtex)
 
-### Decoding Physical and Cognitive Impacts of Particulate Matter Concentrations at Ultra-Fine Scales
-[Publication](https://www.mdpi.com/1424-8220/22/11/4240)
+## Journal Papers
 
-Used **Matlab** to train over 100 machine learning models which estimated particulate matter concentrations based on a suite of over 300 biometric variables. We found biometric variables can be used to accurately estimate particulate matter concentrations at ultra-fine spatial scales with high fidelity (r2 = 0.91) and that smaller particles are better estimated than larger ones. Inferring environmental conditions solely from biometric measurements allows us to disentangle key interactions between the environment and the body.
+- **Relationship updating network with contrastive learning**  
+  **Pengyu Zhang**, Yong Zhang, Xinglin Piao, Yongliang Sun, Baocai Yin  
+  *Physica A: Statistical Mechanics and its Applications*
 
-![Bike Study](/assets/img/bike_study.jpeg)
+  [![Paper](https://img.shields.io/badge/Paper-gray)](https://example.com/paper)
+  [![Appendix](https://img.shields.io/badge/Appendix-gray)](https://example.com/appendix)
+  [![Reviews](https://img.shields.io/badge/Reviews-gray)](https://example.com/reviews)
+  [![Code](https://img.shields.io/badge/Code-gray)](https://example.com/code)
+  [![Video](https://img.shields.io/badge/Video-gray)](https://example.com/video)
+  [![Slides](https://img.shields.io/badge/Slides-gray)](https://example.com/slides)
+  [![Poster](https://img.shields.io/badge/Poster-gray)](https://example.com/poster)
+  [![bibTeX](https://img.shields.io/badge/bibTeX-gray)](https://example.com/bibtex)
 
-## Talks & Lectures
-- Causality: The new science of an old question - GSP Seminar, Fall 2021
-- Guest Lecture: Dimensionality Reduction - Big Data and Machine Learning for Scientific Discovery (PHYS 5336), Spring 2021
-- Guest Lecture: Fourier and Wavelet Transforms - Scientific Computing (PHYS 5315), Fall 2020
-- A Brief Introduction to Optimization - GSP Seminar, Fall 2019
-- Weeks of Welcome Poster Competition - UTD, Fall 2019
-- A Brief Introduction to Networks - GSP Seminar, Spring 2019
+- **MVMA-GCN: Multi-view multi-layer attention graph convolutional networks**  
+  **Pengyu Zhang**, Yong Zhang, Jingcheng Wang, Baocai Yin  
+  *Engineering Applications of Artificial Intelligence*
 
-- [Data Science YouTube](https://www.youtube.com/channel/UCa9gErQ9AE5jT2DZLjXBIdA)
+  [![Paper](https://img.shields.io/badge/Paper-gray)](https://example.com/paper)
+  [![Appendix](https://img.shields.io/badge/Appendix-gray)](https://example.com/appendix)
+  [![Reviews](https://img.shields.io/badge/Reviews-gray)](https://example.com/reviews)
+  [![Code](https://img.shields.io/badge/Code-gray)](https://example.com/code)
+  [![Video](https://img.shields.io/badge/Video-gray)](https://example.com/video)
+  [![Slides](https://img.shields.io/badge/Slides-gray)](https://example.com/slides)
+  [![Poster](https://img.shields.io/badge/Poster-gray)](https://example.com/poster)
+  [![bibTeX](https://img.shields.io/badge/bibTeX-gray)](https://example.com/bibtex)
 
-## Publications
-1. Talebi S., Lary D.J., Wijeratne L. OH., and Lary, T. Modeling Autonomic Pupillary Responses from External Stimuli Using Machine Learning (2019). DOI: 10.26717/BJSTR.2019.20.003446
-2. Wijeratne, L.O.; Kiv, D.R.; Aker, A.R.; Talebi, S.; Lary, D.J. Using Machine Learning for the Calibration of Airborne Particulate Sensors. Sensors 2020, 20, 99.
-3. Lary, D.J.; Schaefer, D.; Waczak, J.; Aker, A.; Barbosa, A.; Wijeratne, L.O.H.; Talebi, S.; Fernando, B.; Sadler, J.; Lary, T.; Lary, M.D. Autonomous Learning of New Environments with a Robotic Team Employing Hyper-Spectral Remote Sensing, Comprehensive In-Situ Sensing and Machine Learning. Sensors 2021, 21, 2240. https://doi.org/10.3390/s21062240
-4. Zhang, Y.; Wijeratne, L.O.H.; Talebi, S.; Lary, D.J. Machine Learning for Light Sensor Calibration. Sensors 2021, 21, 6259. https://doi.org/10.3390/s21186259
-5. Talebi, S.; Waczak, J.; Fernando, B.; Sridhar, A.; Lary, D.
+- **Dual-channel heterogeneous graph network for author name disambiguation**  
+  Xin Zheng, **Pengyu Zhang**, Yanjie Cui, Rong Du, Yong Zhang  
+  *Information*
+
+  [![Paper](https://img.shields.io/badge/Paper-gray)](https://example.com/paper)
+  [![Appendix](https://img.shields.io/badge/Appendix-gray)](https://example.com/appendix)
+  [![Reviews](https://img.shields.io/badge/Reviews-gray)](https://example.com/reviews)
+  [![Code](https://img.shields.io/badge/Code-gray)](https://example.com/code)
+  [![Video](https://img.shields.io/badge/Video-gray)](https://example.com/video)
+  [![Slides](https://img.shields.io/badge/Slides-gray)](https://example.com/slides)
+  [![Poster](https://img.shields.io/badge/Poster-gray)](https://example.com/poster)
+  [![bibTeX](https://img.shields.io/badge/bibTeX-gray)](https://example.com/bibtex)
+
+- **Visual Analysis for Name Disambiguation of Academic Papers**  
+  **Pengyu Zhang**, Yong Zhang, Yangjie Cui, Baocai Yin  
+  *Journal of Computer-Aided Design & Computer Graphics*
+
+  [![Paper](https://img.shields.io/badge/Paper-gray)](https://example.com/paper)
+  [![Appendix](https://img.shields.io/badge/Appendix-gray)](https://example.com/appendix)
+  [![Reviews](https://img.shields.io/badge/Reviews-gray)](https://example.com/reviews)
+  [![Code](https://img.shields.io/badge/Code-gray)](https://example.com/code)
+  [![Video](https://img.shields.io/badge/Video-gray)](https://example.com/video)
+  [![Slides](https://img.shields.io/badge/Slides-gray)](https://example.com/slides)
+  [![Poster](https://img.shields.io/badge/Poster-gray)](https://example.com/poster)
+  [![bibTeX](https://img.shields.io/badge/bibTeX-gray)](https://example.com/bibtex)
+
+# Contact Information
+
+[p.zhang@uva.nl](mailto:p.zhang@uva.nl)
