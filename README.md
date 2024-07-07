@@ -11,6 +11,7 @@ Welcome to Pengyu Zhang’s Personal Homepage!
 [p.zhang@uva.nl](mailto:p.zhang@uva.nl)
 [twitter](https://x.com/pengyu_z)
 [Google Scholar](https://scholar.google.com/citations?user=xH7mJ-0AAAAJ&hl=en)
+[LinkedIn](https://www.linkedin.com/in/pengyuzhang03)
 
 # Publications
 
