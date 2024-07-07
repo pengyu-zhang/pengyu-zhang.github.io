@@ -1,6 +1,4 @@
-# pengyuzhang.github.io
-
-# Pengyu Zhang’s Homepage
+# Pengyu Zhang 张鹏宇
 
 Welcome to Pengyu Zhang’s Personal Homepage!
 
