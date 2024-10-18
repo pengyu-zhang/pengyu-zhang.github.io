@@ -24,6 +24,9 @@ Welcome to Pengyu Zhang’s Personal Homepage!
   **Pengyu Zhang**, Congfeng Cao, Klim Zaporojets, Paul Groth  
   *CIKM 2024: 33rd ACM International Conference on Information and Knowledge Management*
 
+  [![Paper](https://img.shields.io/badge/Paper-gray)](https://arxiv.org/abs/2410.09127)
+  [![Code](https://img.shields.io/badge/Code-gray)](https://github.com/pengyu-zhang/CYCLE-Cross-Year-Contrastive-Learning-in-Entity-Linking)
+
 - **TIGER: Temporally Improved Graph Entity Linker**  
   **Pengyu Zhang**, Congfeng Cao, Paul Groth  
   *ECAI 2024: 7th European Conference on Artifical Intelligence*
