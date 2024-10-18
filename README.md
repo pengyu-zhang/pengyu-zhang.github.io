@@ -28,6 +28,9 @@ Welcome to Pengyu Zhang’s Personal Homepage!
   **Pengyu Zhang**, Congfeng Cao, Paul Groth  
   *ECAI 2024: 7th European Conference on Artifical Intelligence*
 
+  [![Paper](https://img.shields.io/badge/Paper-gray)](https://ebooks.iospress.nl/doi/10.3233/FAIA240933)
+  [![Code](https://img.shields.io/badge/Code-gray)](https://github.com/pengyu-zhang/TIGER-Temporally-Improved-Graph-Entity-Linker)
+
 ## Journal Papers
 
 - **Relationship updating network with contrastive learning**  
