@@ -24,7 +24,7 @@ Welcome to Pengyu Zhang’s Personal Homepage!
   **Pengyu Zhang**, Congfeng Cao, Klim Zaporojets, Paul Groth  
   *CIKM 2024: 33rd ACM International Conference on Information and Knowledge Management*
 
-  [![Paper](https://img.shields.io/badge/Paper-gray)](https://arxiv.org/abs/2410.09127)
+  [![Paper](https://img.shields.io/badge/Paper-gray)](https://dl.acm.org/doi/abs/10.1145/3627673.3679702)
   [![Code](https://img.shields.io/badge/Code-gray)](https://github.com/pengyu-zhang/CYCLE-Cross-Year-Contrastive-Learning-in-Entity-Linking)
 
 - **TIGER: Temporally Improved Graph Entity Linker**  
