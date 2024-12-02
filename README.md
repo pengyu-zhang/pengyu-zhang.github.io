@@ -20,6 +20,12 @@ Welcome to Pengyu Zhang’s Personal Homepage!
 
 ## Conference Papers
 
+- **Understanding the Impact of Entity Linking on the Topology of Entity Co-occurrence Networks for Social Media Analysis**  
+  James Nevin, **Pengyu Zhang**, Dimitar Dimitrov, Michael Lees, Paul Groth, Stefan Dietze
+  *EKAW 2024: 24th International Conference on Knowledge Engineering and Knowledge Management*
+
+  [![Paper](https://img.shields.io/badge/Paper-gray)](https://link.springer.com/chapter/10.1007/978-3-031-77792-9_5)
+
 - **CYCLE: Cross-Year Contrastive Learning in Entity-linking**  
   **Pengyu Zhang**, Congfeng Cao, Klim Zaporojets, Paul Groth  
   *CIKM 2024: 33rd ACM International Conference on Information and Knowledge Management*
