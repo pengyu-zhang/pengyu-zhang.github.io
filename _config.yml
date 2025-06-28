@@ -22,7 +22,7 @@ baidu_site_verification  : code-ZxFK3f4pfb
 # Site Author
 author:
   name             : "Pengyu Zhang (张鹏宇)"
-  avatar           : "/assets/img/headshot.jpg"
+  avatar           : "images/headshot.jpg"
   bio              : "Enhancing Temporal Knowledge Graphs (TKGs) to better capture the dynamic nature of real-world entities and their relationships over time."
   location         : "Amsterdam, Netherlands"
   employer         : "University of Amsterdam"
