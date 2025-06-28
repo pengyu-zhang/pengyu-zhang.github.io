@@ -11,8 +11,6 @@ redirect_from:
 <span class='anchor' id='about-me'></span>
 {% include_relative includes/intro.md %}
 
-"If you like the template of this homepage, welcome to star and fork my open-sourced template version [AcadHomepage ![](https://img.shields.io/github/stars/RayeRen/acad-homepage.github.io?style=social)](https://github.com/RayeRen/acad-homepage.github.io)."
-
 {% include_relative includes/news.md %}
 
 {% include_relative includes/pub.md %}
@@ -21,4 +19,8 @@ redirect_from:
 {% include_relative includes/honers.md %}
 {% endcomment %}
 
-{% include_relative includes/others.md %}
+{% include_relative includes/educations.md %}
+
+{% include_relative includes/talks.md %}
+
+{% include_relative includes/internships.md %}
