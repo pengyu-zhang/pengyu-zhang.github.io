@@ -1,32 +1,37 @@
 
-# 💻 Selected Research Papers
+# 💻 Publications
 
-My full paper list is shown at [my personal homepage](https://rayeren.github.io).
+**Pengyu Zhang**, Congfeng Cao, Klim Zaporojets, Paul Groth.  
+**CYCLE: Cross-Year Contrastive Learning in Entity-Linking**.  
+*Proceedings of the 33rd ACM International Conference on Information and Knowledge Management (CIKM), 2024.*  
+[Paper](https://dl.acm.org/doi/abs/10.1145/3627673.3679702) | [Code](https://github.com/pengyu-zhang/CYCLE-Cross-Year-Contrastive-Learning-in-Entity-Linking)
 
-#### 🎙 Audio and Speech Processing
-- ``ICLR 2021`` [FastSpeech 2: Fast and High-Quality End-to-End Text to Speech](https://arxiv.org/abs/2006.04558), **Yi Ren**, Chenxu Hu, Xu Tan, et al.
-- ``NeurIPS 2019`` [FastSpeech: Fast, Robust and Controllable Text to Speech](https://papers.nips.cc/paper/8580-fastspeech-fast-robust-and-controllable-text-to-speech.pdf), **Yi Ren**, Yangjun Ruan, Xu Tan, et al.
-- `ICLR 2024` [Mega-TTS 2: Boosting Prompting Mechanisms for Zero-Shot Speech Synthesis](https://openreview.net/forum?id=mvMI3N4AvD), Ziyue Jiang, Jinglin Liu, **Yi Ren**, et al. 
-- ``AAAI 2022`` [DiffSinger: Singing Voice Synthesis via Shallow Diffusion Mechanism](https://arxiv.org/abs/2105.02446), Jinglin Liu, Chengxi Li, **Yi Ren**, et al. [**Project**](https://diffsinger.github.io/) \| [![](https://img.shields.io/github/stars/NATSpeech/NATSpeech?style=social&label=DiffSpeech+Stars)](https://github.com/NATSpeech/NATSpeech) \| [![](https://img.shields.io/github/stars/MoonInTheRiver/DiffSinger?style=social&label=DiffSinger+Stars)](https://github.com/MoonInTheRiver/DiffSinger) \| [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-blue?label=Demo)](https://huggingface.co/spaces/NATSpeech/DiffSpeech)
-- ``NeurIPS 2021`` [PortaSpeech: Portable and High-Quality Generative Text-to-Speech](https://arxiv.org/abs/2109.15166), **Yi Ren**, Jinglin Liu, Zhou Zhao, [**Project**](https://portaspeech.github.io/) \| [![](https://img.shields.io/github/stars/NATSpeech/NATSpeech?style=social&label=Code+Stars)](https://github.com/NATSpeech/NATSpeech) \| [![Hugging Face](https://img.shields.io/badge/%F0%9F%A4%97%20Hugging%20Face-blue?label=Demo)](https://huggingface.co/spaces/NATSpeech/PortaSpeech)
-- ``ICML 2023`` [Make-An-Audio: Text-To-Audio Generation with Prompt-Enhanced Diffusion Models](https://text-to-audio.github.io/paper.pdf), Rongjie Huang, Jiawei Huang, Dongchao Yang, **Yi Ren**, et al.
-- ``ICLR 2023`` [Bag of Tricks for Unsupervised Text-to-Speech](https://openreview.net/forum?id=SbR9mpTuBn), **Yi Ren**, Chen Zhang, Shuicheng Yan
-- ``ACL 2022`` [Learning the Beauty in Songs: Neural Singing Voice Beautifier](https://arxiv.org/abs/2202.13277), Jinglin Liu, Chengxi Li, **Yi Ren**, Zhiying Zhu, Zhou Zhao \| [![](https://img.shields.io/github/stars/MoonInTheRiver/NeuralSVB?style=social&label=Code+Stars)](https://github.com/MoonInTheRiver/NeuralSVB)
-- ``NeurIPS 2022`` [Dict-TTS: Learning to Pronounce with Prior Dictionary Knowledge for Text-to-Speech](), Ziyue Jiang, Zhe Su, Zhou Zhao, Qian Yang, **Yi Ren**, et al. [![](https://img.shields.io/github/stars/Zain-Jiang/Dict-TTS?style=social&label=Code+Stars)](https://github.com/Zain-Jiang/Dict-TTS)
+**Pengyu Zhang**, Congfeng Cao, Paul Groth.  
+**TIGER: Temporally Improved Graph Entity Linker**.  
+*ECAI 2024. IOS Press, 2024. pp. 3733–3740.*  
+[Paper](https://ebooks.iospress.nl/doi/10.3233/FAIA240933) | [Code](https://github.com/pengyu-zhang/TIGER-Temporally-Improved-Graph-Entity-Linker)
 
-#### 👄 Talkingface Generation
-- ``ICLR 2024`` [Real3D-Portrait: One-shot Realistic 3D Talking Portrait Synthesis](https://openreview.net/forum?id=7ERQPyR2eb), Zhenhui Ye, Tianyun Zhong, **Yi Ren**, et al.
-- ``ICLR 2023`` [GeneFace: Generalized and High-Fidelity Audio-Driven 3D Talking Face Synthesis](https://openreview.net/forum?id=YfwMIDhPccD), Zhenhui Ye, Ziyue Jiang`, **Yi Ren**, et al.
+James Nevin, **Pengyu Zhang**, Dimitar Dimitrov, Michael Lees, Paul Groth, Stefan Dietze.  
+**Understanding the Impact of Entity Linking on the Topology of Entity Co-occurrence Networks for Social Media Analysis**.  
+*International Conference on Knowledge Engineering and Knowledge Management (EKAW), Springer, 2024.*  
+[Paper](https://link.springer.com/chapter/10.1007/978-3-031-77792-9_5) | [Code](https://github.com/jim-g-n/Tweet-Linked-Entity-Co-occurrence)
 
-#### 📚 Machine Translation 
-- ``ACL 2023`` [AV-TranSpeech: Audio-Visual Robust Speech-to-Speech Translation](), Rongjie Huang, Huadai Liu, Xize Cheng, **Yi Ren**, et al.
-- ``ICLR 2023`` [TranSpeech: Speech-to-Speech Translation With Bilateral Perturbation](https://openreview.net/forum?id=UVAmFAtC5ye), Rongjie Huang, Jinglin Liu, Huadai Liu, **Yi Ren**, et al.
-- ``ACL 2020`` [SimulSpeech: End-to-End Simultaneous Speech to Text Translation](https://www.aclweb.org/anthology/2020.acl-main.350), **Yi Ren**, et al.
-- ``ICLR 2019`` [Multilingual Neural Machine Translation with Knowledge Distillation](https://openreview.net/forum?id=S1gUsoR9YX), Xu Tan, **Yi Ren**, et al.
+**Pengyu Zhang**, Yong Zhang, Xinglin Piao, Yongliang Sun, Baocai Yin.  
+**Relationship Updating Network with Contrastive Learning**.  
+*Physica A: Statistical Mechanics and its Applications, 646 (2024): 129874.*  
+[Paper](https://pengyu-zhang.github.io/assets/pdf/Relationship_updating_network_with_contrastive_learning.pdf) | [Code](https://github.com/pengyu-zhang/RUNCL-Relationship-Updating-Network-with-Contrastive-Learning)
 
-#### 🎼 Music Generation 
-- ``ACM-MM 2020`` [PopMAG: Pop Music Accompaniment Generation](https://dl.acm.org/doi/10.1145/3394171.3413721), **Yi Ren**, Jinzheng He, Xu Tan, et al.
+**Pengyu Zhang**, Yong Zhang, Jingcheng Wang, Baocai Yin.  
+**MVMA-GCN: Multi-view Multi-layer Attention Graph Convolutional Networks**.  
+*Engineering Applications of Artificial Intelligence, 126 (2023): 106717.*  
+[Paper](https://pengyu-zhang.github.io/assets/pdf/MVMA-GCN_Multi-view_multi-layer_attention_graph_convolutional_networks.pdf) | [Code](https://github.com/pengyu-zhang/MVMA-GCN)
 
-#### 🧑‍🎨 Generative Model
-- ``ICLR 2022`` [Pseudo Numerical Methods for Diffusion Models on Manifolds](https://openreview.net/forum?id=PlKWVd2yBkY), Luping Liu, **Yi Ren**, et al. \| [![](https://img.shields.io/github/stars/luping-liu/PNDM?style=social&label=Code+Stars)](https://github.com/luping-liu/PNDM) \| [![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/pseudo-numerical-methods-for-diffusion-models-1/image-generation-on-celeba-64x64)](https://paperswithcode.com/sota/image-generation-on-celeba-64x64?p=pseudo-numerical-methods-for-diffusion-models-1)
+**Pengyu Zhang**, Yong Zhang, Yanjie Cui, Baocai Yin.  
+**Visual Analysis for Name Disambiguation of Academic Papers** *(in Chinese)*.  
+*Journal of Computer-Aided Design and Computer Graphics, 2022, 34(11): 1659–1672.* (CCF-A, EI)  
+[Paper](https://pengyu-zhang.github.io/assets/pdf/Visual_Analysis_for_Name_Disambiguation_of_Academic_Papers.pdf) | [Video (YouTube)](https://www.youtube.com/watch?v=sZGQ9jVOcU0&ab_channel=PengyuZhang) | [Video (Bilibili)](https://www.bilibili.com/video/BV1QM4m1k77Q/?share_source=copy_web&vd_source=0f0c53b1336c0b7fd125e87e18787003)
 
+Xin Zheng, **Pengyu Zhang**, Yanjie Cui, Rong Du, Yong Zhang.  
+**Dual-Channel Heterogeneous Graph Network for Author Name Disambiguation**.  
+*Information, 12(9), 2021: 383.*  
+[Paper](https://pengyu-zhang.github.io/assets/pdf/Dual-Channel_Heterogeneous_Graph_Network_for_Author_Name_Disambiguation.pdf) | [Code](https://github.com/pengyu-zhang/Dual-channel-Heterogeneous-Graph-Network-for-Author-Name-Disambiguation)
