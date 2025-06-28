@@ -1,5 +1,4 @@
-
-# 💻 Publications
+# Publications
 
 - ``CIKM 2024`` CYCLE: Cross-Year Contrastive Learning in Entity-Linking. **Pengyu Zhang**, Congfeng Cao, Klim Zaporojets, Paul Groth. Proceedings of the 33rd ACM International Conference on Information and Knowledge Management.  
 [Paper](https://github.com/pengyu-zhang/pengyu-zhang.github.io/blob/main/pdf/CYCLE.pdf) | [Code](https://github.com/pengyu-zhang/CYCLE-Cross-Year-Contrastive-Learning-in-Entity-Linking)
