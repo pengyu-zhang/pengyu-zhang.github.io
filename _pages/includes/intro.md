@@ -1,0 +1,5 @@
+I am a second-year Ph.D. student at the [Informatics Institute](https://ivi.uva.nl/) of the [University of Amsterdam (UvA)](https://www.uva.nl/en) and a member of the [INDE lab](https://indelab.org/), where I am supervised by [Prof. Paul Groth](https://pgroth.com/). Before joining UvA, I obtained my master’s degree from the Faculty of Information Technology at [Beijing University of Technology (BJUT)](https://english.bjut.edu.cn/).
+
+My research primarily focuses on enhancing Temporal Knowledge Graphs (TKGs) to better capture the dynamic nature of real-world entities and their relationships over time. I am particularly interested in integrating structural and textual information to improve entity linking and address the issue of temporal degradation. Additionally, I am exploring the use of multi-modal data and reinforcement learning for adaptive link prediction in TKGs, aiming to optimize decision-making processes by accurately distinguishing between beneficial and harmful temporal changes.
+
+Feel free to reach out if you have any questions or would like to discuss further.
