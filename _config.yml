@@ -6,9 +6,9 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-title                    : "Yi Ren (任意)"
-description              : "Focusing on video and speech large generation model."
-repository               : "rayeren/rayeren.github.io"
+title                    : "Pengyu Zhang (张鹏宇)"
+description              : "A third-year Ph.D. student at the University of Amsterdam (UvA), focusing on Temporal Knowledge Graphs (TKGs)."
+repository               : "pengyu-zhang/pengyu-zhang.github.io"
 google_scholar_stats_use_cdn : true
 
 # google analytics
@@ -21,14 +21,14 @@ baidu_site_verification  : code-ZxFK3f4pfb
 
 # Site Author
 author:
-  name             : "Yi Ren (任意)"
-  avatar           : "images/ry_profile.jpeg"
-  bio              : ""
-  location         : "Singapore"
-  employer         :
+  name             : "Pengyu Zhang (张鹏宇)"
+  avatar           : "/assets/img/headshot.jpg"
+  bio              : "Enhancing Temporal Knowledge Graphs (TKGs) to better capture the dynamic nature of real-world entities and their relationships over time."
+  location         : "Amsterdam, Netherlands"
+  employer         : "University of Amsterdam"
   pubmed           : 
-  googlescholar    : "https://scholar.google.com/citations?user=4FA6C0AAAAAJ"
-  email            : "rayeren613@gmail.com"
+  googlescholar    : "https://scholar.google.com/citations?user=xH7mJ-0AAAAJ&hl"
+  email            : "p.zhang@uva.nl"
   researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
   uri              :
   bitbucket        :
@@ -37,21 +37,21 @@ author:
   flickr           :
   facebook         :
   foursquare       :
-  github           : "RayeRen"
+  github           : "pengyu-zhang"
   google_plus      :
   keybase          :
   instagram        :
   impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
   lastfm           :
-  linkedin         : "rayeren"
-  dblp             : "https://dblp.org/pid/75/6568-6.html"
-  orcid            : "https://orcid.org/0000-0002-9160-3848"
+  linkedin         : "pengyuzhang03"
+  dblp             : #"https://dblp.org/pid/75/6568-6.html"
+  orcid            : "https://orcid.org/0000-0001-5111-4487"
   pinterest        :
   soundcloud       :
   stackoverflow    : # http://stackoverflow.com/users/123456/username
   steam            :
   tumblr           :
-  twitter          : 
+  twitter          : "pengyu_z"
   vine             :
   weibo            :
   xing             :
