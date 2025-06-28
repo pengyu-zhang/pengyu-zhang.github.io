@@ -1,12 +1,12 @@
 # Site Settings
 title: "Pengyu Zhang (张鹏宇)"
-description: "A second-year Ph.D. student at the University of Amsterdam (UvA), focusing on Temporal Knowledge Graphs (TKGs)."
-repository: "pengyu-zhang/pengyu-zhang.github.io" #   রিপোজিটরির নাম দিন
+description: "A third-year Ph.D. student at the University of Amsterdam (UvA), focusing on Temporal Knowledge Graphs (TKGs)."
+repository: "pengyu-zhang/pengyu-zhang.github.io"
 
 # Site Author
 author:
   name: "Pengyu Zhang (张鹏宇)"
-  avatar: "images/your-photo.jpeg" # আপনার ছবি দিন
+  avatar: "/assets/img/headshot.jpg"
   bio: "Enhancing Temporal Knowledge Graphs (TKGs) to better capture the dynamic nature of real-world entities and their relationships over time."
   location: "Amsterdam, Netherlands"
   employer: "University of Amsterdam"
