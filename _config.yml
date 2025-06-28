@@ -9,7 +9,7 @@
 title                    : "Pengyu Zhang (张鹏宇)"
 description              : "Graphs evolve. I keep up."
 repository               : "pengyu-zhang/pengyu-zhang.github.io"
-google_scholar_stats_use_cdn : true
+google_scholar_stats_use_cdn : false
 
 # google analytics
 google_analytics_id      : G-9PGZPE733E
