@@ -17,6 +17,8 @@ redirect_from:
 
 {% include_relative includes/pub_short.md %}
 
+{% include_relative includes/cv.md %}
+
 {% comment %}
 {% include_relative includes/pub.md %}
 
