@@ -1,85 +1,72 @@
-# Pengyu Zhang 张鹏宇
 
-Welcome to Pengyu Zhang’s Personal Homepage!
+<h1 align="center">
+AcadHomepage
+</h1>
 
-**Background**: I am a second-year Ph.D. student at the [Informatics Institute](https://ivi.uva.nl/) of the [University of Amsterdam (UvA)](https://www.uva.nl/en) and a member of the [INDE lab](https://indelab.org/), where I am supervised by [Prof. Paul Groth](https://pgroth.com/). Before joining UvA, I obtained my master’s degree from the Faculty of Information Technology at [Beijing University of Technology (BJUT)](https://english.bjut.edu.cn/).
+<div align="center">
 
-**Research Interests**: My research primarily focuses on enhancing Temporal Knowledge Graphs (TKGs) to better capture the dynamic nature of real-world entities and their relationships over time. I am particularly interested in integrating structural and textual information to improve entity linking and address the issue of temporal degradation. Feel free to reach out if you have any questions or would like to discuss further.
+[![](https://img.shields.io/github/stars/RayeRen/acad-homepage.github.io)](https://github.com/RayeRen/acad-homepage.github.io)
+[![](https://img.shields.io/github/forks/RayeRen/acad-homepage.github.io)](https://github.com/RayeRen/acad-homepage.github.io)
+[![](https://img.shields.io/github/issues/RayeRen/acad-homepage.github.io)](https://github.com/RayeRen/acad-homepage.github.io)
+[![](https://img.shields.io/github/license/RayeRen/acad-homepage.github.io)](https://github.com/RayeRen/acad-homepage.github.io/blob/main/LICENSE)  | [中文文档](./docs/README-zh.md) 
+</div>
 
-# Contact Information
+<p align="center">A Modern and Responsive Academic Personal Homepage</p>
 
-[p.zhang@uva.nl](mailto:p.zhang@uva.nl)
+<p align="center">
+    <br>
+    <img src="docs/screenshot.png" width="100%"/>
+    <br>
+</p>
 
-[twitter](https://x.com/pengyu_z)
+Some examples:
+- [Demo Page](https://rayeren.github.io/acad-homepage.github.io/)
+- [Personal Homepage of the author](https://rayeren.github.io/)
 
-[Google Scholar](https://scholar.google.com/citations?user=xH7mJ-0AAAAJ&hl=en)
+## Key Features
+- **Automatically update google scholar citations**: using the google scholar crawler and github action, this REPO can update the author citations and publication citations automatically.
+- **Support Google analytics**: you can trace the traffics of your homepage by easy configuration.
+- **Responsive**: this homepage automatically adjust for different screen sizes and viewports.
+- **Beautiful and Simple Design**: this homepage is beautiful and simple, which is very suitable for academic personal homepage.
+- **SEO**: search Engine Optimization (SEO) helps search engines find the information you publish on your homepage easily, then rank it against similar websites.
 
-[LinkedIn](https://www.linkedin.com/in/pengyuzhang03)
+## Quick Start
 
-# Publications
+1. Fork this REPO and rename to `USERNAME.github.io`, where `USERNAME` is your github USERNAME.
+1. Configure the google scholar citation crawler:
+    1. Find your google scholar ID in the url of your google scholar page (e.g., https://scholar.google.com/citations?user=SCHOLAR_ID), where `SCHOLAR_ID` is your google scholar ID.
+    1. Set GOOGLE_SCHOLAR_ID variable to your google scholar ID in `Settings -> Secrets -> Actions -> New repository secret` of the REPO website with `name=GOOGLE_SCHOLAR_ID` and `value=SCHOLAR_ID`.
+    1. Click the `Action` of the REPO website and enable the workflows by clicking *"I understand my workflows, go ahead and enable them"*. This github action will generate google scholar citation stats data `gs_data.json` in `google-scholar-stats` branch of your REPO. When you update your main branch, this action will be triggered. This action will also be trigger 08:00 UTC everyday.
+1. Generate favicon using [favicon-generator](https://redketchup.io/favicon-generator) and download all generated files to `REPO/images`.
+1. Modify the configuration of your homepage `_config.yml`:
+    1. `title`: the title of your homepage
+    1. `description`: the description of your homepage
+    1. `repository`: USER_NAME/REPO_NAME  
+    1. `google_analytics_id` (optional): google analytics ID
+    1. SEO Related keys (optional): get these keys from search engine consoles (e.g. Google, Bing and Baidu) and paste here.
+    1. `author`: the author information of this homepage, including some other websites, emails, city and univeristy.
+    1. More configuration details are described in the comments.
+1. Add your homepage content in `_pages/about.md`.
+    1. You can use html+markdown syntax just same as jekyll.
+    1. You can use a `<span>` tag with class `show_paper_citations` and attribute `data` to display the citations of your paper. Set the data to the google scholar paper ID. For
+        ```html
+        <span class='show_paper_citations' data='DhtAFkwAAAAJ:ALROH1vI_8AC'></span>
+        ``` 
+        > Q: How to get the google scholar paper ID?   
+        > A: Enter your google scholar homepage and click the paper name. Then you can see the paper ID from `citation_for_view=XXXX`, where `XXXX` is the required paper ID.
+1. Your page will be published at `https://USERNAME.github.io`.
 
-## Conference Papers
+## Debug Locally
 
-- **Understanding the Impact of Entity Linking on the Topology of Entity Co-occurrence Networks for Social Media Analysis**  
-  James Nevin, **Pengyu Zhang**, Dimitar Dimitrov, Michael Lees, Paul Groth, Stefan Dietze
-  *EKAW 2024: 24th International Conference on Knowledge Engineering and Knowledge Management*
+1. Clone your REPO to local using `git clone`.
+1. Install Jekyll building environment, including `Ruby`, `RubyGems`, `GCC` and `Make` following [the installation guide](https://jekyllrb.com/docs/installation/#requirements).
+1. Run `bash run_server.sh` to start Jekyll livereload server.
+1. Open http://127.0.0.1:4000 in your browser.
+1. If you change the source code of the website, the livereload server will automatically refresh.
+1. When you finish the modification of your homepage, `commit` your changings and `push` to your remote REPO using `git` command.
 
-  [![Paper](https://img.shields.io/badge/Paper-gray)](https://link.springer.com/chapter/10.1007/978-3-031-77792-9_5)
-  [![Code](https://img.shields.io/badge/Code-gray)](https://github.com/jim-g-n/Tweet-Linked-Entity-Co-occurrence)
+# Acknowledges
 
-- **CYCLE: Cross-Year Contrastive Learning in Entity-linking**  
-  **Pengyu Zhang**, Congfeng Cao, Klim Zaporojets, Paul Groth  
-  *CIKM 2024: 33rd ACM International Conference on Information and Knowledge Management*
-
-  [![Paper](https://img.shields.io/badge/Paper-gray)](https://dl.acm.org/doi/abs/10.1145/3627673.3679702)
-  [![Code](https://img.shields.io/badge/Code-gray)](https://github.com/pengyu-zhang/CYCLE-Cross-Year-Contrastive-Learning-in-Entity-Linking)
-
-- **TIGER: Temporally Improved Graph Entity Linker**  
-  **Pengyu Zhang**, Congfeng Cao, Paul Groth  
-  *ECAI 2024: 7th European Conference on Artifical Intelligence*
-
-  [![Paper](https://img.shields.io/badge/Paper-gray)](https://ebooks.iospress.nl/doi/10.3233/FAIA240933)
-  [![Code](https://img.shields.io/badge/Code-gray)](https://github.com/pengyu-zhang/TIGER-Temporally-Improved-Graph-Entity-Linker)
-
-## Journal Papers
-
-- **Relationship updating network with contrastive learning**  
-  **Pengyu Zhang**, Yong Zhang, Xinglin Piao, Yongliang Sun, Baocai Yin  
-  *Physica A: Statistical Mechanics and its Applications*
-
-  [![Paper](https://img.shields.io/badge/Paper-gray)](https://pengyu-zhang.github.io/assets/pdf/Relationship_updating_network_with_contrastive_learning.pdf)
-  [![Code](https://img.shields.io/badge/Code-gray)](https://github.com/pengyu-zhang/RUNCL-Relationship-Updating-Network-with-Contrastive-Learning)
-
-- **MVMA-GCN: Multi-view multi-layer attention graph convolutional networks**  
-  **Pengyu Zhang**, Yong Zhang, Jingcheng Wang, Baocai Yin  
-  *Engineering Applications of Artificial Intelligence*
-
-  [![Paper](https://img.shields.io/badge/Paper-gray)](https://pengyu-zhang.github.io/assets/pdf/MVMA-GCN_Multi-view_multi-layer_attention_graph_convolutional_networks.pdf)
-  [![Code](https://img.shields.io/badge/Code-gray)](https://github.com/pengyu-zhang/MVMA-GCN)
-
-- **Dual-channel heterogeneous graph network for author name disambiguation**  
-  Xin Zheng, **Pengyu Zhang**, Yanjie Cui, Rong Du, Yong Zhang  
-  *Information*
-
-  [![Paper](https://img.shields.io/badge/Paper-gray)](https://pengyu-zhang.github.io/assets/pdf/Dual-Channel_Heterogeneous_Graph_Network_for_Author_Name_Disambiguation.pdf)
-  [![Code](https://img.shields.io/badge/Code-gray)](https://github.com/pengyu-zhang/Dual-channel-Heterogeneous-Graph-Network-for-Author-Name-Disambiguation)
-
-- **Visual Analysis for Name Disambiguation of Academic Papers**  
-  **Pengyu Zhang**, Yong Zhang, Yangjie Cui, Baocai Yin  
-  *Journal of Computer-Aided Design & Computer Graphics*
-
-  [![Paper](https://img.shields.io/badge/Paper-gray)](https://pengyu-zhang.github.io/assets/pdf/Visual_Analysis_for_Name_Disambiguation_of_Academic_Papers.pdf)
-  [![Video](https://img.shields.io/badge/Video-gray)](https://youtu.be/sZGQ9jVOcU0?si=nXcT5z_ealmEVFUu)
-  [![Video](https://img.shields.io/badge/Video-gray)](https://www.bilibili.com/video/BV1QM4m1k77Q/?share_source=copy_web&vd_source=0f0c53b1336c0b7fd125e87e18787003)
-
-<!--
-  [![Paper](https://img.shields.io/badge/Paper-gray)](https://example.com/paper)
-  [![Appendix](https://img.shields.io/badge/Appendix-gray)](https://example.com/appendix)
-  [![Reviews](https://img.shields.io/badge/Reviews-gray)](https://example.com/reviews)
-  [![Code](https://img.shields.io/badge/Code-gray)](https://example.com/code)
-  [![Video](https://img.shields.io/badge/Video-gray)](https://example.com/video)
-  [![Slides](https://img.shields.io/badge/Slides-gray)](https://example.com/slides)
-  [![Poster](https://img.shields.io/badge/Poster-gray)](https://example.com/poster)
-  [![bibTeX](https://img.shields.io/badge/bibTeX-gray)](https://example.com/bibtex)
-  Additionally, I am exploring the use of multi-modal data and reinforcement learning for adaptive link prediction in TKGs, aiming to optimize decision-making processes by accurately distinguishing between beneficial and harmful temporal changes.
--->
+- AcadHomepage incorporates Font Awesome, which is distributed under the terms of the SIL OFL 1.1 and MIT License.
+- AcadHomepage is influenced by the github repo [mmistakes/minimal-mistakes](https://github.com/mmistakes/minimal-mistakes), which is distributed under the MIT License.
+- AcadHomepage is influenced by the github repo [academicpages/academicpages.github.io](https://github.com/academicpages/academicpages.github.io), which is distributed under the MIT License.
