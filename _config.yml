@@ -7,7 +7,7 @@
 
 # Site Settings
 title                    : "Pengyu Zhang (张鹏宇)"
-description              : "A third-year Ph.D. student at the University of Amsterdam (UvA), focusing on Temporal Knowledge Graphs (TKGs)."
+description              : "Graphs evolve. I try to keep up."
 repository               : "pengyu-zhang/pengyu-zhang.github.io"
 google_scholar_stats_use_cdn : true
 
@@ -23,7 +23,7 @@ baidu_site_verification  :
 author:
   name             : "Pengyu Zhang (张鹏宇)"
   avatar           : "images/headshot.jpg"
-  bio              : "Enhancing Temporal Knowledge Graphs (TKGs) to better capture the dynamic nature of real-world entities and their relationships over time."
+  bio              : ""
   location         : "Amsterdam, Netherlands"
   employer         : "University of Amsterdam"
   pubmed           : 
