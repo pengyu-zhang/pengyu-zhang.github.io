@@ -6,7 +6,7 @@
 # `jekyll serve`. If you change this file, please restart the server process.
 
 # Site Settings
-title                    : "Pengyu Zhang (张鹏宇)"
+title                    : "Pengyu Zhang"
 description              : "Graphs evolve. I keep up."
 repository               : "pengyu-zhang/pengyu-zhang.github.io"
 google_scholar_stats_use_cdn : false
