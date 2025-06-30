@@ -23,8 +23,8 @@ baidu_site_verification  :
 author:
   name             : "Pengyu Zhang (张鹏宇)"
   avatar           : "images/headshot.jpg"
-  bio              : ""
-  location         : "Amsterdam, Netherlands"
+  bio              : 
+  location         : 
   employer         : "University of Amsterdam"
   pubmed           : 
   googlescholar    : "https://scholar.google.com/citations?user=xH7mJ-0AAAAJ&hl"
