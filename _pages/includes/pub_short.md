@@ -6,8 +6,8 @@
 - ``ECAI 2024`` TIGER: Temporally Improved Graph Entity Linker. **Pengyu Zhang**, Congfeng Cao, Paul Groth. IOS Press, pp. 3733–3740.  
 [Paper](https://pengyu-zhang.github.io/pdf/TIGER.pdf) | [Code](https://github.com/pengyu-zhang/TIGER-Temporally-Improved-Graph-Entity-Linker)
 
-- ``arXiv`` Using Large Language Models to Tackle Fundamental Challenges in Graph Learning: A Comprehensive Survey. Mengran Li, **Pengyu Zhang**, Wenbin Xing, Yijia Zheng, Klim Zaporojets, Junzhou Chen, Ronghui Zhang, Yong Zhang, Siyuan Gong, Jia Hu, Xiaolei Ma, Zhiyuan Liu, Paul Groth, Marcel Worring. arXiv:2505.18475.  
-[Paper](https://arxiv.org/abs/2505.18475) | [Code](https://github.com/limengran98/Awesome-Literature-Graph-Learning-Challenges)
+- ``ESWA 2025`` A survey of large language models for data challenges in graphs. Mengran Li, **Pengyu Zhang**, Wenbin Xing, Yijia Zheng, Klim Zaporojets, Junzhou Chen, Ronghui Zhang, Yong Zhang, Siyuan Gong, Jia Hu, Xiaolei Ma, Zhiyuan Liu, Paul Groth, Marcel Worring. Expert Systems with Applications. https://doi.org/10.1016/j.eswa.2025.129643.
+[Paper](https://pengyu-zhang.github.io/pdf/Graph-Learning-Challenges.pdf) | [Code](https://github.com/limengran98/Awesome-Literature-Graph-Learning-Challenges)
 
 - ``EKAW 2024`` Understanding the Impact of Entity Linking on the Topology of Entity Co-occurrence Networks for Social Media Analysis. James Nevin, **Pengyu Zhang**, Dimitar Dimitrov, Michael Lees, Paul Groth, Stefan Dietze. International Conference on Knowledge Engineering and Knowledge Management.  
 [Paper](https://link.springer.com/chapter/10.1007/978-3-031-77792-9_5) | [Code](https://github.com/jim-g-n/Tweet-Linked-Entity-Co-occurrence)
