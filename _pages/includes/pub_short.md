@@ -19,7 +19,7 @@
 [Paper](https://pengyu-zhang.github.io/pdf/MVMA-GCN.pdf) | [Code](https://github.com/pengyu-zhang/MVMA-GCN)
 
 - ``JCAD 2022`` Visual Analysis for Name Disambiguation of Academic Papers *(in Chinese)*. **Pengyu Zhang**, Yong Zhang, Yanjie Cui, Baocai Yin. Journal of Computer-Aided Design and Computer Graphics. 10.3724/sp.j.1089.2022.19191.  
-[Paper](https://pengyu-zhang.github.io/pdf/Visual_Analysis.pdf) | [Video (YouTube)](https://www.youtube.com/watch?v=jQ8MNu-L-Os) | [Video (Bilibili)](https://www.bilibili.com/video/BV1QM4m1k77Q/?share_source=copy_web&vd_source=0f0c53b1336c0b7fd125e87e18787003)
+[Paper](https://pengyu-zhang.github.io/pdf/Visual_Analysis.pdf) | [Video (YouTube)](https://www.youtube.com/watch?v=jQ8MNu-L-Os) | [Video (Bilibili)](https://www.bilibili.com/video/BV1QM4m1k77Q/)
 
 - ``Information 2021`` Dual-Channel Heterogeneous Graph Network for Author Name Disambiguation. Xin Zheng, **Pengyu Zhang**, Yanjie Cui, Rong Du, Yong Zhang. Information. 10.3390/info12090383.  
 [Paper](https://pengyu-zhang.github.io/pdf/Dual-Channel.pdf) | [Code](https://github.com/pengyu-zhang/Dual-channel-Heterogeneous-Graph-Network-for-Author-Name-Disambiguation)
