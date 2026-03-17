@@ -1,5 +1,8 @@
 # Publications
 
+- ``ESWC 2026`` Are a Thousand Words Better Than a Single Picture? Beyond Images - A Framework for Multi-Modal Knowledge Graph Dataset Enrichment. **Pengyu Zhang**, Klim Zaporojets, Jie Liu, Jia-Hong Huang, Paul Groth. 23rd European Semantic Web Conference.  
+[Paper](https://pengyu-zhang.github.io/pdf/Beyond_Images.pdf) | [Code](https://github.com/pengyu-zhang/Beyond-Images)
+
 - ``ESWA 2025`` A survey of large language models for data challenges in graphs. Mengran Li, **Pengyu Zhang**, Wenbin Xing, Yijia Zheng, Klim Zaporojets, Junzhou Chen, Ronghui Zhang, Yong Zhang, Siyuan Gong, Jia Hu, Xiaolei Ma, Zhiyuan Liu, Paul Groth, Marcel Worring. Expert Systems with Applications. 10.1016/j.eswa.2025.129643.  
 [Paper](https://pengyu-zhang.github.io/pdf/Graph-Learning-Challenges.pdf) | [Code](https://github.com/limengran98/Awesome-Literature-Graph-Learning-Challenges)
 
