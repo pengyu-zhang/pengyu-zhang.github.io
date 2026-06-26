@@ -210,3 +210,9 @@ h1:before, .anchor:before {
 .author__tagline {
   font-style: italic;
 }
+
+/* Unify the sidebar social icons to one color (drop the per-brand colors) so
+   the wide list matches the compact narrow-screen row. Themed for dark mode. */
+.author__urls.social-icons i {
+  color: var(--text);
+}
