@@ -66,6 +66,11 @@
 <meta name="theme-color" content="#ffffff">
 <link rel="stylesheet" href="assets/css/academicons.css"/>
 
+<!-- Inter (modern UI typeface) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
 <script type="text/x-mathjax-config"> MathJax.Hub.Config({ TeX: { equationNumbers: { autoNumber: "all" } } }); </script>
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({
@@ -76,6 +81,17 @@
   });
 </script>
 <script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/latest.js?config=TeX-MML-AM_CHTML' async></script>
+
+<!-- Apply saved/OS color theme before paint to avoid a flash -->
+<script>
+  (function () {
+    try {
+      var saved = localStorage.getItem('theme');
+      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', theme);
+    } catch (e) {}
+  })();
+</script>
 
 <!-- end custom head snippets -->
 
@@ -110,8 +126,27 @@
         <ul class="hidden-links hidden"></ul>
       </nav>
     </div>
+    <button type="button" id="theme-toggle" class="theme-toggle" aria-label="Toggle light/dark mode" title="Toggle light/dark mode"></button>
   </div>
 </div>
+
+<script>
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    function setIcon() {
+      var dark = document.documentElement.getAttribute('data-theme') === 'dark';
+      btn.textContent = dark ? '☀️' : '🌙'; // ☀️ / 🌙
+    }
+    setIcon();
+    btn.addEventListener('click', function () {
+      var next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      setIcon();
+    });
+  })();
+</script>
 
     <div id="main" role="main">
       
@@ -241,7 +276,7 @@
           <section class="page__content" itemprop="text">
             <h1 id="about-me">About Me</h1>
 
-<p>I am a fourth-year Ph.D. candidate in Computer Science at the INtelligent Data Engineering Lab (INDElab), University of Amsterdam, advised by <a href="https://pgroth.com">Prof. Dr. Paul Groth</a> and <a href="https://klimzaporojets.github.io/">Dr. Klim Zaporojets</a>.</p>
+<p>I am a fourth-year Ph.D. candidate in Computer Science at the INtelligent Data Engineering Lab (<a href="https://indelab.org/">INDElab</a>), University of Amsterdam, advised by <a href="https://pgroth.com">Prof. Dr. Paul Groth</a> and <a href="https://klimzaporojets.github.io/">Dr. Klim Zaporojets</a>.</p>
 
 <p><strong>My research</strong> builds deep-learning models for multi-modal knowledge graphs that stay accurate as data drifts over time and that disambiguate near-identical entities. I fuse graph structure, text, images, and temporal signals for entity linking, link prediction, and recommendation. My methods consistently improve over prior state of the art (up to <strong>+20% on entity linking</strong> and <strong>+6% on recommendation</strong>) and ship as open-source code with released datasets and benchmarks.</p>
 
