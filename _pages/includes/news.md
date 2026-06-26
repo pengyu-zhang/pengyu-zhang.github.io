@@ -1,6 +1,14 @@
-# 🔥 News
-- *2024.03*: 🎉 Two papers are accepted by ICLR 2024
-- *2023.05*: 🎉 Five papers are accepted by ACL 2023
-- *2023.01*: DiffSinger was introduced in [a very popular video](https://www.bilibili.com/video/BV1uM411t7ZJ) (2000k+ views) in Bilibili!
-- *2023.01*: I join TikTok <img src='./images/tiktok.png' style='width: 6em;'> as a speech research scientist in Singapore!
-- *2022.02*: I release a modern and responsive academic personal [homepage template](https://github.com/RayeRen/acad-homepage.github.io). Welcome to STAR and FORK!
+# News
+- *2026.07*: 🎤 Heading to San Diego in July for **ACL 2026** to present *Fusion Training for Mathematical Generalization in Large Language Models*, come say hi if you'll be around!
+- *2026.05*: A great week in Dubrovnik presenting *Beyond Images* at **ESWC 2026**.
+- *2026.05*: Presented *Graph-TempCZ* at **LREC 2026** in Palma de Mallorca, lots of good chats on software mentions in the literature.
+- *2026.04*: 🎉 *Fusion Training for Mathematical Generalization in Large Language Models* is in at the **ACL 2026** Student Research Workshop!
+- *2026.03*: 🎉 *Beyond Images* was accepted at **ESWC 2026**, thanks to everyone who made it happen.
+- *2026.01*: 🎉 *Graph-TempCZ* accepted at **LREC 2026**. Great to see this one land.
+- *2025.08*: 🎉 Our survey on large language models for data challenges in graphs was accepted in **Expert Systems with Applications**.
+- *2024.11*: Presented our work on entity linking and co-occurrence networks at **EKAW 2024**, right here in Amsterdam.
+- *2024.10*: Off to Boise for **CIKM 2024** to present *CYCLE*.
+- *2024.10*: Presented *TIGER* at **ECAI 2024** in Santiago de Compostela.
+- *2024.09*: 🎉 Our paper on entity linking in co-occurrence networks was accepted at **EKAW 2024**.
+- *2024.08*: 🎉 *CYCLE* accepted at **CIKM 2024**!
+- *2024.07*: 🎉 *TIGER* accepted at **ECAI 2024**!

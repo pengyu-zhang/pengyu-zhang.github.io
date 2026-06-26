@@ -6,8 +6,10 @@
         var gsDataBaseUrl = 'https://raw.githubusercontent.com/{{ site.repository }}/'
         {% endif %}
         $.getJSON(gsDataBaseUrl + "google-scholar-stats/gs_data.json", function (data) {
-            // var totalCitation = data['citedby']
-            // document.getElementById('total_cit').innerHTML = totalCitation;
+            var totalCitEl = document.getElementById('total_cit');
+            if (totalCitEl && data['citedby'] != null) {
+                totalCitEl.innerHTML = 'Total citations: ' + data['citedby'];
+            }
             var citationEles = document.getElementsByClassName('show_paper_citations')
             Array.prototype.forEach.call(citationEles, element => {
                 var paperId = element.getAttribute('data')
