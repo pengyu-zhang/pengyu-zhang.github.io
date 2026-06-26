@@ -1,7 +1,7 @@
 services:
   jekyll:
     image: ruby:2.7
-    container_name: pengyu_homepage_v2
+    container_name: pengyu_homepage_v3
     working_dir: /srv/jekyll
     environment:
       - BUNDLE_PATH=/usr/local/bundle
