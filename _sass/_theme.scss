@@ -17,6 +17,9 @@
   --border:         #{$lighter-gray};
   --code-bg:        #fafafa;
 
+  /* frosted sticky header */
+  --header-bg:      rgba(255, 255, 255, 0.8);
+
   /* conference badges */
   --badge-bg:       var(--accent);
   --badge-text:     #ffffff;
@@ -92,6 +95,7 @@ li em:first-child {
   --muted:          #969ba3;
   --border:         #2a2f37;
   --code-bg:        #1b1e24;
+  --header-bg:      rgba(20, 22, 26, 0.8);
 
   --badge-bg:       #3a5bd0;
   --badge-text:     #ffffff;
@@ -101,10 +105,9 @@ li em:first-child {
 
   /* surfaces the base theme hard-codes to light values */
   .masthead {
-    background-color: var(--bg);
     border-bottom-color: var(--border);
   }
-  .greedy-nav { background: var(--bg); }
+  .greedy-nav { background: transparent; }
   .greedy-nav a { color: var(--text); }
   .greedy-nav .hidden-links {
     background: var(--bg);
@@ -123,9 +126,70 @@ li em:first-child {
 }
 
 /* ==========================================================================
+   STICKY HEADER + ANCHOR OFFSET + SMOOTH SCROLL + BACK-TO-TOP
+   ========================================================================== */
+
+/* Keep the top nav pinned while scrolling. (position:sticky also serves as the
+   positioning context for the absolutely-positioned .theme-toggle button.) */
+.masthead {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  /* frosted-glass effect (Apple-style): translucent background + blur.
+     The base theme animates the masthead (opacity fade); that animation
+     breaks backdrop-filter compositing in Chromium, so disable it here. */
+  animation: none;
+  background-color: var(--header-bg);
+  -webkit-backdrop-filter: saturate(180%) blur(16px);
+          backdrop-filter: saturate(180%) blur(16px);
+}
+
+/* The inner nav has its own opaque white background which would cover the
+   middle of the frosted bar — make it transparent so the blur shows through. */
+.greedy-nav { background: transparent; }
+
+/* Make anchored headings land below the sticky header instead of under it.
+   The jquery smooth-scroll plugin (main.min.js, offset:-70) handles nav clicks;
+   scroll-margin-top covers native jumps / direct #hash loads. The template's
+   old :before spacer is neutralised here so the two don't stack. */
+h1 { scroll-margin-top: 70px; }
+h1:before, .anchor:before {
+  height: 0;
+  margin-top: 0;
+}
+
+/* Floating back-to-top button */
+.back-to-top {
+  position: fixed;
+  bottom: 1.5em;
+  right: 1.5em;
+  z-index: 40;
+  width: 2.6em;
+  height: 2.6em;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: var(--accent);
+  color: var(--selection-text);
+  font-size: 1.1em;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease, background 0.2s ease;
+}
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover { background: var(--accent-hover); }
+
+/* ==========================================================================
    THEME TOGGLE BUTTON (in the masthead)
    ========================================================================== */
-.masthead { position: relative; }
 
 .theme-toggle {
   position: absolute;
@@ -140,4 +204,9 @@ li em:first-child {
   line-height: 1;
   cursor: pointer;
   color: inherit;
+}
+
+/* Tagline under the name — italic so it reads as a distinct motto */
+.author__tagline {
+  font-style: italic;
 }
