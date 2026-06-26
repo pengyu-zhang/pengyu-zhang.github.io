@@ -1,0 +1,143 @@
+/* ==========================================================================
+   THEME TOKENS
+   Single source of truth for colors. Change the accent in one place here,
+   and it propagates to links, badges, and selection. Also lays the
+   foundation for a dark mode (override these vars under a media query / class).
+   ========================================================================== */
+
+:root {
+  /* brand accent */
+  --accent:         #1f3a8a;
+  --accent-hover:   #16306f;
+
+  /* surfaces & text */
+  --bg:             #ffffff;
+  --text:           #{$text-color};
+  --muted:          #{$gray};
+  --border:         #{$lighter-gray};
+  --code-bg:        #fafafa;
+
+  /* conference badges */
+  --badge-bg:       var(--accent);
+  --badge-text:     #ffffff;
+
+  /* text selection */
+  --selection-bg:   var(--accent);
+  --selection-text: #ffffff;
+}
+
+/* --------------------------------------------------------------------------
+   Re-point core outputs to the tokens above
+   -------------------------------------------------------------------------- */
+
+html {
+  background-color: var(--bg);
+}
+
+body {
+  color: var(--text);
+}
+
+a {
+  color: var(--accent);
+
+  &:hover {
+    color: var(--accent-hover);
+  }
+}
+
+/* conference badges (rendered from `` ``VENUE YEAR`` `` inline code) */
+.highlighter-rouge {
+  background-color: var(--badge-bg);
+  color: var(--badge-text);
+}
+
+/* paper-box badge (used by the long publications layout) */
+.badge {
+  background-color: var(--badge-bg);
+}
+
+::selection {
+  background: var(--selection-bg);
+  color: var(--selection-text);
+}
+
+::-moz-selection {
+  background: var(--selection-bg);
+  color: var(--selection-text);
+}
+
+/* --------------------------------------------------------------------------
+   Leading date labels in lists (News, Education) — keep upright so the
+   italic digits don't collide with the trailing colon. Paper titles and
+   other inline italics are untouched.
+   -------------------------------------------------------------------------- */
+li em:first-child {
+  font-style: normal;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   DARK MODE
+   Activated by data-theme="dark" on <html> (set by the inline head script,
+   which follows a saved preference or the OS setting). Only color tokens and
+   a few hard-coded surfaces from the base theme are overridden here.
+   ========================================================================== */
+[data-theme="dark"] {
+  --accent:         #8ab4ff;
+  --accent-hover:   #adc8ff;
+
+  --bg:             #14161a;
+  --text:           #d7dadf;
+  --muted:          #969ba3;
+  --border:         #2a2f37;
+  --code-bg:        #1b1e24;
+
+  --badge-bg:       #3a5bd0;
+  --badge-text:     #ffffff;
+
+  --selection-bg:   #8ab4ff;
+  --selection-text: #0b0c0f;
+
+  /* surfaces the base theme hard-codes to light values */
+  .masthead {
+    background-color: var(--bg);
+    border-bottom-color: var(--border);
+  }
+  .greedy-nav { background: var(--bg); }
+  .greedy-nav a { color: var(--text); }
+  .greedy-nav .hidden-links {
+    background: var(--bg);
+    border-color: var(--border);
+  }
+
+  .page__content h1 { border-bottom-color: var(--border); }
+  .author__avatar img { border-color: var(--border); }
+  hr { border-top-color: var(--border); }
+
+  .page__footer {
+    background-color: #0f1115;
+    color: var(--muted);
+  }
+  .page__footer a { color: var(--muted); }
+}
+
+/* ==========================================================================
+   THEME TOGGLE BUTTON (in the masthead)
+   ========================================================================== */
+.masthead { position: relative; }
+
+.theme-toggle {
+  position: absolute;
+  top: 50%;
+  right: 1em;
+  transform: translateY(-50%);
+  z-index: 20;
+  padding: 0 0.4em;
+  background: transparent;
+  border: 0;
+  font-size: 1.15em;
+  line-height: 1;
+  cursor: pointer;
+  color: inherit;
+}
