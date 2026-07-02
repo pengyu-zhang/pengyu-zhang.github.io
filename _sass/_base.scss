@@ -121,8 +121,12 @@ blockquote {
 /* links */
 
 a {
-  
+
   &:focus {
+    outline: 0;
+  }
+
+  &:focus-visible {
     @extend %tab-focus;
   }
 

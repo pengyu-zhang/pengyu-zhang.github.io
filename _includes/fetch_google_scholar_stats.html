@@ -1,21 +1,29 @@
 <script>
-    $(document).ready(function () {
+    (function () {
         {% if site.google_scholar_stats_use_cdn %}
-        var gsDataBaseUrl = 'https://cdn.jsdelivr.net/gh/{{ site.repository }}@'
+        var gsDataBaseUrl = 'https://cdn.jsdelivr.net/gh/{{ site.repository }}@';
         {% else %}
-        var gsDataBaseUrl = 'https://raw.githubusercontent.com/{{ site.repository }}/'
+        var gsDataBaseUrl = 'https://raw.githubusercontent.com/{{ site.repository }}/';
         {% endif %}
-        $.getJSON(gsDataBaseUrl + "google-scholar-stats/gs_data.json", function (data) {
-            var totalCitEl = document.getElementById('total_cit');
-            if (totalCitEl && data['citedby'] != null) {
-                totalCitEl.innerHTML = 'Total citations: ' + data['citedby'];
-            }
-            var citationEles = document.getElementsByClassName('show_paper_citations')
-            Array.prototype.forEach.call(citationEles, element => {
-                var paperId = element.getAttribute('data')
-                var numCitations = data['publications'][paperId]['num_citations']
-                element.innerHTML = '| Citations: ' + numCitations;
-            });
-        });
-    })
+        fetch(gsDataBaseUrl + 'google-scholar-stats/gs_data.json')
+            .then(function (resp) {
+                if (!resp.ok) throw new Error('stats not available yet');
+                return resp.json();
+            })
+            .then(function (data) {
+                var totalCitEl = document.getElementById('total_cit');
+                if (totalCitEl && data['citedby'] != null) {
+                    totalCitEl.innerHTML = 'Total citations: ' + data['citedby'];
+                }
+                var citationEles = document.getElementsByClassName('show_paper_citations');
+                Array.prototype.forEach.call(citationEles, function (element) {
+                    var paperId = element.getAttribute('data');
+                    var pub = data['publications'] && data['publications'][paperId];
+                    if (pub && pub['num_citations'] != null) {
+                        element.innerHTML = '| Citations: ' + pub['num_citations'];
+                    }
+                });
+            })
+            .catch(function () { /* branch missing until the crawler action first succeeds */ });
+    })();
 </script>

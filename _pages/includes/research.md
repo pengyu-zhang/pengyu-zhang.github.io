@@ -1,67 +1,73 @@
-# Project Experience
+# Experience
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2026</div><img src='images/fusion_training.png' alt="Fusion Training" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2026</div><img src='images/fusion_training.png' alt="Fusion Training" width="100%">
+<div class="paper-links"><a href="/pdf/Fusion_Training.pdf">Paper</a> | <a href="https://aclanthology.org/2026.acl-srw.64/">DOI</a> | <a href="https://github.com/caocongfeng/Fusion-Bench">Code</a></div>
+</div></div>
 <div class='paper-box-text' markdown="1">
 
-**Fusion Training** · Hybrid reasoning in large language models
+**Fusion Training** · Hybrid-reasoning LLMs
 
-**Made one model good at both quick answers and deep step by step reasoning, instead of trading one for the other.**
-
-Newer LLMs (like Qwen3 and GPT-5) switch between fast concise replies for easy questions and long reasoning for hard ones to save time and compute, but training both behaviors into a single model makes them compete. Using math problem solving as the testbed, we systematically studied how to mix and order the two kinds of training data, showed that interleaving them keeps both skills strong, quantified the trade off between them, and released an open benchmark (Fusion Bench) for the community.
+- Found that interleaving thinking and non-thinking training data keeps both abilities strong, and measured how the balance shifts (adding more non-thinking data steadily hurts reasoning). Released the open Fusion Bench benchmark.
+- Newer LLMs mix quick answers with long step-by-step reasoning to save compute, but putting both into one model makes them fight. Ran a full grid over data ratios and training orders to see what keeps both working.
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Under review</div><img src='images/timeroute.png' alt="TimeRoute" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Under review</div><img src='images/timeroute.png' alt="TimeRoute" width="100%">
+<div class="paper-links"><a href="https://arxiv.org">arXiv</a></div>
+</div></div>
 <div class='paper-box-text' markdown="1">
 
-**TimeRoute** · Recommendation system
+**TimeRoute** · Time-aware recommendation
 
-**Improved recommendation accuracy by up to 6%** on TikTok and Amazon datasets, beating strong baselines.
-
-Recommenders usually blend user signals (clicks, text, images) the same way no matter when they happened. I built a model that learns which signals matter over short versus long time spans and weighs them accordingly, then automatically cleans up noisy and missing data so the recommendations stay reliable.
+- Raised recommendation accuracy by up to **6%** on TikTok, Amazon-Baby, and Amazon-Sports over strong baselines.
+- Recommenders usually mix a user's clicks, text, and images the same way no matter when each happened. Built a model that learns which of these matter over short versus long time spans, and that cleans up noisy or missing history on its own.
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Under review</div><img src='images/time_imprint.png' alt="Time Imprint" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Under review</div><img src='images/time_imprint.png' alt="Time Imprint" width="100%">
+<div class="paper-links"><a href="https://arxiv.org">arXiv</a></div>
+</div></div>
 <div class='paper-box-text' markdown="1">
 
-**Time Imprint** · Entity resolution
+**Time Imprint** · Multi-modal entity disambiguation
 
-**Boosted top match accuracy by up to 4.81%, and by up to 200%** on the hardest cases.
-
-Systems often confuse near identical records whose text and images look almost the same. I added timing as an extra clue so the model can tell them apart, sharply cutting errors on the most confusable pairs.
+- Raised top-match accuracy by up to **4.81%** overall, and by up to **200%** on the hardest, most look-alike cases.
+- Systems often mix up near-identical records whose text and images look almost the same. Added time as an extra clue so the model can tell them apart, cutting errors most where they were worst.
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ESWC 2026</div><img src='images/beyond_images.png' alt="Beyond Images" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ESWC 2026</div><img src='images/beyond_images.png' alt="Beyond Images" width="100%">
+<div class="paper-links"><a href="/pdf/Beyond_Images.pdf">Paper</a> | <a href="https://doi.org/10.1007/978-3-032-25156-5_5">DOI</a> | <a href="https://github.com/pengyu-zhang/Beyond-Images">Code</a> | <a href="https://youtu.be/PHaukQic-N4">YouTube</a> | <a href="https://www.bilibili.com/video/BV13445zLEp4">Bilibili</a></div>
+</div></div>
 <div class='paper-box-text' markdown="1">
 
-**Beyond Images** · Automated data enrichment
+**Beyond Images** · Knowledge-graph data enrichment
 
-**Lifted match accuracy by up to 7%, and by up to 333%** on ambiguous logos and symbols.
-
-Many records have missing or low quality images, which hurts matching. I built an automated pipeline that finds extra images online, turns them into text with vision language models, and summarizes everything with an LLM, filling the gaps without any manual work.
+- Raised match accuracy by up to **7%** overall, and by up to **333%** on ambiguous logos and symbols.
+- Many records have missing or low-quality images, which hurts matching. Built a pipeline that finds extra images online, turns them into text with vision-language models, and writes a summary with an LLM, filling the gaps with no manual work.
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CIKM 2024</div><img src='images/cycle.png' alt="CYCLE" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">LREC 2026</div><img src='images/graph_tempcz.png' alt="Graph-TempCZ" width="100%">
+<div class="paper-links"><a href="/pdf/Graph-TempCZ.pdf">Paper</a> | <a href="https://doi.org/10.63317/2jopizgg4dzo">DOI</a> | <a href="https://github.com/caocongfeng/Graph-TempCZ">Code</a></div>
+</div></div>
 <div class='paper-box-text' markdown="1">
 
-**CYCLE** · Entity resolution that holds up over time
+**Graph-TempCZ** · Large-scale graph link prediction
 
-**Beat the best prior method by 13.9% to 17.8%**, with the largest gains on rare records.
-
-Models that match text to a database get worse as that database changes from year to year. I designed a training approach that learns from those yearly changes so accuracy stays high as the data evolves, and released an open benchmark for the problem.
+- Raised test accuracy by **5.98%** (to **92.88%**) with a GraphSAGE GNN over feature-based XGBoost baselines.
+- Built the first large graph linking research papers to the software they use, with over six million mentions spanning 1959 to 2022, and checked how well the model predicts usage in later years.
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ECAI 2024</div><img src='images/tiger.png' alt="TIGER" width="100%"></div></div>
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CIKM & ECAI 2024</div><img src='images/cycle.png' alt="CYCLE and TIGER" width="100%">
+<div class="paper-links">CYCLE: <a href="/pdf/CYCLE.pdf">Paper</a> | <a href="https://doi.org/10.1145/3627673.3679702">DOI</a> | <a href="https://github.com/pengyu-zhang/CYCLE-Cross-Year-Contrastive-Learning-in-Entity-Linking">Code</a><br>TIGER: <a href="/pdf/TIGER.pdf">Paper</a> | <a href="https://doi.org/10.3233/FAIA240933">DOI</a> | <a href="https://github.com/pengyu-zhang/TIGER-Temporally-Improved-Graph-Entity-Linker">Code</a></div>
+</div></div>
 <div class='paper-box-text' markdown="1">
 
-**TIGER** · Entity resolution with graphs and text
+**CYCLE & TIGER** · Temporally robust entity linking
 
-**Outperformed the strongest baseline by 16% to 21%.**
-
-Tackling the same drift problem, I combined how records connect to each other with their text descriptions to make matching more robust as data changes over time, and released a public benchmark to measure it.
+- CYCLE beat the best prior method by **13.9% to 17.8%**; TIGER beat the strongest baseline by **16% to 21%**, measured over one to three year gaps.
+- Models that match text to a database lose accuracy as the database changes from year to year. CYCLE learns from those yearly changes, and TIGER also uses how records connect to each other. Both come with public benchmarks (GCL-TempEL and Graph-TempEL).
 </div>
 </div>

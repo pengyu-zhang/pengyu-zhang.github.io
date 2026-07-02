@@ -27,6 +27,9 @@
   /* text selection */
   --selection-bg:   var(--accent);
   --selection-text: #ffffff;
+
+  /* tinted callout surfaces (job-market banner) */
+  --callout-bg:     rgba(31, 58, 138, 0.05);
 }
 
 /* --------------------------------------------------------------------------
@@ -77,7 +80,6 @@ a {
    -------------------------------------------------------------------------- */
 li em:first-child {
   font-style: normal;
-  color: var(--muted);
 }
 
 /* ==========================================================================
@@ -103,6 +105,8 @@ li em:first-child {
   --selection-bg:   #8ab4ff;
   --selection-text: #0b0c0f;
 
+  --callout-bg:     rgba(138, 180, 255, 0.08);
+
   /* surfaces the base theme hard-codes to light values */
   .masthead {
     border-bottom-color: var(--border);
@@ -118,11 +122,20 @@ li em:first-child {
   .author__avatar img { border-color: var(--border); }
   hr { border-top-color: var(--border); }
 
-  .page__footer {
-    background-color: #0f1115;
-    color: var(--muted);
-  }
-  .page__footer a { color: var(--muted); }
+}
+
+/* ==========================================================================
+   SITE FOOTER (minimal; the template's .page__footer is unused)
+   ========================================================================== */
+
+.site-footer {
+  clear: both;
+  margin-top: 3em;
+  padding: 1.5em 1em 2em;
+  border-top: 1px solid var(--border);
+  text-align: center;
+  font-size: 0.82em;
+  color: var(--muted);
 }
 
 /* ==========================================================================
@@ -152,7 +165,7 @@ li em:first-child {
    The jquery smooth-scroll plugin (main.min.js, offset:-70) handles nav clicks;
    scroll-margin-top covers native jumps / direct #hash loads. The template's
    old :before spacer is neutralised here so the two don't stack. */
-h1 { scroll-margin-top: 70px; }
+h1, .anchor { scroll-margin-top: 70px; }
 h1:before, .anchor:before {
   height: 0;
   margin-top: 0;
@@ -206,6 +219,15 @@ h1:before, .anchor:before {
   color: inherit;
 }
 
+/* On narrow screens the hamburger button occupies the top-right corner —
+   shift the theme toggle left so the two don't overlap. */
+@media (max-width: 768px) {
+  .theme-toggle {
+    right: 4.25em;
+  }
+}
+
+
 /* Tagline under the name — italic so it reads as a distinct motto */
 .author__tagline {
   font-style: italic;
@@ -215,4 +237,197 @@ h1:before, .anchor:before {
    the wide list matches the compact narrow-screen row. Themed for dark mode. */
 .author__urls.social-icons i {
   color: var(--text);
+}
+
+/* ==========================================================================
+   READABILITY: cap the page width. The template stretches #main to 1800px,
+   which pushes body text past ~100 characters per line; ~1080px keeps prose
+   near a comfortable measure while leaving room for the project cards.
+   ========================================================================== */
+
+#main {
+  max-width: 1080px;
+}
+
+/* Align the masthead content with #main (same cap + same 1em side padding) */
+.masthead__inner-wrap {
+  max-width: 1080px;
+  padding-left: 1em;
+  padding-right: 1em;
+}
+
+
+/* ==========================================================================
+   PROJECT CARD IMAGES: uniform tiles (the source figures have wildly
+   different aspect ratios), soft border + shadow instead of the hard
+   3px offset shadow from the base stylesheet.
+   ========================================================================== */
+
+.paper-box {
+  border-bottom-color: var(--border);
+
+  .paper-box-image img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: contain;
+    background: #ffffff;
+    padding: 0.5em;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+}
+
+[data-theme="dark"] .paper-box .paper-box-image img {
+  /* soften the glare of white paper figures on the dark background */
+  filter: brightness(0.88);
+}
+
+/* Paper/DOI/Code links directly beneath each project card image */
+.paper-box .paper-links {
+  margin-top: 0.5em;
+  font-size: 0.9em;
+  line-height: 1.7;
+  text-align: center;
+
+  a { white-space: nowrap; }  /* wrap only at separators, never inside a label */
+}
+
+/* the filter above promotes the img into its own paint layer, which would
+   cover the absolutely-positioned venue badge — keep the badge on top */
+.paper-box .badge {
+  z-index: 1;
+}
+
+/* ==========================================================================
+   JOB-SEARCH CTA (sidebar buttons + About callout)
+   ========================================================================== */
+
+.author__cta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5em;
+  margin: 0.9em 0 0.3em;
+}
+
+.author__cta-btn {
+  display: inline-block;
+  padding: 0.42em 0.9em;
+  border: 1px solid var(--accent);
+  border-radius: 6px;
+  font-size: 0.78em;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  color: var(--accent);
+
+  &:hover {
+    text-decoration: none;
+    background: var(--callout-bg);
+    color: var(--accent-hover);
+    border-color: var(--accent-hover);
+  }
+}
+
+.author__cta-btn--primary {
+  background: var(--accent);
+  color: var(--bg);
+
+  &:hover {
+    background: var(--accent-hover);
+    color: var(--bg);
+  }
+}
+
+.job-callout {
+  margin: 1.1em 0;
+  padding: 0.75em 1em;
+  border-left: 3px solid var(--accent);
+  border-radius: 0 6px 6px 0;
+  background: var(--callout-bg);
+
+  p { margin: 0; }
+}
+
+.job-callout__meta {
+  display: inline-block;
+  margin-top: 0.35em;
+  font-size: 0.86em;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   COLLAPSED OLDER NEWS
+   ========================================================================== */
+
+.news-more {
+  margin: 0.5em 0 1em;
+
+  summary {
+    cursor: pointer;
+    color: var(--muted);
+    font-size: 0.9em;
+    list-style: none;               /* hide the default triangle marker */
+    -webkit-user-select: none;
+    user-select: none;
+
+    &::-webkit-details-marker { display: none; }
+
+    &::after {
+      content: "\25BE";             /* ▾ chevron */
+      display: inline-block;
+      margin-left: 0.35em;
+      transition: transform 0.2s ease;
+    }
+
+    &:hover { color: var(--accent); }
+  }
+
+  .less-label { display: none; }
+
+  &[open] {
+    summary { margin-bottom: 0.5em; }
+    summary::after { transform: rotate(180deg); }
+    .more-label { display: none; }
+    .less-label { display: inline; }
+  }
+}
+
+/* ==========================================================================
+   SKILL CHIPS
+   ========================================================================== */
+
+.skills-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+  margin-top: 0.5em;
+}
+
+.skill-group h3 {
+  margin: 0 0 0.45em;
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted);
+}
+
+.skill-chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.45em;
+
+  li {
+    margin: 0;
+    padding: 0.28em 0.75em;
+    border: 1px solid var(--border);
+    border-radius: 999px;
+    background: var(--code-bg);
+    font-size: 0.82em;
+    line-height: 1.35;
+  }
 }

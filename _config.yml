@@ -8,6 +8,7 @@
 # Site Settings
 title                    : "Pengyu Zhang"
 description              : "The data drifts. My models keep up."
+url                      : "https://pengyu-zhang.github.io"
 repository               : "pengyu-zhang/pengyu-zhang.github.io"
 google_scholar_stats_use_cdn : false
 
@@ -152,11 +153,3 @@ whitelist:
   - jekyll-gist
   - jekyll-feed
   - jemoji
-
-
-# HTML Compression
-# - http://jch.penibelst.de/
-compress_html:
-  clippings: all
-  ignore:
-    envs: development

@@ -4,6 +4,9 @@
 - *2026.05*: Presented *Graph-TempCZ* at **LREC 2026** in Palma de Mallorca, lots of good chats on software mentions in the literature.
 - *2026.04*: 🎉 *Fusion Training for Mathematical Generalization in Large Language Models* is in at the **ACL 2026** Student Research Workshop!
 - *2026.03*: 🎉 *Beyond Images* was accepted at **ESWC 2026**, thanks to everyone who made it happen.
+<details class="news-more" markdown="1">
+<summary><span class="more-label">More</span><span class="less-label">Less</span></summary>
+
 - *2026.01*: 🎉 *Graph-TempCZ* accepted at **LREC 2026**. Great to see this one land.
 - *2025.08*: 🎉 Our survey on large language models for data challenges in graphs was accepted in **Expert Systems with Applications**.
 - *2024.11*: Presented our work on entity linking and co-occurrence networks at **EKAW 2024**, right here in Amsterdam.
@@ -12,3 +15,5 @@
 - *2024.09*: 🎉 Our paper on entity linking in co-occurrence networks was accepted at **EKAW 2024**.
 - *2024.08*: 🎉 *CYCLE* accepted at **CIKM 2024**!
 - *2024.07*: 🎉 *TIGER* accepted at **ECAI 2024**!
+
+</details>

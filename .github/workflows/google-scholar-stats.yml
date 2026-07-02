@@ -1,0 +1,36 @@
+name: Update Google Scholar stats
+
+on:
+  schedule:
+    - cron: '0 6 * * *'   # daily at 06:00 UTC; Scholar sometimes blocks runners, retries next day
+  workflow_dispatch:       # allow manual runs from the Actions tab
+
+permissions:
+  contents: write          # needed to push the google-scholar-stats branch
+
+jobs:
+  update-stats:
+    runs-on: ubuntu-latest
+    env:
+      GOOGLE_SCHOLAR_ID: xH7mJ-0AAAAJ
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install -r google_scholar_crawler/requirements.txt
+
+      - name: Fetch citation data
+        run: python google_scholar_crawler/main.py
+
+      - name: Publish to google-scholar-stats branch
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: google-scholar-stats
+          publish_dir: ./results
+          force_orphan: true
+          commit_message: 'Update Google Scholar stats'

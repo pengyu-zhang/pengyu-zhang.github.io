@@ -19,13 +19,14 @@ redirect_from:
 
 {% include_relative includes/educations.md %}
 
+{% include_relative includes/honers.md %}
+
 {% include_relative includes/skills.md %}
 
 {% include_relative includes/cv.md %}
 
 {% comment %}
 Unused sections kept for future use:
-{% include_relative includes/honers.md %}
 {% include_relative includes/talks.md %}
 {% include_relative includes/internships.md %}
 {% include_relative includes/pub.md %}
