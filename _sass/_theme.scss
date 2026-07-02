@@ -1,24 +1,30 @@
 /* ==========================================================================
-   THEME TOKENS
-   Single source of truth for colors. Change the accent in one place here,
-   and it propagates to links, badges, and selection. Also lays the
-   foundation for a dark mode (override these vars under a media query / class).
+   V6 DESIGN SYSTEM
+   Three-column card layout (profile | tabbed content | news) inspired by
+   modern portfolio pages. Single source of truth for colors and geometry:
+   change a token here and it propagates everywhere. Dark mode overrides the
+   same tokens under [data-theme="dark"].
    ========================================================================== */
 
 :root {
-  /* brand accent */
-  --accent:         #1f3a8a;
-  --accent-hover:   #16306f;
+  /* brand: airy blue primary + orange highlights */
+  --accent:         #2f6fed;
+  --accent-hover:   #2456c4;
+  --accent-soft:    #e8f0fe;   /* tinted pill / hover surfaces */
+  --on-accent:      #ffffff;   /* text on solid accent fills */
+
+  --orange:         #f97316;   /* accents only: New badge, callout, dots */
+  --orange-soft:    #fff3e8;
 
   /* surfaces & text */
-  --bg:             #ffffff;
-  --text:           #{$text-color};
-  --muted:          #{$gray};
-  --border:         #{$lighter-gray};
-  --code-bg:        #fafafa;
-
-  /* frosted sticky header */
-  --header-bg:      rgba(255, 255, 255, 0.8);
+  --bg-page:        #f5f7fb;
+  --card-bg:        #ffffff;
+  --card-border:    #eaeef5;
+  --tint-bg:        #f6f8fc;   /* item surfaces inside cards (news rows) */
+  --text:           #1f2937;
+  --muted:          #64748b;
+  --border:         #e5eaf2;
+  --code-bg:        #f2f5fa;
 
   /* conference badges */
   --badge-bg:       var(--accent);
@@ -28,16 +34,68 @@
   --selection-bg:   var(--accent);
   --selection-text: #ffffff;
 
-  /* tinted callout surfaces (job-market banner) */
-  --callout-bg:     rgba(31, 58, 138, 0.05);
+  /* tinted callout surface (job-market banner) */
+  --callout-bg:     var(--orange-soft);
+
+  --shadow-card:    0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 16px rgba(16, 24, 40, 0.06);
+
+  /* geometry — every rounded corner on the site uses one of these three */
+  --radius-card:    16px;
+  --radius-inner:   10px;
+  --radius-pill:    999px;
+}
+
+[data-theme="dark"] {
+  --accent:         #8ab4ff;
+  --accent-hover:   #adc8ff;
+  --accent-soft:    rgba(138, 180, 255, 0.14);
+  --on-accent:      #0b0c0f;
+
+  --orange:         #ffa15c;
+  --orange-soft:    rgba(255, 150, 80, 0.12);
+
+  --bg-page:        #0f1115;
+  --card-bg:        #171a21;
+  --card-border:    #262b35;
+  --tint-bg:        #1d212a;
+  --text:           #d7dadf;
+  --muted:          #969ba3;
+  --border:         #2a2f37;
+  --code-bg:        #1b1e24;
+
+  --badge-bg:       #3a5bd0;
+  --badge-text:     #ffffff;
+
+  --selection-bg:   #8ab4ff;
+  --selection-text: #0b0c0f;
+
+  --callout-bg:     rgba(255, 150, 80, 0.12);
+
+  --shadow-card:    none;
 }
 
 /* --------------------------------------------------------------------------
    Re-point core outputs to the tokens above
    -------------------------------------------------------------------------- */
 
+html,
+body {
+  background-color: var(--bg-page);
+}
+
+/* Keep the viewport width constant whether or not a vertical scrollbar is
+   present, so short pages (or the instant before images lay out) don't make
+   the whole layout jump sideways. Old browsers without scrollbar-gutter get
+   an always-visible scrollbar track instead. */
 html {
-  background-color: var(--bg);
+  overflow-y: scroll;
+}
+
+@supports (scrollbar-gutter: stable) {
+  html {
+    overflow-y: auto;
+    scrollbar-gutter: stable;
+  }
 }
 
 body {
@@ -54,13 +112,21 @@ a {
 
 /* conference badges (rendered from `` ``VENUE YEAR`` `` inline code) */
 .highlighter-rouge {
+  padding: 0.14em 0.65em;
+  border-radius: var(--radius-pill);
   background-color: var(--badge-bg);
   color: var(--badge-text);
+  font-family: inherit;
+  font-size: 0.82em;
+  font-weight: 600;
+  white-space: nowrap;
 }
 
-/* paper-box badge (used by the long publications layout) */
+/* paper-box corner badge (Experience cards) */
 .badge {
   background-color: var(--badge-bg);
+  border-radius: var(--radius-pill);
+  z-index: 1;
 }
 
 ::selection {
@@ -73,295 +139,412 @@ a {
   color: var(--selection-text);
 }
 
-/* --------------------------------------------------------------------------
-   Leading date labels in lists (News, Education) — keep upright so the
-   italic digits don't collide with the trailing colon. Paper titles and
-   other inline italics are untouched.
-   -------------------------------------------------------------------------- */
+/* Leading date labels in lists (News, Education) — keep upright so the
+   italic digits don't collide with the trailing colon. */
 li em:first-child {
   font-style: normal;
 }
 
+hr { border-top-color: var(--border); }
+
 /* ==========================================================================
-   DARK MODE
-   Activated by data-theme="dark" on <html> (set by the inline head script,
-   which follows a saved preference or the OS setting). Only color tokens and
-   a few hard-coded surfaces from the base theme are overridden here.
+   THREE-COLUMN LAYOUT
+   Grid areas: left profile (sticky) | center tabbed content | right news
+   (sticky). Collapses to two columns (news drops under the content), then
+   to a single stacked column on phones.
    ========================================================================== */
-[data-theme="dark"] {
-  --accent:         #8ab4ff;
-  --accent-hover:   #adc8ff;
 
-  --bg:             #14161a;
-  --text:           #d7dadf;
-  --muted:          #969ba3;
-  --border:         #2a2f37;
-  --code-bg:        #1b1e24;
-  --header-bg:      rgba(20, 22, 26, 0.8);
+#main.layout {
+  display: grid;
+  grid-template-columns: 300px minmax(0, 1fr) 320px;
+  grid-template-areas:
+    "left center right"
+    "left footer right";
+  gap: 1.5em;
+  align-items: start;
+  float: none;
+  width: auto;
+  max-width: 1400px;
+  margin: 1.5em auto 0;
+  padding: 0 1.25em;
+}
 
-  --badge-bg:       #3a5bd0;
-  --badge-text:     #ffffff;
+/* Fixed strip in the page background color over the top 1.5em of the
+   viewport: center-column content scrolling up disappears under it instead
+   of peeking out above the (never-moving) tab bar and side cards. */
+body::after {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1.5em;
+  background: var(--bg-page);
+  z-index: 25;
+  pointer-events: none;
+}
 
-  --selection-bg:   #8ab4ff;
-  --selection-text: #0b0c0f;
+/* The three sticky elements (left card, tab bar, news card) all pin at
+   1.5em — exactly their initial offset — so they never shift on scroll. */
+.layout__left {
+  grid-area: left;
+  position: sticky;
+  top: 1.5em;
+}
 
-  --callout-bg:     rgba(138, 180, 255, 0.08);
+.layout__center {
+  grid-area: center;
+  min-width: 0;
+}
 
-  /* surfaces the base theme hard-codes to light values */
-  .masthead {
-    border-bottom-color: var(--border);
+/* PJAX swap: quick fade of the center content while the next page loads */
+.page__content {
+  transition: opacity 0.15s ease;
+
+  &.is-loading {
+    opacity: 0;
   }
-  .greedy-nav { background: transparent; }
-  .greedy-nav a { color: var(--text); }
-  .greedy-nav .hidden-links {
-    background: var(--bg);
-    border-color: var(--border);
+}
+
+.layout__right {
+  grid-area: right;
+  position: sticky;
+  top: 1.5em;
+}
+
+/* neutralise the template's Susy float grid on the content article */
+.layout .page {
+  float: none;
+  width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+@media (max-width: 1280px) {
+  #main.layout {
+    grid-template-columns: 280px minmax(0, 1fr);
+    grid-template-areas:
+      "left center"
+      "left right"
+      "left footer";
   }
 
-  .page__content h1 { border-bottom-color: var(--border); }
-  .author__avatar img { border-color: var(--border); }
-  hr { border-top-color: var(--border); }
+  .layout__right {
+    position: static;
+  }
+}
 
+@media (max-width: 925px) {
+  #main.layout {
+    grid-template-columns: minmax(0, 1fr);
+    grid-template-areas:
+      "left"
+      "center"
+      "right"
+      "footer";
+  }
+
+  .layout__left {
+    position: static;
+  }
 }
 
 /* ==========================================================================
-   SITE FOOTER (minimal; the template's .page__footer is unused)
+   CARDS — every module is a white rounded rectangle
    ========================================================================== */
 
-.site-footer {
-  clear: both;
-  margin-top: 3em;
-  padding: 1.5em 1em 2em;
-  border-top: 1px solid var(--border);
-  text-align: center;
-  font-size: 0.82em;
+.card {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  padding: 1.6em 1.8em;
+}
+
+.content-card {
+  margin-bottom: 1.5em;
+}
+
+/* Section titles: small-caps label with an orange dot and a hairline that
+   fills the rest of the row (tab names match these 1:1 where applicable). */
+.page__content h1,
+.news-card__title {
+  display: flex;
+  align-items: center;
+  gap: 0.6em;
+  margin: 0 0 1.1em;
+  padding: 0;
+  border-bottom: 0;
+  font-size: 0.95em;
+  font-weight: 700;
+  letter-spacing: 0.09em;
+  text-transform: uppercase;
+  color: var(--accent);
+
+  &::before {
+    content: "";
+    display: block;
+    flex: none;
+    width: 0.55em;
+    height: 0.55em;
+    margin: 0;
+    border-radius: var(--radius-pill);
+    background: var(--orange);
+    position: static;
+  }
+
+  &::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+}
+
+/* small uppercase sub-labels inside a card (Education / Awards, skill groups) */
+.page__content h3.group-label,
+.skill-group h3 {
+  margin: 1.4em 0 0.55em;
+  font-size: 0.8em;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
   color: var(--muted);
 }
 
-/* ==========================================================================
-   STICKY HEADER + ANCHOR OFFSET + SMOOTH SCROLL + BACK-TO-TOP
-   ========================================================================== */
-
-/* Keep the top nav pinned while scrolling. (position:sticky also serves as the
-   positioning context for the absolutely-positioned .theme-toggle button.) */
-.masthead {
-  position: sticky;
-  top: 0;
-  z-index: 30;
-  /* frosted-glass effect (Apple-style): translucent background + blur.
-     The base theme animates the masthead (opacity fade); that animation
-     breaks backdrop-filter compositing in Chromium, so disable it here. */
-  animation: none;
-  background-color: var(--header-bg);
-  -webkit-backdrop-filter: saturate(180%) blur(16px);
-          backdrop-filter: saturate(180%) blur(16px);
-}
-
-/* The inner nav has its own opaque white background which would cover the
-   middle of the frosted bar — make it transparent so the blur shows through. */
-.greedy-nav { background: transparent; }
-
-/* Make anchored headings land below the sticky header instead of under it.
-   The jquery smooth-scroll plugin (main.min.js, offset:-70) handles nav clicks;
-   scroll-margin-top covers native jumps / direct #hash loads. The template's
-   old :before spacer is neutralised here so the two don't stack. */
-h1, .anchor { scroll-margin-top: 70px; }
-h1:before, .anchor:before {
-  height: 0;
+.page__content h3.group-label:first-of-type {
   margin-top: 0;
 }
 
-/* Floating back-to-top button */
-.back-to-top {
-  position: fixed;
-  bottom: 1.5em;
-  right: 1.5em;
-  z-index: 40;
-  width: 2.6em;
-  height: 2.6em;
+/* ==========================================================================
+   TAB BAR — pill navigation in a rounded card, sticky at the top of the
+   content column. Active tab = solid accent pill.
+   ========================================================================== */
+
+.tabbar {
+  position: sticky;
+  top: 1.5em;
+  z-index: 30;
+  display: flex;
+  align-items: center;
+  gap: 0.4em;
+  margin-bottom: 1.5em;
+  padding: 0.45em 0.6em;
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+
+.tabbar__tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35em;
+  flex: 1;
+  margin: 0;
   padding: 0;
+  list-style: none;
+
+  li {
+    margin: 0;
+    padding: 0;
+  }
+}
+
+.tabbar__tab {
+  display: block;
+  padding: 0.5em 1.2em;
+  border-radius: var(--radius-pill);
+  font-size: 0.98em;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  transition: background 0.15s ease, color 0.15s ease;
+
+  &:hover {
+    background: var(--accent-soft);
+    color: var(--accent);
+    text-decoration: none;
+  }
+
+  &.is-active {
+    background: var(--accent);
+    color: var(--on-accent);
+
+    &:hover {
+      background: var(--accent-hover);
+      color: var(--on-accent);
+    }
+  }
+}
+
+/* theme toggle lives at the right end of the tab bar */
+.theme-toggle {
+  flex: none;
+  padding: 0.3em 0.45em;
+  background: transparent;
   border: 0;
-  border-radius: 50%;
-  background: var(--accent);
-  color: var(--selection-text);
+  border-radius: var(--radius-pill);
   font-size: 1.1em;
   line-height: 1;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(8px);
-  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease, background 0.2s ease;
-}
-.back-to-top.is-visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-.back-to-top:hover { background: var(--accent-hover); }
-
-/* ==========================================================================
-   THEME TOGGLE BUTTON (in the masthead)
-   ========================================================================== */
-
-.theme-toggle {
-  position: absolute;
-  top: 50%;
-  right: 1em;
-  transform: translateY(-50%);
-  z-index: 20;
-  padding: 0 0.4em;
-  background: transparent;
-  border: 0;
-  font-size: 1.15em;
-  line-height: 1;
-  cursor: pointer;
   color: inherit;
-}
 
-/* On narrow screens the hamburger button occupies the top-right corner —
-   shift the theme toggle left so the two don't overlap. */
-@media (max-width: 768px) {
-  .theme-toggle {
-    right: 4.25em;
+  &:hover {
+    background: var(--accent-soft);
   }
 }
 
-
-/* Tagline under the name — italic so it reads as a distinct motto */
-.author__tagline {
-  font-style: italic;
-}
-
-/* Unify the sidebar social icons to one color (drop the per-brand colors) so
-   the wide list matches the compact narrow-screen row. Themed for dark mode. */
-.author__urls.social-icons i {
-  color: var(--text);
-}
-
 /* ==========================================================================
-   READABILITY: cap the page width. The template stretches #main to 1800px,
-   which pushes body text past ~100 characters per line; ~1080px keeps prose
-   near a comfortable measure while leaving room for the project cards.
+   LEFT COLUMN — profile card
    ========================================================================== */
 
-#main {
-  max-width: 1080px;
-}
-
-/* Align the masthead content with #main (same cap + same 1em side padding) */
-.masthead__inner-wrap {
-  max-width: 1080px;
-  padding-left: 1em;
-  padding-right: 1em;
-}
-
-
-/* ==========================================================================
-   PROJECT CARD IMAGES: uniform tiles (the source figures have wildly
-   different aspect ratios), soft border + shadow instead of the hard
-   3px offset shadow from the base stylesheet.
-   ========================================================================== */
-
-.paper-box {
-  border-bottom-color: var(--border);
-
-  .paper-box-image img {
-    width: 100%;
-    aspect-ratio: 16 / 10;
-    object-fit: contain;
-    background: #ffffff;
-    padding: 0.5em;
-    border: 1px solid var(--border);
-    border-radius: 10px;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
-  }
-}
-
-[data-theme="dark"] .paper-box .paper-box-image img {
-  /* soften the glare of white paper figures on the dark background */
-  filter: brightness(0.88);
-}
-
-/* Paper/DOI/Code links directly beneath each project card image */
-.paper-box .paper-links {
-  margin-top: 0.5em;
-  font-size: 0.9em;
-  line-height: 1.7;
+.profile-card {
   text-align: center;
-
-  a { white-space: nowrap; }  /* wrap only at separators, never inside a label */
 }
 
-/* the filter above promotes the img into its own paint layer, which would
-   cover the absolutely-positioned venue badge — keep the badge on top */
-.paper-box .badge {
-  z-index: 1;
+.profile-card__avatar {
+  display: block;
+  width: 100%;
+  border-radius: var(--radius-inner);
 }
 
-/* ==========================================================================
-   JOB-SEARCH CTA (sidebar buttons + About callout)
-   ========================================================================== */
-
-.author__cta {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5em;
-  margin: 0.9em 0 0.3em;
+.profile-card__name {
+  margin: 0.75em 0 0.3em;
+  font-size: 1.35em;
+  line-height: 1.3;
 }
 
-.author__cta-btn {
-  display: inline-block;
-  padding: 0.42em 0.9em;
-  border: 1px solid var(--accent);
-  border-radius: 6px;
-  font-size: 0.78em;
-  font-weight: 600;
-  line-height: 1.2;
-  text-decoration: none;
-  color: var(--accent);
-
-  &:hover {
-    text-decoration: none;
-    background: var(--callout-bg);
-    color: var(--accent-hover);
-    border-color: var(--accent-hover);
-  }
-}
-
-.author__cta-btn--primary {
-  background: var(--accent);
-  color: var(--bg);
-
-  &:hover {
-    background: var(--accent-hover);
-    color: var(--bg);
-  }
-}
-
-.job-callout {
-  margin: 1.1em 0;
-  padding: 0.75em 1em;
-  border-left: 3px solid var(--accent);
-  border-radius: 0 6px 6px 0;
-  background: var(--callout-bg);
-
-  p { margin: 0; }
-}
-
-.job-callout__meta {
-  display: inline-block;
-  margin-top: 0.35em;
-  font-size: 0.86em;
+.profile-card__name-zh {
+  font-weight: 500;
   color: var(--muted);
 }
 
+.profile-card__role {
+  margin: 0 0 0.4em;
+  font-size: 0.95em;
+  line-height: 1.5;
+  color: var(--muted);
+}
+
+.profile-card__location {
+  margin: 0 0 0.6em;
+  font-size: 0.88em;
+  color: var(--muted);
+
+  i { color: var(--accent); }
+}
+
+.profile-card__tagline {
+  margin: 0 0 1em;
+  font-size: 0.88em;
+  font-style: italic;
+  color: var(--muted);
+}
+
+.profile-card__cta {
+  display: block;
+  padding: 0.65em 1em;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.15s ease;
+
+  &:hover {
+    background: var(--accent-hover);
+    color: var(--on-accent);
+    text-decoration: none;
+  }
+}
+
+.profile-card__links {
+  margin: 1.1em 0 0;
+  padding: 0.9em 0 0;
+  border-top: 1px solid var(--border);
+  list-style: none;
+  text-align: left;
+
+  li {
+    margin: 0;
+    padding: 0;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: 0.6em;
+    padding: 0.3em 0.2em;
+    border-radius: var(--radius-inner);
+    font-size: 0.92em;
+    color: var(--text);
+    text-decoration: none;
+    overflow-wrap: anywhere;
+
+    i { color: var(--muted); }
+
+    &:hover {
+      color: var(--accent);
+      text-decoration: none;
+
+      i { color: var(--accent); }
+    }
+  }
+}
+
 /* ==========================================================================
-   COLLAPSED OLDER NEWS
+   RIGHT COLUMN — news card. Each item is a tinted rounded row with the
+   leading date rendered as a small pill; the newest item gets an orange
+   "New" badge. The More/Less <details> folding carries over from v5.
    ========================================================================== */
 
+.news-card {
+  font-size: 0.95em;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  li {
+    position: relative;
+    margin: 0 0 0.7em;
+    padding: 0.75em 0.9em;
+    background: var(--tint-bg);
+    border-radius: var(--radius-inner);
+    line-height: 1.55;
+
+    em:first-child {
+      display: inline-block;
+      margin-bottom: 0.3em;
+      padding: 0.1em 0.65em;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.85em;
+      font-weight: 600;
+    }
+  }
+
+  /* newest item — "New" badge floats in the top-right corner; only the
+     first line wraps around it, the rest of the text uses the full width */
+  > ul:first-of-type > li:first-child::before {
+    content: "New";
+    float: right;
+    margin: 0.1em 0 0.25em 0.55em;
+    padding: 0.12em 0.6em;
+    border-radius: var(--radius-pill);
+    background: var(--orange);
+    color: #ffffff;
+    font-size: 0.74em;
+    font-weight: 600;
+  }
+}
+
 .news-more {
-  margin: 0.5em 0 1em;
+  margin: 0.2em 0 0;
 
   summary {
     cursor: pointer;
@@ -386,10 +569,132 @@ h1:before, .anchor:before {
   .less-label { display: none; }
 
   &[open] {
-    summary { margin-bottom: 0.5em; }
+    summary { margin-bottom: 0.6em; }
     summary::after { transform: rotate(180deg); }
     .more-label { display: none; }
     .less-label { display: inline; }
+  }
+}
+
+/* ==========================================================================
+   JOB-SEARCH CALLOUT (About card) — orange highlight
+   ========================================================================== */
+
+.job-callout {
+  margin: 1.1em 0;
+  padding: 0.75em 1em;
+  border-left: 3px solid var(--orange);
+  border-radius: var(--radius-inner);
+  background: var(--callout-bg);
+  box-shadow: var(--shadow-card);
+
+  p { margin: 0; }
+}
+
+.job-callout__meta {
+  display: inline-block;
+  margin-top: 0.35em;
+  font-size: 0.86em;
+  color: var(--muted);
+}
+
+/* ==========================================================================
+   EXPERIENCE CARDS (paper-box) — keep the v5 tile look, tokens updated
+   ========================================================================== */
+
+.paper-box {
+  border-bottom-color: var(--border);
+
+  &:last-of-type {
+    border-bottom: 0;
+    padding-bottom: 0.5em;
+  }
+
+  .paper-box-image img {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    object-fit: contain;
+    background: #ffffff;
+    padding: 0.5em;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-inner);
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  }
+}
+
+[data-theme="dark"] .paper-box .paper-box-image img {
+  /* soften the glare of white paper figures on the dark background */
+  filter: brightness(0.88);
+}
+
+/* Paper/DOI/Code links directly beneath each project card image */
+.paper-box .paper-links {
+  margin-top: 0.5em;
+  font-size: 0.9em;
+  line-height: 1.7;
+  text-align: center;
+
+  a { white-space: nowrap; }  /* wrap only at separators, never inside a label */
+}
+
+/* ==========================================================================
+   PUBLICATIONS
+   ========================================================================== */
+
+.scholar-total {
+  display: block;
+  margin: -0.4em 0 0.9em;
+  font-size: 0.9em;
+  color: var(--muted);
+}
+
+.see-all {
+  margin: 0.4em 0 0;
+
+  a { font-weight: 600; }
+}
+
+/* ==========================================================================
+   TIMELINE MARKERS (Education & Awards, Publications) — hollow blue rings,
+   no connecting line; hovering a row fills its ring orange.
+   ========================================================================== */
+
+.page__content ul.timeline {
+  margin: 0 0 0.5em;
+  padding: 0;
+  list-style: none;
+
+  li {
+    position: relative;
+    margin: 0;
+    padding: 0 0 1em 1.7em;
+
+    &::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0.28em;
+      width: 12px;
+      height: 12px;
+      border-radius: var(--radius-pill);
+      background: var(--card-bg);
+      border: 2px solid var(--accent);
+      transition: background 0.2s ease, transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    &:hover::before {
+      background: var(--orange);
+      transform: scale(1.3);
+    }
+
+    &:last-child {
+      padding-bottom: 0.2em;
+    }
+
+    em:first-child {
+      color: var(--muted);
+      font-size: 0.92em;
+    }
   }
 }
 
@@ -406,11 +711,6 @@ h1:before, .anchor:before {
 
 .skill-group h3 {
   margin: 0 0 0.45em;
-  font-size: 0.8em;
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.05em;
-  color: var(--muted);
 }
 
 .skill-chips {
@@ -425,9 +725,69 @@ h1:before, .anchor:before {
     margin: 0;
     padding: 0.28em 0.75em;
     border: 1px solid var(--border);
-    border-radius: 999px;
+    border-radius: var(--radius-pill);
     background: var(--code-bg);
     font-size: 0.82em;
     line-height: 1.35;
   }
 }
+
+/* ==========================================================================
+   PHOTO WALL (Beyond) — masonry-ish columns
+   ========================================================================== */
+
+.photo-wall {
+  columns: 2 240px;
+  column-gap: 1em;
+  margin-top: 0.5em;
+
+  img {
+    display: block;
+    width: 100%;
+    height: auto;   /* with the width/height attrs this reserves the aspect
+                       ratio before the file loads — no layout jump */
+    margin: 0 0 1em;
+    border-radius: var(--radius-inner);
+    break-inside: avoid;
+  }
+}
+
+/* ==========================================================================
+   FOOTER + BACK-TO-TOP
+   ========================================================================== */
+
+.site-footer {
+  grid-area: footer;
+  padding: 0.25em 1em 1.5em;
+  text-align: center;
+  font-size: 0.82em;
+  color: var(--muted);
+}
+
+.back-to-top {
+  position: fixed;
+  bottom: 1.5em;
+  right: 1.5em;
+  z-index: 40;
+  width: 2.6em;
+  height: 2.6em;
+  padding: 0;
+  border: 0;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: var(--on-accent);
+  font-size: 1.1em;
+  line-height: 1;
+  cursor: pointer;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: opacity 0.2s ease, transform 0.2s ease, visibility 0.2s ease, background 0.2s ease;
+}
+.back-to-top.is-visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.back-to-top:hover { background: var(--accent-hover); }

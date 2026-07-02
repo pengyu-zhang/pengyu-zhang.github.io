@@ -8,26 +8,19 @@ redirect_from:
   - /about.html
 ---
 
-<span class='anchor' id='about-me'></span>
+<div class="card content-card" markdown="1">
 {% include_relative includes/intro.md %}
+</div>
 
-{% include_relative includes/news.md %}
-
-{% include_relative includes/research.md %}
-
-{% include_relative includes/pub_short.md %}
-
-{% include_relative includes/educations.md %}
-
-{% include_relative includes/honers.md %}
-
-{% include_relative includes/skills.md %}
-
-{% include_relative includes/cv.md %}
+<div class="card content-card" markdown="1">
+{% include_relative includes/education_awards.md %}
+</div>
 
 {% comment %}
 Unused sections kept for future use:
 {% include_relative includes/talks.md %}
 {% include_relative includes/internships.md %}
 {% include_relative includes/pub.md %}
+{% include_relative includes/pub_selected.md %}
+{% include_relative includes/cv.md %}
 {% endcomment %}

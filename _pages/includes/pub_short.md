@@ -39,3 +39,4 @@
 
 - ``Information 2021`` Dual-Channel Heterogeneous Graph Network for Author Name Disambiguation. Xin Zheng, **Pengyu Zhang**, Yanjie Cui, Rong Du, Yong Zhang. Information.  
 [Paper](/pdf/Dual-Channel.pdf) | [DOI](https://doi.org/10.3390/info12090383) | [Code](https://github.com/pengyu-zhang/Dual-channel-Heterogeneous-Graph-Network-for-Author-Name-Disambiguation) <span class='show_paper_citations' data='xH7mJ-0AAAAJ:u-x6o8ySG0sC'></span>
+{: .timeline}

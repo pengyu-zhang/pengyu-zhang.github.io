@@ -1,0 +1,5 @@
+<div class="news-card card">
+  <h2 class="news-card__title">News</h2>
+  {% capture news_md %}{% include news-items.md %}{% endcapture %}
+  {{ news_md | markdownify }}
+</div>

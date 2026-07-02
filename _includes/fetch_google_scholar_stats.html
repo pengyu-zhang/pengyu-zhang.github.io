@@ -5,12 +5,21 @@
         {% else %}
         var gsDataBaseUrl = 'https://raw.githubusercontent.com/{{ site.repository }}/';
         {% endif %}
-        fetch(gsDataBaseUrl + 'google-scholar-stats/gs_data.json')
-            .then(function (resp) {
-                if (!resp.ok) throw new Error('stats not available yet');
-                return resp.json();
-            })
-            .then(function (data) {
+        var dataPromise = null;
+
+        function getData() {
+            if (!dataPromise) {
+                dataPromise = fetch(gsDataBaseUrl + 'google-scholar-stats/gs_data.json')
+                    .then(function (resp) {
+                        if (!resp.ok) throw new Error('stats not available yet');
+                        return resp.json();
+                    });
+            }
+            return dataPromise;
+        }
+
+        function fill() {
+            getData().then(function (data) {
                 var totalCitEl = document.getElementById('total_cit');
                 if (totalCitEl && data['citedby'] != null) {
                     totalCitEl.innerHTML = 'Total citations: ' + data['citedby'];
@@ -23,7 +32,12 @@
                         element.innerHTML = '| Citations: ' + pub['num_citations'];
                     }
                 });
-            })
-            .catch(function () { /* branch missing until the crawler action first succeeds */ });
+            }).catch(function () { /* branch missing until the crawler action first succeeds */ });
+        }
+
+        fill();
+        // PJAX swaps the center column in without a page load — re-fill the
+        // freshly inserted citation spans (the JSON fetch is cached above).
+        document.addEventListener('pjax:content', fill);
     })();
 </script>

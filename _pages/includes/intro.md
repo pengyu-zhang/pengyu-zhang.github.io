@@ -3,7 +3,7 @@
 I am a fourth-year Ph.D. candidate in Computer Science at the INtelligent Data Engineering Lab ([INDElab](https://indelab.org/)), University of Amsterdam, advised by [Prof. Dr. Paul Groth](https://pgroth.com) and [Dr. Klim Zaporojets](https://klimzaporojets.github.io/).
 
 <div class="job-callout" markdown="1">
-**I am on the job market, seeking Data Scientist and Machine Learning Engineer roles.** Feel free to reach out at [p.zhang@uva.nl](mailto:p.zhang@uva.nl) or download my [CV (PDF)](pdf/CV.pdf).
+**I am on the job market, seeking Data Scientist and Machine Learning Engineer roles.** Feel free to reach out at [p.zhang@uva.nl](mailto:p.zhang@uva.nl) or download my [CV (PDF)](/pdf/CV.pdf).
 <br><span class="job-callout__meta">Based in Amsterdam · open to roles across the Netherlands</span>
 </div>
 

@@ -8,26 +8,39 @@
   <body>
 
     {% include browser-upgrade.html %}
-    {% include masthead.html %}
 
-    <div id="main" role="main">
-      {% include sidebar.html %}
-    
-      <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-        {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
-        <div class="page__inner-wrap">
-          <section class="page__content" itemprop="text">
-            {{ content }}
-          </section>
-        </div>
-      </article>
+    <div id="main" class="layout" role="main">
+
+      <aside class="layout__left">
+        {% include author-profile.html %}
+      </aside>
+
+      <div class="layout__center">
+        {% include tabbar.html %}
+        <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
+          {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
+          <div class="page__inner-wrap">
+            <section class="page__content" itemprop="text">
+              {{ content }}
+            </section>
+          </div>
+        </article>
+      </div>
+
+      <aside class="layout__right">
+        {% include news-card.html %}
+      </aside>
+
+      {% comment %} The footer lives inside the grid (row 2, center column) so
+      the sticky side columns' containing block reaches the very bottom of the
+      page — otherwise a footer below the grid shoves them up at full scroll. {% endcomment %}
+      <footer class="site-footer">
+        &copy; {{ site.time | date: "%Y" }} {{ site.author.name }} &middot; Last updated {{ site.time | date: "%B %Y" }}
+      </footer>
+
     </div>
 
     <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">&uarr;</button>
-
-    <footer class="site-footer">
-      &copy; {{ site.time | date: "%Y" }} {{ site.author.name }} &middot; Last updated {{ site.time | date: "%B %Y" }}
-    </footer>
 
     {% include scripts.html %}
 

@@ -1,4 +1,3 @@
-# News
 - *2026.07*: 🎤 Heading to San Diego in July for **ACL 2026** to present *Fusion Training for Mathematical Generalization in Large Language Models*, come say hi if you'll be around!
 - *2026.05*: A great week in Dubrovnik presenting *Beyond Images* at **ESWC 2026**.
 - *2026.05*: Presented *Graph-TempCZ* at **LREC 2026** in Palma de Mallorca, lots of good chats on software mentions in the literature.
