@@ -31,6 +31,7 @@
 
 <meta property="og:locale" content="en">
 <meta property="og:site_name" content="{{ site.title }}">
+<meta property="og:type" content="website">
 <meta property="og:title" content="{{ site.title }}">
 
 {% if seo_url %}
@@ -43,11 +44,11 @@
 {% endif %}
 
 {% if seo_url %}
-  <meta property="og:image" content="{{ seo_url }}/images/og-card.png">
+  <meta property="og:image" content="{{ seo_url }}/images/og-card.png?v=2">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:image" content="{{ seo_url }}/images/og-card.png">
+  <meta name="twitter:image" content="{{ seo_url }}/images/og-card.png?v=2">
 {% endif %}
 
 {% if site.twitter.username %}
