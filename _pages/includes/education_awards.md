@@ -1,4 +1,4 @@
-# Education & Awards
+# Education & Awards & Service
 
 <h3 class="group-label">Education</h3>
 
@@ -10,6 +10,10 @@
 
 - *2026*: Conference travel grant for ACL 2026.
 - *2022*: Outstanding Master's Thesis, Beijing University of Technology.
+{: .timeline}
+
+<h3 class="group-label">Service</h3>
+
 - Reviewer / sub-reviewer: CIKM, ECAI, ESWC, PKDD.
-- Teaching assistant: Data Engineering (BJUT, 2020–2021).
+- *2020 - 2021*: Teaching assistant, Data Engineering (BJUT).
 {: .timeline}

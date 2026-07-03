@@ -7,14 +7,12 @@
    ========================================================================== */
 
 :root {
-  /* brand: airy blue primary + orange highlights */
-  --accent:         #2f6fed;
-  --accent-hover:   #2456c4;
-  --accent-soft:    #e8f0fe;   /* tinted pill / hover surfaces */
+  /* brand: periwinkle indigo — one hue, three strengths */
+  --accent:         #4f46e5;   /* primary: links, active tab, buttons */
+  --accent-hover:   #4338ca;   /* pressed/hover on solid fills */
+  --accent-bright:  #6366f1;   /* lighter pop: dot hover, subtle accents */
+  --accent-soft:    #e0e7ff;   /* tinted pill / hover surfaces */
   --on-accent:      #ffffff;   /* text on solid accent fills */
-
-  --orange:         #f97316;   /* accents only: New badge, callout, dots */
-  --orange-soft:    #fff3e8;
 
   /* surfaces & text */
   --bg-page:        #f5f7fb;
@@ -22,7 +20,7 @@
   --card-border:    #eaeef5;
   --tint-bg:        #f6f8fc;   /* item surfaces inside cards (news rows) */
   --text:           #1f2937;
-  --muted:          #64748b;
+  --muted:          #5d6b82;  /* ≥4.5:1 on every surface it appears on */
   --border:         #e5eaf2;
   --code-bg:        #f2f5fa;
 
@@ -35,7 +33,7 @@
   --selection-text: #ffffff;
 
   /* tinted callout surface (job-market banner) */
-  --callout-bg:     var(--orange-soft);
+  --callout-bg:     #eef2ff;
 
   --shadow-card:    0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 16px rgba(16, 24, 40, 0.06);
 
@@ -46,13 +44,11 @@
 }
 
 [data-theme="dark"] {
-  --accent:         #8ab4ff;
-  --accent-hover:   #adc8ff;
-  --accent-soft:    rgba(138, 180, 255, 0.14);
+  --accent:         #818cf8;
+  --accent-hover:   #a5b4fc;
+  --accent-bright:  #a5b4fc;
+  --accent-soft:    rgba(129, 140, 248, 0.16);
   --on-accent:      #0b0c0f;
-
-  --orange:         #ffa15c;
-  --orange-soft:    rgba(255, 150, 80, 0.12);
 
   --bg-page:        #0f1115;
   --card-bg:        #171a21;
@@ -63,13 +59,13 @@
   --border:         #2a2f37;
   --code-bg:        #1b1e24;
 
-  --badge-bg:       #3a5bd0;
+  --badge-bg:       #4f46e5;
   --badge-text:     #ffffff;
 
-  --selection-bg:   #8ab4ff;
+  --selection-bg:   #818cf8;
   --selection-text: #0b0c0f;
 
-  --callout-bg:     rgba(255, 150, 80, 0.12);
+  --callout-bg:     rgba(129, 140, 248, 0.10);
 
   --shadow-card:    none;
 }
@@ -146,6 +142,25 @@ li em:first-child {
 }
 
 hr { border-top-color: var(--border); }
+
+/* The template reset strips link outlines — restore a visible focus ring for
+   keyboard navigation (focus-visible: keyboard only, not mouse clicks). */
+a:focus-visible,
+button:focus-visible,
+summary:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+
+/* Honor the OS "reduce motion" setting */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    transition: none !important;
+    animation: none !important;
+  }
+}
 
 /* ==========================================================================
    THREE-COLUMN LAYOUT
@@ -289,7 +304,7 @@ body::after {
     height: 0.55em;
     margin: 0;
     border-radius: var(--radius-pill);
-    background: var(--orange);
+    background: var(--accent);
     position: static;
   }
 
@@ -467,24 +482,30 @@ body::after {
   text-align: left;
 
   li {
-    margin: 0;
+    margin: 0 0 0.4em;
     padding: 0;
+
+    &:last-child { margin-bottom: 0; }
   }
 
+  /* small pill buttons — same language as Download CV, clearly secondary */
   a {
     display: flex;
     align-items: center;
     gap: 0.6em;
-    padding: 0.3em 0.2em;
-    border-radius: var(--radius-inner);
-    font-size: 0.92em;
+    padding: 0.4em 0.9em;
+    border-radius: var(--radius-pill);
+    background: var(--tint-bg);
+    font-size: 0.9em;
     color: var(--text);
     text-decoration: none;
     overflow-wrap: anywhere;
+    transition: background 0.15s ease, color 0.15s ease;
 
     i { color: var(--muted); }
 
     &:hover {
+      background: var(--accent-soft);
       color: var(--accent);
       text-decoration: none;
 
@@ -536,8 +557,8 @@ body::after {
     margin: 0.1em 0 0.25em 0.55em;
     padding: 0.12em 0.6em;
     border-radius: var(--radius-pill);
-    background: var(--orange);
-    color: #ffffff;
+    background: var(--accent);
+    color: var(--on-accent);
     font-size: 0.74em;
     font-weight: 600;
   }
@@ -583,7 +604,7 @@ body::after {
 .job-callout {
   margin: 1.1em 0;
   padding: 0.75em 1em;
-  border-left: 3px solid var(--orange);
+  border-left: 3px solid var(--accent);
   border-radius: var(--radius-inner);
   background: var(--callout-bg);
   box-shadow: var(--shadow-card);
@@ -627,6 +648,56 @@ body::after {
   filter: brightness(0.88);
 }
 
+/* Slimmer figure column: with the lightbox the thumbnail is an entry point,
+   not the content — give the reclaimed width to the text. (Same 768px
+   threshold as the template's $medium breakpoint.) */
+@media (min-width: 768px) {
+  .paper-box .paper-box-image {
+    min-width: 180px;
+    max-width: 32%;
+  }
+
+  .paper-box .paper-box-text {
+    max-width: 68%;
+  }
+}
+
+/* Thumbnails open a lightbox (JS); without JS the wrapping <a> just opens
+   the full image in a new tab via <base target="_blank">. */
+.paper-box .img-zoom {
+  display: block;
+  cursor: zoom-in;
+}
+
+.lightbox {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2em;
+  background: rgba(15, 17, 21, 0.88);
+  cursor: zoom-out;
+  animation: lightbox-in 0.15s ease;
+
+  img {
+    max-width: 100%;
+    max-height: 100%;
+    padding: 0.75em;
+    border-radius: var(--radius-inner);
+    background: #ffffff; /* paper figures assume a light background */
+  }
+}
+
+@keyframes lightbox-in {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
 /* Paper/DOI/Code links directly beneath each project card image */
 .paper-box .paper-links {
   margin-top: 0.5em;
@@ -655,8 +726,8 @@ body::after {
 }
 
 /* ==========================================================================
-   TIMELINE MARKERS (Education & Awards, Publications) — hollow blue rings,
-   no connecting line; hovering a row fills its ring orange.
+   TIMELINE MARKERS (Education & Awards, Publications) — solid indigo dots,
+   no connecting line; hovering a row pops the dot bigger and brighter.
    ========================================================================== */
 
 .page__content ul.timeline {
@@ -673,7 +744,7 @@ body::after {
       content: "";
       position: absolute;
       left: 0;
-      top: 0.28em;
+      top: 0.3em;
       width: 12px;
       height: 12px;
       border-radius: var(--radius-pill);
@@ -683,17 +754,23 @@ body::after {
     }
 
     &:hover::before {
-      background: var(--orange);
-      transform: scale(1.3);
+      background: var(--accent);
+      transform: scale(1.35);
     }
 
     &:last-child {
       padding-bottom: 0.2em;
     }
 
+    /* leading date — same soft pill as the News dates */
     em:first-child {
-      color: var(--muted);
-      font-size: 0.92em;
+      display: inline-block;
+      padding: 0.1em 0.65em;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.85em;
+      font-weight: 600;
     }
   }
 }
@@ -721,13 +798,15 @@ body::after {
   flex-wrap: wrap;
   gap: 0.45em;
 
+  /* borderless neutral pills — quieter than the indigo date chips */
   li {
     margin: 0;
     padding: 0.28em 0.75em;
-    border: 1px solid var(--border);
     border-radius: var(--radius-pill);
-    background: var(--code-bg);
+    background: var(--tint-bg);
+    color: var(--text);
     font-size: 0.82em;
+    font-weight: 500;
     line-height: 1.35;
   }
 }

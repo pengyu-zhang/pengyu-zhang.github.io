@@ -74,6 +74,47 @@
   }
 
   /* ==========================================================
+     Lightbox for figure thumbnails (a.img-zoom). Click opens the
+     full image in a dimmed overlay; click anywhere or Escape
+     closes it. Delegated on document, so it keeps working after
+     PJAX swaps. Without JS the wrapping <a> simply opens the
+     image in a new tab (via <base target="_blank">).
+     ========================================================== */
+  function closeLightbox() {
+    var box = document.querySelector('.lightbox');
+    if (box) box.parentNode.removeChild(box);
+  }
+
+  document.addEventListener('click', function (e) {
+    if (e.defaultPrevented || e.button !== 0 ||
+        e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+
+    if (e.target.closest && e.target.closest('.lightbox')) {
+      closeLightbox();
+      return;
+    }
+
+    var link = e.target.closest ? e.target.closest('a.img-zoom') : null;
+    if (!link) return;
+    e.preventDefault();
+
+    var overlay = document.createElement('div');
+    overlay.className = 'lightbox';
+    overlay.setAttribute('role', 'dialog');
+    overlay.setAttribute('aria-label', 'Image preview (click or press Escape to close)');
+    var img = document.createElement('img');
+    img.src = link.href;
+    var thumb = link.querySelector('img');
+    img.alt = thumb ? thumb.alt : '';
+    overlay.appendChild(img);
+    document.body.appendChild(overlay);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  /* ==========================================================
      Smooth scroll for same-page anchors ("#news" and "/#news").
      Interception also stops <base target="_blank"> from opening
      fragment links in a new tab.

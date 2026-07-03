@@ -1,6 +1,6 @@
 # Experience
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2026</div><img src='/images/fusion_training.png' alt="Fusion Training" width="100%">
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2026</div><a class="img-zoom" href="/images/fusion_training.png"><img src='/images/fusion_training.png' alt="Fusion Training" width="100%"></a>
 <div class="paper-links"><a href="/pdf/Fusion_Training.pdf">Paper</a> | <a href="https://aclanthology.org/2026.acl-srw.64/">DOI</a> | <a href="https://github.com/caocongfeng/Fusion-Bench">Code</a></div>
 </div></div>
 <div class='paper-box-text' markdown="1">
@@ -12,7 +12,7 @@
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Under review</div><img src='/images/timeroute.png' alt="TimeRoute" width="100%">
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Under review</div><a class="img-zoom" href="/images/timeroute.png"><img src='/images/timeroute.png' alt="TimeRoute" width="100%"></a>
 <div class="paper-links"><a href="https://arxiv.org">arXiv</a></div>
 </div></div>
 <div class='paper-box-text' markdown="1">
@@ -24,7 +24,7 @@
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Under review</div><img src='/images/time_imprint.png' alt="Time Imprint" width="100%">
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">Under review</div><a class="img-zoom" href="/images/time_imprint.png"><img src='/images/time_imprint.png' alt="Time Imprint" width="100%"></a>
 <div class="paper-links"><a href="https://arxiv.org">arXiv</a></div>
 </div></div>
 <div class='paper-box-text' markdown="1">
@@ -36,7 +36,7 @@
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ESWC 2026</div><img src='/images/beyond_images.png' alt="Beyond Images" width="100%">
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ESWC 2026</div><a class="img-zoom" href="/images/beyond_images.png"><img src='/images/beyond_images.png' alt="Beyond Images" width="100%"></a>
 <div class="paper-links"><a href="/pdf/Beyond_Images.pdf">Paper</a> | <a href="https://doi.org/10.1007/978-3-032-25156-5_5">DOI</a> | <a href="https://github.com/pengyu-zhang/Beyond-Images">Code</a> | <a href="https://youtu.be/PHaukQic-N4">YouTube</a> | <a href="https://www.bilibili.com/video/BV13445zLEp4">Bilibili</a></div>
 </div></div>
 <div class='paper-box-text' markdown="1">
@@ -48,7 +48,7 @@
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">LREC 2026</div><img src='/images/graph_tempcz.png' alt="Graph-TempCZ" width="100%">
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">LREC 2026</div><a class="img-zoom" href="/images/graph_tempcz.png"><img src='/images/graph_tempcz.png' alt="Graph-TempCZ" width="100%"></a>
 <div class="paper-links"><a href="/pdf/Graph-TempCZ.pdf">Paper</a> | <a href="https://doi.org/10.63317/2jopizgg4dzo">DOI</a> | <a href="https://github.com/caocongfeng/Graph-TempCZ">Code</a></div>
 </div></div>
 <div class='paper-box-text' markdown="1">
@@ -60,7 +60,7 @@
 </div>
 </div>
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CIKM & ECAI 2024</div><img src='/images/cycle.png' alt="CYCLE and TIGER" width="100%">
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">CIKM & ECAI 2024</div><a class="img-zoom" href="/images/cycle.png"><img src='/images/cycle.png' alt="CYCLE and TIGER" width="100%"></a>
 <div class="paper-links">CYCLE: <a href="/pdf/CYCLE.pdf">Paper</a> | <a href="https://doi.org/10.1145/3627673.3679702">DOI</a> | <a href="https://github.com/pengyu-zhang/CYCLE-Cross-Year-Contrastive-Learning-in-Entity-Linking">Code</a><br>TIGER: <a href="/pdf/TIGER.pdf">Paper</a> | <a href="https://doi.org/10.3233/FAIA240933">DOI</a> | <a href="https://github.com/pengyu-zhang/TIGER-Temporally-Improved-Graph-Entity-Linker">Code</a></div>
 </div></div>
 <div class='paper-box-text' markdown="1">

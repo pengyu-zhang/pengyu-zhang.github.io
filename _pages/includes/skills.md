@@ -5,7 +5,7 @@
     <h3>Programming</h3>
     <ul class="skill-chips">
       <li>Python</li>
-      <li>SQL</li>
+      <li>PostgreSQL</li>
       <li>Bash</li>
       <li>Git</li>
       <li>Linux</li>
@@ -31,6 +31,14 @@
     <ul class="skill-chips">
       <li>Weights &amp; Biases</li>
       <li>Jupyter</li>
+    </ul>
+  </div>
+  <div class="skill-group">
+    <h3>Languages</h3>
+    <ul class="skill-chips">
+      <li>Chinese (native)</li>
+      <li>English (fluent, IELTS 7.0)</li>
+      <li>Dutch (elementary)</li>
     </ul>
   </div>
 </div>
