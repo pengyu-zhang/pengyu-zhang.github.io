@@ -820,12 +820,21 @@ body::after {
   column-gap: 1em;
   margin-top: 0.5em;
 
+  /* photos are wrapped in a.img-zoom (lightbox) — the anchor is the column
+     item, so break-inside lives on it, not the img */
+  a {
+    display: block;
+    margin: 0 0 1em;
+    break-inside: avoid;
+    cursor: zoom-in;
+  }
+
   img {
     display: block;
     width: 100%;
     height: auto;   /* with the width/height attrs this reserves the aspect
                        ratio before the file loads — no layout jump */
-    margin: 0 0 1em;
+    margin: 0;
     border-radius: var(--radius-inner);
     break-inside: avoid;
   }
