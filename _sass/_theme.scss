@@ -811,6 +811,14 @@ body::after {
   }
 }
 
+/* research-interest chips inside the job callout: card-bg pills so they stand
+   out on the tinted callout surface (--tint-bg would blend into it) */
+.intro-chips {
+  margin: 0.7em 0 0.2em;
+
+  li { background: var(--card-bg); }
+}
+
 /* ==========================================================================
    PHOTO WALL (Beyond) — masonry-ish columns
    ========================================================================== */

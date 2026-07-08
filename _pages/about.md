@@ -2,7 +2,7 @@
 permalink: /
 title: ""
 excerpt: ""
-description: "Fourth-year Computer Science Ph.D. candidate at the University of Amsterdam, building multi-modal and temporal knowledge-graph models for entity linking, link prediction, and recommendation. On the job market for Data Scientist and Machine Learning Engineer roles."
+description: "Fourth-year Computer Science Ph.D. candidate at the University of Amsterdam, building deep learning models that fuse graph structure, text, images, and time to keep entity linking, link prediction, and recommendation accurate as data drifts. On the job market for Data Scientist and Machine Learning Engineer roles."
 author_profile: true
 redirect_from: 
   - /about/
