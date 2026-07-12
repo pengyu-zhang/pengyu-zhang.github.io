@@ -281,8 +281,11 @@ body::after {
 }
 
 /* Section titles: small-caps label with an orange dot and a hairline that
-   fills the rest of the row (tab names match these 1:1 where applicable). */
+   fills the rest of the row (tab names match these 1:1 where applicable).
+   Section headings are h2 in the markdown (the page's single h1 is the name
+   in the profile card); h1 is kept in the selector as a safety net. */
 .page__content h1,
+.page__content h2,
 .news-card__title {
   display: flex;
   align-items: center;

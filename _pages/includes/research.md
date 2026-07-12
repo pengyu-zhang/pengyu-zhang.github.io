@@ -1,4 +1,4 @@
-# Experience
+## Experience
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2026</div><a class="img-zoom" href="/images/fusion_training.png"><img src='/images/fusion_training.png' alt="Fusion Training" width="100%"></a>
 <div class="paper-links"><a href="/pdf/Fusion_Training.pdf">Paper</a> | <a href="https://doi.org/10.18653/v1/2026.acl-srw.64">DOI</a> | <a href="https://github.com/caocongfeng/Fusion-Bench">Code</a></div>

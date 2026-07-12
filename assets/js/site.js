@@ -44,6 +44,7 @@
       var next = doc.querySelector(CONTENT_SEL);
       if (!next) throw new Error('content container missing in ' + url);
       content.innerHTML = next.innerHTML;
+      if (doc.title) document.title = doc.title;
       if (push) history.pushState({ pjax: true }, '', url);
       setActiveTab(new URL(url, location.href).pathname);
       window.scrollTo(0, 0);

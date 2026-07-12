@@ -1,4 +1,4 @@
-# Skills
+## Skills
 
 <div class="skills-grid">
   <div class="skill-group">

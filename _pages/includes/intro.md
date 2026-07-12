@@ -1,4 +1,4 @@
-# About Me
+## About Me
 
 I am a fourth-year Computer Science Ph.D. candidate at the University of Amsterdam ([INDElab](https://indelab.org/)), advised by [Prof. Dr. Paul Groth](https://pgroth.com) and [Dr. Klim Zaporojets](https://klimzaporojets.github.io/), expecting to graduate in 2027.
 

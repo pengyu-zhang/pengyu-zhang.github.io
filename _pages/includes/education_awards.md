@@ -1,4 +1,4 @@
-# Education & Awards & Service
+## Education & Awards & Service
 
 <h3 class="group-label">Education</h3>
 

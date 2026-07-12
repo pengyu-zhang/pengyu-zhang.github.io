@@ -1,4 +1,4 @@
-# Publications
+## Publications
 <span id='total_cit' class='scholar-total'></span>
 
 - ``Under review`` TimeRoute: Time-Scale Experts for Multi-Modal Diffusion Recommendation. **Pengyu Zhang**, Yangqin Jiang, Klim Zaporojets, Congfeng Cao, Paul Groth.  
