@@ -91,6 +91,9 @@ exclude:
   - vendor
   - google_scholar_crawler
   - github_myprofile_updater
+  # include_relative fragments only, never standalone pages (would leak into
+  # sitemap.xml as duplicate-content pages via optional-front-matter)
+  - _pages/includes
 keep_files:
   - .git
   - .svn
