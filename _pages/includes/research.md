@@ -25,7 +25,7 @@
 </div>
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Under review</div><a class="img-zoom" href="/images/time_imprint.png"><img src='/images/time_imprint.png' alt="Time Imprint" width="100%"></a>
-<div class="paper-links"><a href="https://arxiv.org">arXiv</a></div>
+<div class="paper-links"><a href="https://arxiv.org/abs/2607.09777">arXiv</a></div>
 </div></div>
 <div class='paper-box-text' markdown="1">
 

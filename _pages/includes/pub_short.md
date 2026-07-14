@@ -5,7 +5,7 @@
 [arXiv](https://arxiv.org)
 
 - ``Under review`` Time Imprint: Learning Time-Aware Representations in Multi-Modal Knowledge Graphs. **Pengyu Zhang**, Klim Zaporojets, Congfeng Cao, Jia-Hong Huang, Paul Groth.  
-[arXiv](https://arxiv.org)
+[arXiv](https://arxiv.org/abs/2607.09777)
 
 - ``ACL 2026`` Fusion Training for Mathematical Generalization in Large Language Models. Congfeng Cao, **Pengyu Zhang**, Jelke Bloem. Annual Meeting of the Association for Computational Linguistics (Student Research Workshop).  
 [Paper](/pdf/Fusion_Training.pdf) | [DOI](https://doi.org/10.18653/v1/2026.acl-srw.64) | [Code](https://github.com/caocongfeng/Fusion-Bench)
