@@ -35,7 +35,7 @@
 [Paper](/pdf/MVMA-GCN.pdf) | [DOI](https://doi.org/10.1016/j.engappai.2023.106717) | [Code](https://github.com/pengyu-zhang/MVMA-GCN) <span class='show_paper_citations' data='xH7mJ-0AAAAJ:u5HHmVD_uO8C'></span>
 
 - ``JCAD 2022`` Visual Analysis for Name Disambiguation of Academic Papers *(in Chinese)*. **Pengyu Zhang**, Yong Zhang, Yanjie Cui, Baocai Yin. Journal of Computer-Aided Design and Computer Graphics.  
-[Paper](/pdf/Visual_Analysis.pdf) | [DOI](https://doi.org/10.3724/sp.j.1089.2022.19191) | [YouTube](https://www.youtube.com/watch?v=jQ8MNu-L-Os) | [Bilibili](https://www.bilibili.com/video/BV1QM4m1k77Q/) <span class='show_paper_citations' data='xH7mJ-0AAAAJ:d1gkVwhDpl0C'></span>
+[Paper](/pdf/Visual_Analysis.pdf) | [DOI](https://doi.org/10.3724/sp.j.1089.2022.19191) | [Code](https://github.com/pengyu-zhang/Visual-Analysis-for-Name-Disambiguation-of-Academic-Papers) | [Demo](https://pengyu-zhang.github.io/Visual-Analysis-for-Name-Disambiguation-of-Academic-Papers/) | [YouTube](https://www.youtube.com/watch?v=jQ8MNu-L-Os) | [Bilibili](https://www.bilibili.com/video/BV1QM4m1k77Q/) <span class='show_paper_citations' data='xH7mJ-0AAAAJ:d1gkVwhDpl0C'></span>
 
 - ``Information 2021`` Dual-Channel Heterogeneous Graph Network for Author Name Disambiguation. Xin Zheng, **Pengyu Zhang**, Yanjie Cui, Rong Du, Yong Zhang. Information.  
 [Paper](/pdf/Dual-Channel.pdf) | [DOI](https://doi.org/10.3390/info12090383) | [Code](https://github.com/pengyu-zhang/Dual-channel-Heterogeneous-Graph-Network-for-Author-Name-Disambiguation) <span class='show_paper_citations' data='xH7mJ-0AAAAJ:u-x6o8ySG0sC'></span>
