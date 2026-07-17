@@ -37,7 +37,7 @@
 </div>
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">ESWC 2026</div><a class="img-zoom" href="/images/beyond_images.png"><img src='/images/beyond_images.png' alt="Beyond Images" width="100%"></a>
-<div class="paper-links"><a href="/pdf/Beyond_Images.pdf">Paper</a> | <a href="https://doi.org/10.1007/978-3-032-25156-5_5">DOI</a> | <a href="https://github.com/pengyu-zhang/Beyond-Images">Code</a> | <a href="https://youtu.be/PHaukQic-N4">YouTube</a> | <a href="https://www.bilibili.com/video/BV13445zLEp4">Bilibili</a></div>
+<div class="paper-links"><a href="/pdf/Beyond_Images.pdf">Paper</a> | <a href="https://doi.org/10.1007/978-3-032-25156-5_5">DOI</a> | <a href="https://github.com/pengyu-zhang/Beyond-Images">Code</a> | <a href="https://pengyu-zhang.github.io/Beyond-Images/">Demo</a> | <a href="https://youtu.be/PHaukQic-N4">YouTube</a> | <a href="https://www.bilibili.com/video/BV13445zLEp4">Bilibili</a></div>
 </div></div>
 <div class='paper-box-text' markdown="1">
 

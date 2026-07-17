@@ -11,7 +11,7 @@
 [Paper](/pdf/Fusion_Training.pdf) | [DOI](https://doi.org/10.18653/v1/2026.acl-srw.64) | [Code](https://github.com/caocongfeng/Fusion-Bench)
 
 - ``ESWC 2026`` Are a Thousand Words Better Than a Single Picture? Beyond Images - A Framework for Multi-Modal Knowledge Graph Dataset Enrichment. **Pengyu Zhang**, Klim Zaporojets, Jie Liu, Jia-Hong Huang, Paul Groth. 23rd European Semantic Web Conference.  
-[Paper](/pdf/Beyond_Images.pdf) | [DOI](https://doi.org/10.1007/978-3-032-25156-5_5) | [Code](https://github.com/pengyu-zhang/Beyond-Images) | [YouTube](https://youtu.be/PHaukQic-N4) | [Bilibili](https://www.bilibili.com/video/BV13445zLEp4) <span class='show_paper_citations' data='xH7mJ-0AAAAJ:Tyk-4Ss8FVUC'></span>
+[Paper](/pdf/Beyond_Images.pdf) | [DOI](https://doi.org/10.1007/978-3-032-25156-5_5) | [Code](https://github.com/pengyu-zhang/Beyond-Images) | [Demo](https://pengyu-zhang.github.io/Beyond-Images/) | [YouTube](https://youtu.be/PHaukQic-N4) | [Bilibili](https://www.bilibili.com/video/BV13445zLEp4) <span class='show_paper_citations' data='xH7mJ-0AAAAJ:Tyk-4Ss8FVUC'></span>
 
 - ``LREC 2026`` Graph-TempCZ: A Graph Representation of Software Mentions for Predicting Software Usage in Scientific Publications. Congfeng Cao, **Pengyu Zhang**, Jelke Bloem. International Conference on Language Resources and Evaluation.  
 [Paper](/pdf/Graph-TempCZ.pdf) | [DOI](https://doi.org/10.63317/2jopizgg4dzo) | [Code](https://github.com/caocongfeng/Graph-TempCZ)
