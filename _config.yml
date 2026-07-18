@@ -7,7 +7,7 @@
 
 # Site Settings
 title                    : "Pengyu Zhang"
-description              : "The data drifts. My models keep up."
+description              : "Machine learning that stays accurate as data drifts."
 url                      : "https://pengyu-zhang.github.io"
 repository               : "pengyu-zhang/pengyu-zhang.github.io"
 google_scholar_stats_use_cdn : false

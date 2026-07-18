@@ -3,7 +3,7 @@ permalink: /
 title: ""
 seo_title: "Pengyu Zhang | Ph.D. Candidate in Computer Science, University of Amsterdam"
 excerpt: ""
-description: "Fourth-year Computer Science Ph.D. candidate at the University of Amsterdam, building deep learning models that fuse graph structure, text, images, and time to keep entity linking, link prediction, and recommendation accurate as data drifts. On the job market for Data Scientist and Machine Learning Engineer roles."
+description: "Fourth-year Computer Science Ph.D. candidate at the University of Amsterdam, building deep learning models that fuse graph structure, text, images, and time to keep entity linking, link prediction, and recommendation accurate as data drifts. On the job market for industry and postdoctoral positions."
 author_profile: true
 redirect_from: 
   - /about/
