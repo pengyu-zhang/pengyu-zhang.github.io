@@ -1,3 +1,4 @@
+- *2026.07*: 🎉 *Select, Don't Train* was accepted at **ISWC 2026**.
 - *2026.07*: 🎤 Presented *Fusion Training for Mathematical Generalization in Large Language Models* at **ACL 2026** in San Diego.
 - *2026.05*: A great week in Dubrovnik presenting *Beyond Images* at **ESWC 2026**.
 - *2026.05*: Presented *Graph-TempCZ* at **LREC 2026** in Palma de Mallorca, lots of good chats on software mentions in the literature.

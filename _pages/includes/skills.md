@@ -27,13 +27,6 @@
     </ul>
   </div>
   <div class="skill-group">
-    <h3>Tools</h3>
-    <ul class="skill-chips">
-      <li>Weights &amp; Biases</li>
-      <li>Jupyter</li>
-    </ul>
-  </div>
-  <div class="skill-group">
     <h3>Languages</h3>
     <ul class="skill-chips">
       <li>Chinese (native)</li>

@@ -1,17 +1,5 @@
 ## Experience
 
-<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2026</div><a class="img-zoom" href="/images/fusion_training.png"><img src='/images/fusion_training.png' alt="Fusion Training" width="100%"></a>
-<div class="paper-links"><a href="/pdf/Fusion_Training.pdf">Paper</a> | <a href="https://doi.org/10.18653/v1/2026.acl-srw.64">DOI</a> | <a href="https://github.com/caocongfeng/Fusion-Bench">Code</a></div>
-</div></div>
-<div class='paper-box-text' markdown="1">
-
-**Fusion Training** · Hybrid-reasoning LLMs
-
-- Found that interleaving thinking and non-thinking training data keeps both abilities strong, and measured how the balance shifts (adding more non-thinking data steadily hurts reasoning). Released the open Fusion Bench benchmark.
-- Newer LLMs mix quick answers with long step-by-step reasoning to save compute, but putting both into one model makes them fight. Ran a full grid over data ratios and training orders to see what keeps both working.
-</div>
-</div>
-
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Under review</div><a class="img-zoom" href="/images/timeroute.png"><img src='/images/timeroute.png' alt="TimeRoute" width="100%"></a>
 <div class="paper-links"><a href="https://arxiv.org">arXiv</a></div>
 </div></div>
@@ -33,6 +21,18 @@
 
 - Raised top-match accuracy by up to **4.81%** overall, and by up to **200%** on the hardest, most look-alike cases.
 - Systems often mix up near-identical records whose text and images look almost the same. Added time as an extra clue so the model can tell them apart, cutting errors most where they were worst.
+</div>
+</div>
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">ACL 2026</div><a class="img-zoom" href="/images/fusion_training.png"><img src='/images/fusion_training.png' alt="Fusion Training" width="100%"></a>
+<div class="paper-links"><a href="/pdf/Fusion_Training.pdf">Paper</a> | <a href="https://doi.org/10.18653/v1/2026.acl-srw.64">DOI</a> | <a href="https://github.com/caocongfeng/Fusion-Bench">Code</a></div>
+</div></div>
+<div class='paper-box-text' markdown="1">
+
+**Fusion Training** · Hybrid-reasoning LLMs
+
+- Found that interleaving thinking and non-thinking training data keeps both abilities strong, and measured how the balance shifts (adding more non-thinking data steadily hurts reasoning). Released the open Fusion Bench benchmark.
+- Newer LLMs mix quick answers with long step-by-step reasoning to save compute, but putting both into one model makes them fight. Ran a full grid over data ratios and training orders to see what keeps both working.
 </div>
 </div>
 
@@ -69,5 +69,17 @@
 
 - CYCLE beat the best prior method by **13.9% to 17.8%**; TIGER beat the strongest baseline by **16% to 21%**, measured over one to three year gaps.
 - Models that match text to a database lose accuracy as the database changes from year to year. CYCLE learns from those yearly changes, and TIGER also uses how records connect to each other. Both come with public benchmarks (GCL-TempEL and Graph-TempEL).
+</div>
+</div>
+
+<div class='paper-box'><div class='paper-box-image'><div><div class="badge">JCAD 2022</div><a class="img-zoom" href="/images/Visual_Analysis.png"><img src='/images/Visual_Analysis.png' alt="Visual Analysis" width="100%"></a>
+<div class="paper-links"><a href="/pdf/Visual_Analysis.pdf">Paper</a> | <a href="https://doi.org/10.3724/sp.j.1089.2022.19191">DOI</a> | <a href="https://github.com/pengyu-zhang/Visual-Analysis-for-Name-Disambiguation-of-Academic-Papers">Code</a> | <a href="https://pengyu-zhang.github.io/Visual-Analysis-for-Name-Disambiguation-of-Academic-Papers/">Demo</a> | <a href="https://www.youtube.com/watch?v=jQ8MNu-L-Os">YouTube</a> | <a href="https://www.bilibili.com/video/BV1QM4m1k77Q/">Bilibili</a></div>
+</div></div>
+<div class='paper-box-text' markdown="1">
+
+**Visual Analysis** · Interactive name disambiguation
+
+- Reached **91.4%** classification accuracy on ACM and **91.7%** on DBLP, and drove a user study where students and veteran research administrators disambiguated 4,000 real university papers with over **95%** task completion.
+- University research offices spend heavy manual effort separating authors who share a name, which is common for Chinese names. Built an interactive visual analytics system on a multi-view graph classifier (co-authorship, shared venues, and shared keywords) with linked views that expose team structure and let users verify each decision.
 </div>
 </div>

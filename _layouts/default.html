@@ -42,6 +42,10 @@
 
     <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">&uarr;</button>
 
+    {% comment %} PJAX swaps the center column in place; this polite live region
+    announces the new page to screen readers, which otherwise hear nothing. {% endcomment %}
+    <div id="pjax-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
+
     {% include scripts.html %}
 
   </body>

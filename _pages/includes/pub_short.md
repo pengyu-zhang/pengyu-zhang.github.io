@@ -1,11 +1,13 @@
 ## Publications
 <span id='total_cit' class='scholar-total'></span>
 
-- ``Under review`` TimeRoute: Time-Scale Experts for Multi-Modal Diffusion Recommendation. **Pengyu Zhang**, Yangqin Jiang, Klim Zaporojets, Congfeng Cao, Paul Groth.  
+- ``Under review`` TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation. **Pengyu Zhang**, Yangqin Jiang, Klim Zaporojets, Congfeng Cao, Paul Groth.  
 [arXiv](https://arxiv.org)
 
 - ``Under review`` Time Imprint: Learning Time-Aware Representations in Multi-Modal Knowledge Graphs. **Pengyu Zhang**, Klim Zaporojets, Congfeng Cao, Jia-Hong Huang, Paul Groth.  
 [arXiv](https://arxiv.org/abs/2607.09777)
+
+- ``ISWC 2026`` Select, Don't Train: The Benefits of Modular Entity Disambiguation with LLM-Based Selection. Fina Polat, Daniel Daza, **Pengyu Zhang**, Klim Zaporojets, Paul Groth. International Semantic Web Conference.
 
 - ``ACL 2026`` Fusion Training for Mathematical Generalization in Large Language Models. Congfeng Cao, **Pengyu Zhang**, Jelke Bloem. Annual Meeting of the Association for Computational Linguistics (Student Research Workshop).  
 [Paper](/pdf/Fusion_Training.pdf) | [DOI](https://doi.org/10.18653/v1/2026.acl-srw.64) | [Code](https://github.com/caocongfeng/Fusion-Bench)

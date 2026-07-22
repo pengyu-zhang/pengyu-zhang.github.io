@@ -8,11 +8,10 @@ html {
   /* apply a natural box layout model to all elements */
   box-sizing: border-box;
   background-color: $background-color;
-  font-size: 16px;
-
-  // @include breakpoint($medium) {
-  //   font-size: 18px;
-  // }
+  /* 100% honors the visitor's browser default (Dynamic Type). The whole type
+     scale is em-relative, so the layout scales with their chosen size instead
+     of being pinned to a fixed 16px. */
+  font-size: 100%;
 
   -webkit-text-size-adjust: 100%;
   -ms-text-size-adjust: 100%;
