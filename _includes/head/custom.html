@@ -3,23 +3,26 @@
 <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
 <link rel="manifest" href="/images/site.webmanifest">
 
-<meta name="theme-color" content="#ffffff">
-<link rel="stylesheet" href="/assets/css/academicons.css"/>
-
-<!-- Inter (modern UI typeface) — loaded non-blocking so it never delays first
-     paint; the system-font fallback stack renders instantly, then Inter swaps in -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" media="print" onload="this.media='all'">
-<noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"></noscript>
+<!-- browser chrome color follows the page background (--bg-page tokens in
+     _theme.scss — keep the hex values in sync). The media split covers the
+     pre-JS OS default; syncThemeColor below overrides both when a saved or
+     toggled theme differs from the OS. -->
+<meta name="theme-color" media="(prefers-color-scheme: light)" content="#f5f7fb">
+<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#0f1115">
 
 <!-- Apply saved/OS color theme before paint to avoid a flash -->
 <script>
   (function () {
+    window.syncThemeColor = function (theme) {
+      var color = theme === 'dark' ? '#0f1115' : '#f5f7fb';
+      var metas = document.querySelectorAll('meta[name="theme-color"]');
+      for (var i = 0; i < metas.length; i++) metas[i].setAttribute('content', color);
+    };
     try {
       var saved = localStorage.getItem('theme');
       var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', theme);
+      if (saved) window.syncThemeColor(saved); // manual choice may differ from the OS
     } catch (e) {}
   })();
 </script>

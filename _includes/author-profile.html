@@ -1,5 +1,9 @@
 {% assign author = site.author %}
 
+{% comment %} Icons are inline SVGs on currentColor (Feather/Lucide strokes,
+ORCID is its brand shape as a mono fill) — same family as the theme-toggle
+moon/sun. No icon fonts: FontAwesome and academicons were removed in v9. {% endcomment %}
+
 <div itemscope itemtype="http://schema.org/Person" class="profile-card card">
 
   <img src="/{{ author.avatar }}" class="profile-card__avatar" alt="{{ author.name }}" itemprop="image">
@@ -8,16 +12,16 @@
 
   <p class="profile-card__role">Ph.D. Candidate<br>Computer Science<br>{{ author.employer }}</p>
 
-  <p class="profile-card__location"><i class="fas fa-fw fa-map-marker-alt" aria-hidden="true"></i> Amsterdam, the Netherlands</p>
+  <p class="profile-card__location"><svg class="pc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> Amsterdam, the Netherlands</p>
 
   <a class="profile-card__cta" href="/pdf/CV.pdf">Download CV</a>
 
   <ul class="profile-card__links">
-    <li><a href="mailto:{{ author.email }}"><i class="fas fa-fw fa-envelope" aria-hidden="true"></i> {{ author.email }}</a></li>
-    <li><a href="{{ author.googlescholar }}"><i class="fas fa-fw fa-graduation-cap" aria-hidden="true"></i> Google Scholar</a></li>
-    <li><a href="https://github.com/{{ author.github }}"><i class="fab fa-fw fa-github" aria-hidden="true"></i> GitHub</a></li>
-    <li><a href="https://www.linkedin.com/in/{{ author.linkedin }}"><i class="fab fa-fw fa-linkedin" aria-hidden="true"></i> LinkedIn</a></li>
-    <li><a href="{{ author.orcid }}"><i class="ai ai-orcid-square ai-fw" aria-hidden="true"></i> ORCID</a></li>
+    <li><a href="mailto:{{ author.email }}"><svg class="pc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg> {{ author.email }}</a></li>
+    <li><a href="{{ author.googlescholar }}"><svg class="pc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21.42 10.922a1 1 0 0 0-.019-1.838L12.83 5.18a2 2 0 0 0-1.66 0L2.6 9.08a1 1 0 0 0 0 1.832l8.57 3.908a2 2 0 0 0 1.66 0z"/><path d="M22 10v6"/><path d="M6 12.5V16a6 3 0 0 0 12 0v-3.5"/></svg> Google Scholar</a></li>
+    <li><a href="https://github.com/{{ author.github }}"><svg class="pc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg> GitHub</a></li>
+    <li><a href="https://www.linkedin.com/in/{{ author.linkedin }}"><svg class="pc-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg> LinkedIn</a></li>
+    <li><a href="{{ author.orcid }}"><svg class="pc-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zM7.369 4.378c.525 0 .947.431.947.947 0 .525-.422.947-.947.947-.525 0-.946-.422-.946-.947 0-.525.421-.947.946-.947zm-.722 3.038h1.444v10.041H6.647V7.416zm3.562 0h3.9c3.712 0 5.344 2.653 5.344 5.025 0 2.578-2.016 5.025-5.325 5.025h-3.919V7.416zm1.444 1.303v7.444h2.297c3.272 0 4.022-2.484 4.022-3.722 0-2.016-1.284-3.722-4.097-3.722h-2.222z"/></svg> ORCID</a></li>
   </ul>
 
 </div>

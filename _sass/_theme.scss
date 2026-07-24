@@ -1,5 +1,5 @@
 /* ==========================================================================
-   V6 DESIGN SYSTEM
+   V8 DESIGN SYSTEM
    Three-column card layout (profile | tabbed content | news) inspired by
    modern portfolio pages. Single source of truth for colors and geometry:
    change a token here and it propagates everywhere. Dark mode overrides the
@@ -36,8 +36,10 @@
   --callout-bg:     #eef2ff;
 
   /* translucent floating chrome (frosted tab bar). Falls back to --card-bg
-     where backdrop-filter is unsupported or the user reduces transparency. */
+     where backdrop-filter is unsupported or the user reduces transparency.
+     --glass-edge is the bright top edge: light catching the material. */
   --glass-bg:       rgba(255, 255, 255, 0.72);
+  --glass-edge:     rgba(255, 255, 255, 0.55);
 
   --shadow-card:    0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 16px rgba(16, 24, 40, 0.06);
   /* deeper shadow for floating chrome (the frosted tab bar) so it reads as
@@ -83,6 +85,7 @@
   --callout-bg:     rgba(129, 140, 248, 0.10);
 
   --glass-bg:       rgba(23, 26, 33, 0.72);
+  --glass-edge:     rgba(255, 255, 255, 0.07);
 
   --shadow-card:    none;
   --shadow-float:   0 8px 30px rgba(0, 0, 0, 0.45);
@@ -148,6 +151,15 @@ a {
   font-size: 0.82em;
   font-weight: 600;
   white-space: nowrap;
+  /* _base.scss gives inline code a 1px light border and nbsp pseudo-spacers;
+     the badge owns its box instead (in ≤v8 a dead _syntax rule happened to
+     suppress both — without these the border shows white in dark mode) */
+  border: 0;
+
+  &::before,
+  &::after {
+    content: normal;
+  }
 }
 
 /* paper-box corner badge (Experience cards) */
@@ -186,7 +198,9 @@ summary:focus-visible {
 
 /* Press feedback: acknowledge the touch/click on pointer-DOWN, not on
    release. A discrete, compositor-friendly scale — the reduced-motion block
-   below zeroes the transition, but the instant scale still reads as a press. */
+   below zeroes the transition, but the instant scale still reads as a press.
+   The release eases back via the transform transition each control carries
+   in its base state (press snaps in fast, release settles smoothly). */
 .tabbar__tab:active,
 .profile-card__cta:active,
 .profile-card__links a:active,
@@ -198,8 +212,8 @@ summary:focus-visible {
 /* Honor the OS "reduce motion" setting. Reduced motion does not mean no
    feedback (skill section 14): keep the short opacity/color cross-fades that
    aid comprehension, and make only movement — transforms, the elastic dot
-   overshoot, slides — instant. Keyframe animations collapse to ~0 duration
-   but still fire their end events (the lightbox close relies on that). */
+   overshoot, slides — instant. Opacity stays in the transition whitelist, so
+   transitionend still fires for the PJAX fade and the lightbox close. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -211,6 +225,20 @@ summary:focus-visible {
   }
 }
 
+/* Ease dark↔light switches instead of hard-cutting the whole page (skill
+   section 14: avoid abrupt brightness jumps). The toggle adds this class for
+   ~260ms around the data-theme flip, so the blanket transition never lingers
+   to slow down other interactions. Deliberately NOT gated on reduced motion:
+   softening a full-viewport brightness jump is itself the accessible option. */
+.theme-switching,
+.theme-switching *,
+.theme-switching *::before,
+.theme-switching *::after {
+  transition: background-color 0.2s var(--ease), color 0.2s var(--ease),
+              border-color 0.2s var(--ease), box-shadow 0.2s var(--ease),
+              fill 0.2s var(--ease) !important;
+}
+
 /* ==========================================================================
    THREE-COLUMN LAYOUT
    Grid areas: left profile (sticky) | center tabbed content | right news
@@ -218,9 +246,14 @@ summary:focus-visible {
    to a single stacked column on phones.
    ========================================================================== */
 
+/* Column widths and breakpoints in rem/em, not px, so the layout scales
+   along with the user's text-size setting (skill 15, Dynamic Type). Values
+   are exact conversions at the 16px default: 18.75rem = 300px,
+   20rem = 320px, 87.5rem = 1400px — identical rendering unless the user
+   has raised their font size, in which case the columns now grow with it. */
 #main.layout {
   display: grid;
-  grid-template-columns: 300px minmax(0, 1fr) 320px;
+  grid-template-columns: 18.75rem minmax(0, 1fr) 20rem;
   grid-template-areas:
     "left center right"
     "left footer right";
@@ -228,7 +261,7 @@ summary:focus-visible {
   align-items: start;
   float: none;
   width: auto;
-  max-width: 1400px;
+  max-width: 87.5rem;
   margin: 1.5em auto 0;
   padding: 0 1.25em;
 }
@@ -285,9 +318,11 @@ body::after {
   padding: 0;
 }
 
-@media (max-width: 1280px) {
+/* 80em = 1280px at the default font size; em media queries track the
+   browser's base font size, so larger text collapses columns sooner. */
+@media (max-width: 80em) {
   #main.layout {
-    grid-template-columns: 280px minmax(0, 1fr);
+    grid-template-columns: 17.5rem minmax(0, 1fr);
     grid-template-areas:
       "left center"
       "left right"
@@ -299,7 +334,8 @@ body::after {
   }
 }
 
-@media (max-width: 925px) {
+/* 58em ≈ 925px at the default font size */
+@media (max-width: 58em) {
   #main.layout {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
@@ -330,7 +366,7 @@ body::after {
   margin-bottom: 1.5em;
 }
 
-/* Section titles: small-caps label with an orange dot and a hairline that
+/* Section titles: small-caps label with an accent dot and a hairline that
    fills the rest of the row (tab names match these 1:1 where applicable).
    Section headings are h2 in the markdown (the page's single h1 is the name
    in the profile card); h1 is kept in the selector as a safety net. */
@@ -369,9 +405,9 @@ body::after {
   }
 }
 
-/* small uppercase sub-labels inside a card (Education / Awards, skill groups) */
+/* small uppercase sub-labels inside a card (Awards / Service, skills rows) */
 .page__content h3.group-label,
-.skill-group h3 {
+.skills-row h3 {
   margin: 1.4em 0 0.55em;
   font-size: 0.8em;
   font-weight: 600;
@@ -404,7 +440,8 @@ body::after {
   backdrop-filter: blur(20px) saturate(180%);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-float);
+  /* inset top highlight: light catching the material's upper edge (skill 12) */
+  box-shadow: inset 0 1px 0 var(--glass-edge), var(--shadow-float);
 }
 
 /* Where backdrop-filter is unsupported, or the user asked the OS for reduced
@@ -422,6 +459,7 @@ body::after {
 }
 
 .tabbar__tabs {
+  position: relative; /* anchor for the sliding indicator */
   display: flex;
   flex-wrap: wrap;
   gap: 0.35em;
@@ -436,7 +474,34 @@ body::after {
   }
 }
 
+/* Sliding active pill (skill 7/8 — spatial consistency): one shared element
+   that site.js glides from the old tab to the new one, so selection reads as
+   a physical object moving, not two unrelated repaints. Position/size are
+   measured (FLIP) and set inline; this rule supplies the look and the glide.
+   Same accent + pill-radius tokens as the static pill it replaces. Reduced
+   motion excludes transform/width from the transition whitelist, so the pill
+   snaps there — the right fallback. Without JS the element never exists and
+   .no-js below restores the static pill. */
+.tabbar__indicator {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  transition: transform var(--dur-med) var(--ease), width var(--dur-med) var(--ease), height var(--dur-med) var(--ease), background var(--dur-fast) var(--ease);
+  will-change: transform;
+}
+
+/* hover-darken carries over from the static pill (clicking the active tab
+   scrolls to top, so hover feedback on it stays meaningful); older browsers
+   without :has() just lose the darken */
+.tabbar__tabs:has(.tabbar__tab.is-active:hover) .tabbar__indicator {
+  background: var(--accent-hover);
+}
+
 .tabbar__tab {
+  position: relative;
+  z-index: 1; /* label text rides above the sliding indicator */
   display: block;
   padding: 0.5em 1.2em;
   border-radius: var(--radius-pill);
@@ -444,7 +509,12 @@ body::after {
   font-weight: 600;
   color: var(--text);
   text-decoration: none;
-  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease);
+  /* label color timing is asymmetric around the pill's glide: this base rule
+     governs the OUTGOING tab (class removed), whose label starts darkening
+     the moment the pill leaves — no delay. The .is-active rule below governs
+     the INCOMING tab. Keeps white text from sitting on the bare card, and
+     dark text from sitting under the arriving pill. */
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 
   &:hover {
     background: var(--accent-soft);
@@ -453,13 +523,26 @@ body::after {
   }
 
   &.is-active {
-    background: var(--accent);
+    /* background is painted by .tabbar__indicator (JS); only the text state
+       lives on the tab itself */
     color: var(--on-accent);
+    /* INCOMING: wait out the glide's first leg, then finish turning white
+       exactly as the pill lands (delay + duration = --dur-med, the glide) */
+    transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease) calc(var(--dur-med) - var(--dur-fast));
 
     &:hover {
-      background: var(--accent-hover);
+      background: transparent;
       color: var(--on-accent);
     }
+  }
+}
+
+/* no-JS fallback: the indicator is JS-created, so restore the static pill */
+.no-js .tabbar__tab.is-active {
+  background: var(--accent);
+
+  &:hover {
+    background: var(--accent-hover);
   }
 }
 
@@ -479,10 +562,27 @@ body::after {
   line-height: 1;
   cursor: pointer;
   color: inherit;
+  transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 
   &:hover {
     background: var(--accent-soft);
   }
+}
+
+/* moon/sun as inline SVGs on currentColor (emoji render inconsistently across
+   platforms and fight the single-hue system). CSS picks the icon: moon in
+   light mode ("switch to dark"), sun in dark mode. */
+.theme-toggle__icon {
+  display: block;
+  width: 1.05em;
+  height: 1.05em;
+}
+
+.theme-toggle__icon--sun { display: none; }
+
+[data-theme="dark"] {
+  .theme-toggle__icon--sun { display: block; }
+  .theme-toggle__icon--moon { display: none; }
 }
 
 /* ==========================================================================
@@ -519,12 +619,21 @@ body::after {
   color: var(--muted);
 }
 
+/* inline SVG icons (profile card): sized in em, riding the text baseline */
+.pc-icon {
+  display: inline-block;
+  flex: none;
+  width: 1.1em;
+  height: 1.1em;
+  vertical-align: -0.2em;
+}
+
 .profile-card__location {
   margin: 0 0 0.6em;
   font-size: 0.88em;
   color: var(--muted);
 
-  i { color: var(--accent); }
+  .pc-icon { color: var(--accent); }
 }
 
 .profile-card__tagline {
@@ -542,7 +651,7 @@ body::after {
   color: var(--on-accent);
   font-weight: 600;
   text-decoration: none;
-  transition: background var(--dur-fast) var(--ease);
+  transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 
   &:hover {
     background: var(--accent-hover);
@@ -578,9 +687,9 @@ body::after {
     color: var(--text);
     text-decoration: none;
     overflow-wrap: anywhere;
-    transition: color var(--dur-fast) var(--ease);
+    transition: color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 
-    i {
+    .pc-icon {
       color: var(--muted);
       transition: color var(--dur-fast) var(--ease);
     }
@@ -589,14 +698,14 @@ body::after {
       color: var(--accent);
       text-decoration: none;
 
-      i { color: var(--accent); }
+      .pc-icon { color: var(--accent); }
     }
   }
 }
 
 /* ==========================================================================
    RIGHT COLUMN — news card. Each item is a tinted rounded row with the
-   leading date rendered as a small pill; the newest item gets an orange
+   leading date rendered as a small pill; the newest item gets an accent
    "New" badge. The More/Less <details> folding carries over from v5.
    ========================================================================== */
 
@@ -678,7 +787,7 @@ body::after {
 }
 
 /* ==========================================================================
-   JOB-SEARCH CALLOUT (About card) — orange highlight
+   JOB-SEARCH CALLOUT (About card) — tinted indigo highlight
    ========================================================================== */
 
 .job-callout {
@@ -719,7 +828,7 @@ body::after {
     padding: 0.5em;
     border: 1px solid var(--border);
     border-radius: var(--radius-inner);
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+    box-shadow: var(--shadow-card);
   }
 }
 
@@ -729,11 +838,11 @@ body::after {
 }
 
 /* Slimmer figure column: with the lightbox the thumbnail is an entry point,
-   not the content — give the reclaimed width to the text. (Same 768px
-   threshold as the template's $medium breakpoint.) */
-@media (min-width: 768px) {
+   not the content — give the reclaimed width to the text. (48em = 768px,
+   the template's $medium breakpoint, at the default font size.) */
+@media (min-width: 48em) {
   .paper-box .paper-box-image {
-    min-width: 180px;
+    min-width: 11.25rem;
     max-width: 32%;
   }
 
@@ -765,7 +874,11 @@ body::after {
   -webkit-backdrop-filter: blur(8px) saturate(115%);
   backdrop-filter: blur(8px) saturate(115%);
   cursor: zoom-out;
-  animation: lightbox-in 0.15s ease;
+  /* transitions, not keyframes: JS toggles .is-open, so a close mid-open
+     reverses from the CURRENT opacity (interruptible) and the exit retraces
+     the entry path (symmetric). site.js removes the node on transitionend. */
+  opacity: 0;
+  transition: opacity var(--dur-fast) var(--ease);
 
   img {
     max-width: 100%;
@@ -773,14 +886,17 @@ body::after {
     padding: 0.75em;
     border-radius: var(--radius-inner);
     background: #ffffff; /* paper figures assume a light background */
-    /* the image materializes (grows in slightly) rather than just blinking on */
-    animation: lightbox-img-in 0.18s ease;
+    /* the image materializes (grows in slightly) rather than just blinking
+       on; reduced motion drops the scale (transform is excluded there) and
+       keeps the fade */
+    transform: scale(0.96);
+    transition: transform 0.18s var(--ease);
   }
 
-  /* symmetric exit — fade out the same way it faded in (JS removes the node
-     on animationend; reduced-motion removes it immediately, see site.js) */
-  &.is-closing {
-    animation: lightbox-out 0.15s ease forwards;
+  &.is-open {
+    opacity: 1;
+
+    img { transform: scale(1); }
   }
 }
 
@@ -791,21 +907,6 @@ body::after {
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
   }
-}
-
-@keyframes lightbox-in {
-  from { opacity: 0; }
-  to   { opacity: 1; }
-}
-
-@keyframes lightbox-out {
-  from { opacity: 1; }
-  to   { opacity: 0; }
-}
-
-@keyframes lightbox-img-in {
-  from { opacity: 0; transform: scale(0.96); }
-  to   { opacity: 1; transform: scale(1); }
 }
 
 /* Paper/DOI/Code links directly beneath each project card image */
@@ -886,18 +987,60 @@ body::after {
 }
 
 /* ==========================================================================
-   SKILL CHIPS
+   SKILLS — typographic rows: label column plus interpunct-separated plain
+   text, hierarchy by weight (core items bold), no pills. The pill chips
+   below survive only for the About-card interest tags (.intro-chips).
    ========================================================================== */
 
-.skills-grid {
+.skills-rows {
   display: flex;
   flex-direction: column;
-  gap: 1em;
+  gap: 0.9em;
   margin-top: 0.5em;
 }
 
-.skill-group h3 {
-  margin: 0 0 0.45em;
+.skills-row {
+  display: grid;
+  grid-template-columns: 11em 1fr;
+  gap: 1em;
+  align-items: baseline;
+
+  h3 {
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    font-size: 0.92em;
+    line-height: 1.9;
+  }
+
+  b {
+    font-weight: 650; /* variable Inter; non-variable fallbacks snap to 700 */
+  }
+
+  /* lines break only at separators, never inside an item (same rule as the
+     paper-links labels) */
+  .item {
+    white-space: nowrap;
+  }
+
+  /* the separator glues to the item before it; the markup's whitespace after
+     it is the only break opportunity, so lines never start with a dot. The
+     smaller right margin compensates for that collapsed space (~0.25em). */
+  .sep {
+    color: var(--muted);
+    opacity: 0.6;
+    margin: 0 0.2em 0 0.45em;
+  }
+}
+
+/* phones: label stacks above its items (48em = 768px at default font size) */
+@media (max-width: 48em) {
+  .skills-row {
+    grid-template-columns: 1fr;
+    gap: 0.2em;
+  }
 }
 
 .skill-chips {
@@ -985,7 +1128,7 @@ body::after {
   font-size: 1.1em;
   line-height: 1;
   cursor: pointer;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.28);
+  box-shadow: var(--shadow-float);  /* floating chrome, same as the tab bar */
   opacity: 0;
   visibility: hidden;
   transform: translateY(8px);

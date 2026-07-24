@@ -11,6 +11,7 @@
 */
 
 @import "vendor/breakpoint/breakpoint"; // media query mixins
+@import "fonts"; // self-hosted Inter @font-face
 @import "variables";
 @import "mixins";
 @import "vendor/susy/susy";
@@ -19,24 +20,10 @@
 @import "base";
 
 @import "utilities";
-@import "animations";
-@import "tables";
-@import "buttons";
-@import "notices";
-@import "masthead";
-@import "navigation";
-@import "footer";
-@import "syntax";
-
-@import "forms";
+@import "animations"; // keeps the `intro` keyframes _page.scss animates with
 
 @import "page";
-@import "archive";
-@import "sidebar";
 
-@import "vendor/font-awesome/fontawesome";
-@import "vendor/font-awesome/solid";
-@import "vendor/font-awesome/brands";
 @import "print";
 
 .paper-box {
@@ -84,16 +71,6 @@
     }
 
 
-}
-
-$scroll_offset : 2em;
-h1:before, .anchor:before { 
-    content: ''; 
-    display: block; 
-    position: relative; 
-    width: 0; 
-    height: $scroll_offset; 
-    margin-top: -$scroll_offset;
 }
 
 .badge {

@@ -1,0 +1,31 @@
+/* ==========================================================================
+   SELF-HOSTED INTER (variable font, weights 100–900)
+   Same files Google Fonts serves (Inter v20, latin + latin-ext splits), but
+   from our own origin: no third-party connection (GDPR: EU case law treats
+   Google Fonts hotlinking as leaking visitor IPs) and one less handshake
+   before text can swap in. font-display: swap keeps first paint on the
+   system-font fallback stack. The latin-ext file only downloads when a page
+   actually uses a latin-ext glyph (unicode-range). head.html preloads the
+   latin file. Chinese glyphs (张鹏宇) fall through to the system font, as
+   they did with the hosted version.
+   ========================================================================== */
+
+/* latin-ext */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/assets/fonts/inter-latin-ext-var.woff2') format('woff2');
+  unicode-range: U+0100-02BA, U+02BD-02C5, U+02C7-02CC, U+02CE-02D7, U+02DD-02FF, U+0304, U+0308, U+0329, U+1D00-1DBF, U+1E00-1E9F, U+1EF2-1EFF, U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+}
+
+/* latin */
+@font-face {
+  font-family: 'Inter';
+  font-style: normal;
+  font-weight: 100 900;
+  font-display: swap;
+  src: url('/assets/fonts/inter-latin-var.woff2') format('woff2');
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+}

@@ -15,7 +15,15 @@ redirect_from:
 </div>
 
 <div class="card content-card" markdown="1">
-{% include_relative includes/education_awards.md %}
+{% include_relative includes/education.md %}
+</div>
+
+<div class="card content-card" markdown="1">
+{% include_relative includes/awards_service.md %}
+</div>
+
+<div class="card content-card" markdown="1">
+{% include_relative includes/skills.md %}
 </div>
 
 {% comment %}

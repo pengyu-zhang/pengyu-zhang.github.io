@@ -22,6 +22,12 @@
       window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   }
 
+  /* JS-driven smooth scrolling ignores the OS reduce-motion setting (unlike
+     CSS scroll-behavior in some browsers), so gate it explicitly. */
+  function scrollBehavior() {
+    return prefersReducedMotion() ? 'auto' : 'smooth';
+  }
+
   /* Announce a PJAX route change to assistive tech (the center column is
      repainted in place, which is otherwise silent to screen readers). */
   function announce(msg) {
@@ -40,6 +46,50 @@
         tab.removeAttribute('aria-current');
       }
     });
+    positionTabIndicator(true);
+  }
+
+  /* ==========================================================
+     Sliding active-pill indicator. One shared element (styled in
+     _theme.scss) glides from the old tab to the new one, so the
+     selection reads as a physical object moving — FLIP: measure
+     the active tab, then let the CSS transition play the move.
+     Created here so no-JS visitors keep the static .is-active
+     pill instead (.no-js rule in _theme.scss).
+     ========================================================== */
+  var tabsList = document.querySelector('.tabbar__tabs');
+  var tabIndicator = null;
+
+  function positionTabIndicator(animate) {
+    if (!tabsList) return;
+    if (!tabIndicator) {
+      tabIndicator = document.createElement('li'); // li: valid child of the ul; abs-positioned, so out of flex flow
+      tabIndicator.className = 'tabbar__indicator';
+      tabIndicator.setAttribute('aria-hidden', 'true');
+      tabsList.insertBefore(tabIndicator, tabsList.firstChild);
+    }
+    var active = tabsList.querySelector('.tabbar__tab.is-active');
+    if (!active) { tabIndicator.style.opacity = '0'; return; }
+    tabIndicator.style.opacity = '';
+    /* measure both against the list: wrapped rows on narrow screens make
+       this a 2D move (x and y), which translate() handles in one go */
+    var listRect = tabsList.getBoundingClientRect();
+    var rect = active.getBoundingClientRect();
+    if (!animate) tabIndicator.style.transition = 'none';
+    tabIndicator.style.transform = 'translate(' + (rect.left - listRect.left) + 'px, ' + (rect.top - listRect.top) + 'px)';
+    tabIndicator.style.width = rect.width + 'px';
+    tabIndicator.style.height = rect.height + 'px';
+    if (!animate) {
+      tabIndicator.getBoundingClientRect(); // flush, so the jump can't animate
+      tabIndicator.style.transition = '';
+    }
+  }
+
+  positionTabIndicator(false); // initial placement: appear in place, no glide
+  window.addEventListener('resize', function () { positionTabIndicator(false); });
+  if (document.fonts && document.fonts.ready) {
+    // Inter swapping in changes tab widths — re-measure once fonts settle
+    document.fonts.ready.then(function () { positionTabIndicator(false); });
   }
 
   /* Resolve once the center column has finished fading out, so the DOM swap
@@ -63,31 +113,64 @@
     });
   }
 
-  function loadPage(url, push) {
-    Promise.all([
-      fetch(url).then(function (resp) {
+  /* Session cache of fetched pages, also fed by hover/focus prefetch: by the
+     time the click lands, the HTML is usually already here (kill latency —
+     the fetch starts on intent, not on commit). Static site, so a cached
+     copy never goes stale within a visit. Failures are evicted so a flaky
+     request doesn't poison the cache. */
+  var pageCache = {};
+  function fetchPage(pathname) {
+    if (!pageCache[pathname]) {
+      var p = fetch(pathname).then(function (resp) {
         if (!resp.ok) throw new Error('HTTP ' + resp.status);
         return resp.text();
-      }),
-      fadeOut(content)
-    ]).then(function (results) {
+      });
+      p.catch(function () { delete pageCache[pathname]; });
+      pageCache[pathname] = p;
+    }
+    return pageCache[pathname];
+  }
+
+  /* Monotonic token so a slow response can never clobber a newer navigation:
+     rapid tab clicks race their fetches, and only the latest click owns the
+     swap (the interface follows the user's most recent intent). */
+  var navToken = 0;
+  var currentPath = location.pathname;
+
+  function loadPage(pathname, push, scrollY) {
+    var token = ++navToken;
+    Promise.all([fetchPage(pathname), fadeOut(content)]).then(function (results) {
+      if (token !== navToken) return; // superseded by a newer navigation
       var doc = new DOMParser().parseFromString(results[0], 'text/html');
       var next = doc.querySelector(CONTENT_SEL);
-      if (!next) throw new Error('content container missing in ' + url);
+      if (!next) throw new Error('content container missing in ' + pathname);
       content.innerHTML = next.innerHTML;
       if (doc.title) document.title = doc.title;
-      if (push) history.pushState({ pjax: true }, '', url);
-      setActiveTab(new URL(url, location.href).pathname);
+      if (push) history.pushState({ pjax: true }, '', pathname);
+      currentPath = pathname;
+      setActiveTab(pathname);
       announce(doc.title);
-      window.scrollTo(0, 0);
+      window.scrollTo(0, scrollY || 0);
       content.classList.remove('is-loading');
       document.dispatchEvent(new CustomEvent('pjax:content'));
     }).catch(function () {
-      window.location.href = url; // graceful fallback: full page load
+      if (token !== navToken) return; // a newer navigation owns the UI now
+      window.location.href = pathname; // graceful fallback: full page load
     });
   }
 
   if (content && window.fetch && window.history && history.pushState) {
+    /* Warm the cache the moment a tab shows intent (hover or keyboard focus).
+       pointerover bubbles (pointerenter does not), so delegate on document. */
+    var maybePrefetch = function (e) {
+      var link = e.target.closest ? e.target.closest('a[target="_self"]') : null;
+      if (!link || link.origin !== location.origin || link.hash) return;
+      if (link.pathname === location.pathname) return;
+      fetchPage(link.pathname);
+    };
+    document.addEventListener('pointerover', maybePrefetch);
+    document.addEventListener('focusin', maybePrefetch);
+
     document.addEventListener('click', function (e) {
       if (e.defaultPrevented || e.button !== 0 ||
           e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
@@ -95,15 +178,22 @@
       if (!link || link.origin !== location.origin || link.hash) return;
       e.preventDefault();
       if (link.pathname === location.pathname) {
-        window.scrollTo({ top: 0, behavior: 'smooth' });
+        window.scrollTo({ top: 0, behavior: scrollBehavior() });
         return;
       }
+      /* Remember where we left this page (on its own history entry), so the
+         Back button returns the reader to the same spot, not the top. */
+      history.replaceState({ pjax: true, scroll: window.scrollY }, '');
       setActiveTab(link.pathname); // optimistic: highlight on the press, not on load
-      loadPage(link.pathname, true);
+      loadPage(link.pathname, true, 0);
     });
 
-    window.addEventListener('popstate', function () {
-      loadPage(location.pathname, false);
+    window.addEventListener('popstate', function (e) {
+      /* Hash-only traversals (e.g. Back from "#news") stay on this page: the
+         browser restores the scroll position itself — swapping content here
+         would refetch the same page and jump the viewport. */
+      if (location.pathname === currentPath) return;
+      loadPage(location.pathname, false, (e.state && e.state.scroll) || 0);
     });
   }
 
@@ -113,24 +203,45 @@
      closes it. Delegated on document, so it keeps working after
      PJAX swaps. Without JS the wrapping <a> simply opens the
      image in a new tab (via <base target="_blank">).
+     Open/close are plain CSS transitions on .is-open, so a close
+     mid-open reverses from the CURRENT opacity (interruptible,
+     symmetric enter/exit) instead of jumping to a keyframe.
      ========================================================== */
   var lightboxReturnFocus = null; // element focus returns to when the box closes
 
+  /* aria-modal alone doesn't stop Tab from reaching the page behind the
+     dialog — inert does (unsupported browsers ignore the attribute and get
+     the old behavior). The back-to-top button sits outside #main, so it
+     needs its own flag. */
+  function setBackgroundInert(on) {
+    Array.prototype.forEach.call(
+      document.querySelectorAll('#main, #back-to-top'),
+      function (el) {
+        if (on) el.setAttribute('inert', '');
+        else el.removeAttribute('inert');
+      }
+    );
+  }
+
   function closeLightbox() {
     var box = document.querySelector('.lightbox');
-    if (!box || box.classList.contains('is-closing')) return;
+    if (!box || !box.classList.contains('is-open')) return; // absent or already closing
     var removed = false;
     function remove() {
       if (removed) return;
       removed = true;
       if (box.parentNode) box.parentNode.removeChild(box);
+      setBackgroundInert(false);
       if (lightboxReturnFocus && lightboxReturnFocus.focus) lightboxReturnFocus.focus();
       lightboxReturnFocus = null;
     }
-    if (prefersReducedMotion()) { remove(); return; } // instant, no exit animation
-    box.classList.add('is-closing');
-    box.addEventListener('animationend', remove);
-    setTimeout(remove, 250); // safety net if animationend doesn't fire
+    /* Reduced motion keeps short opacity fades (see _theme.scss), so
+       transitionend still fires there; the timer is the safety net. */
+    box.classList.remove('is-open');
+    box.addEventListener('transitionend', function (e) {
+      if (e.propertyName === 'opacity') remove();
+    });
+    setTimeout(remove, 300);
   }
 
   document.addEventListener('click', function (e) {
@@ -160,7 +271,10 @@
     img.alt = thumb ? thumb.alt : '';
     overlay.appendChild(img);
     document.body.appendChild(overlay);
-    overlay.focus(); // move focus into the dialog
+    setBackgroundInert(true);
+    overlay.getBoundingClientRect(); // flush styles so the open transition runs
+    overlay.classList.add('is-open');
+    overlay.focus();
   });
 
   document.addEventListener('keydown', function (e) {
@@ -184,7 +298,7 @@
     if (!target) return;
 
     e.preventDefault();
-    target.scrollIntoView({ behavior: 'smooth' });
+    target.scrollIntoView({ behavior: scrollBehavior() });
     if (history.pushState) history.pushState(null, '', href);
   });
 })();
