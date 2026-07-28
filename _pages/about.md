@@ -25,12 +25,3 @@ redirect_from:
 <div class="card content-card" markdown="1">
 {% include_relative includes/skills.md %}
 </div>
-
-{% comment %}
-Unused sections kept for future use:
-{% include_relative includes/talks.md %}
-{% include_relative includes/internships.md %}
-{% include_relative includes/pub.md %}
-{% include_relative includes/pub_selected.md %}
-{% include_relative includes/cv.md %}
-{% endcomment %}
