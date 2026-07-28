@@ -41,7 +41,7 @@ exclude:
   - .sass-cache
   - Gemfile
   - LICENSE
-  - README
+  - README.md
   - docker-compose.yml
   - google_scholar_crawler
   # include_relative fragments only, never standalone pages (would leak into
