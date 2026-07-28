@@ -1,0 +1,6 @@
+---
+---
+/* Intentionally (almost) empty. The github-pages gem injects the Primer
+   default theme when no theme is set, and its assets/css/style.scss would
+   otherwise ship a 76KB stylesheet nothing references (the site loads
+   /assets/css/main.css only). This file overrides it. Do not delete. */

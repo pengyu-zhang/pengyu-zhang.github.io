@@ -20,77 +20,30 @@ google_site_verification : JQYCJePiikBIF4LcbMaXLkBezeiUW19_boIRD7N5nms
 bing_site_verification   : 
 baidu_site_verification  : 
 
-# Site Author
+# Site Author (empty template fields removed; add keys back if a new profile
+# link is ever needed — author-profile.html and seo.html read them)
 author:
   name             : "Pengyu Zhang"
   avatar           : "images/android-chrome-512x512.png"
-  bio              : 
-  location         : 
   employer         : "University of Amsterdam"
-  pubmed           : 
   googlescholar    : "https://scholar.google.com/citations?user=xH7mJ-0AAAAJ&hl"
   email            : "p.zhang@uva.nl"
-  researchgate     :  # example: "https://www.researchgate.net/profile/yourprofile"
-  uri              :
-  bitbucket        :
-  codepen          :
-  dribbble         :
-  flickr           :
-  facebook         :
-  foursquare       :
   github           : "pengyu-zhang"
-  google_plus      :
-  keybase          :
-  instagram        :
-  impactstory      : #"https://profiles.impactstory.org/u/xxxx-xxxx-xxxx-xxxx"
-  lastfm           :
   linkedin         : "pengyuzhang03"
-  dblp             : #"https://dblp.org/pid/75/6568-6.html"
   orcid            : "https://orcid.org/0000-0001-5111-4487"
-  pinterest        :
-  soundcloud       :
-  stackoverflow    : # http://stackoverflow.com/users/123456/username
-  steam            :
-  tumblr           :
   twitter          : "pengyu_z"
-  vine             :
-  weibo            :
-  xing             :
-  youtube          :
-  wikipedia        :
 
 
 # Reading Files
 include:
-  - .htaccess
   - _pages
-  - files
 exclude:
-  - "*.sublime-project"
-  - "*.sublime-workspace"
-  - .asset-cache
-  - .bundle
-  - .jekyll-assets-cache
   - .sass-cache
-  - CHANGELOG
-  - Capfile
   - Gemfile
-  - Gruntfile.js
   - LICENSE
   - README
-  - Rakefile
-  - assets/js/_main.js
-  - assets/js/plugins
-  - assets/js/vendor
-  - config
-  - gulpfile.js
-  - log
-  - node_modules
-  - package.json
-  - tmp
-  - vendor
+  - docker-compose.yml
   - google_scholar_crawler
-  - github_myprofile_updater
   # include_relative fragments only, never standalone pages (would leak into
   # sitemap.xml as duplicate-content pages via optional-front-matter)
   - _pages/includes
@@ -139,20 +92,12 @@ sass:
 
 # Outputting
 permalink: /:categories/:title/
-timezone: Asia/Shanghai # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
+timezone: Europe/Amsterdam # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
 
 
-# Plugins
+# Plugins (the github-pages gem force-loads its own default set on top;
+# only the ones actually used are declared here)
 plugins:
-  - jekyll-paginate
   - jekyll-sitemap
-  - jekyll-gist
   - jekyll-feed
   - jekyll-redirect-from
-# mimic GitHub Pages with --safe
-whitelist:
-  - jekyll-paginate
-  - jekyll-sitemap
-  - jekyll-gist
-  - jekyll-feed
-  - jemoji
