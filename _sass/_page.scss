@@ -3,7 +3,17 @@
    ========================================================================== */
 
 #main {
-  @include container;
+  /* literal output of the removed susy container() — keep values verbatim */
+  max-width: $large;
+  margin-left: auto;
+  margin-right: auto;
+
+  &:after {
+    content: " ";
+    display: block;
+    clear: both;
+  }
+
   @include clearfix;
   margin-top: 1em;
   padding-left: 1em;
@@ -18,18 +28,31 @@
 
 .page {
   @include breakpoint($large) {
-    @include span(10 of 12 last);
-    @include prefix(0.5 of 12);
-    @include suffix(0 of 12);
+    /* literal output of the removed susy span(10 of 12 last) +
+       prefix(0.5 of 12) + suffix(0 of 12) — keep values verbatim,
+       incl. the 0% unit */
+    width: 83.0508474576%;
+    float: right;
+    margin-right: 0;
+    padding-left: 4.2372881356%;
+    padding-right: 0%;
   }
 
   .page__inner-wrap {
-    @include full();
+    clear: both;
+    width: 100%;
+    float: left;
+    margin-left: 0;
+    margin-right: 0;
 
     .page__content,
     .page__meta,
     .page__share {
-      @include full();
+      clear: both;
+      width: 100%;
+      float: left;
+      margin-left: 0;
+      margin-right: 0;
     }
   }
 }
@@ -282,7 +305,11 @@
    ========================================================================== */
 
 .page__comments {
-  @include full();
+  clear: both;
+  width: 100%;
+  float: left;
+  margin-left: 0;
+  margin-right: 0;
 }
 
 .page__comments-title {
@@ -385,7 +412,8 @@
   float: left;
 
   @include breakpoint($large) {
-    @include pre(2.5 of 12);
+    /* literal output of the removed susy pre(2.5 of 12) */
+    margin-left: 21.186440678%;
   }
 
   a {
