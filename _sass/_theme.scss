@@ -839,15 +839,22 @@ body::after {
 
 /* Slimmer figure column: with the lightbox the thumbnail is an entry point,
    not the content — give the reclaimed width to the text. (48em = 768px,
-   the template's $medium breakpoint, at the default font size.) */
+   the template's $medium breakpoint, at the default font size.)
+   The text column MUST be flex:1 + min-width:0, not a % max-width: when the
+   center card gets squeezed (~930-1000px viewports / zoomed-in laptops) the
+   image column hits its 11.25rem floor above 32%, and a 68% text column
+   then overflows the flex line and wraps below the figure. */
 @media (min-width: 48em) {
   .paper-box .paper-box-image {
+    flex: 0 0 auto;
     min-width: 11.25rem;
     max-width: 32%;
   }
 
   .paper-box .paper-box-text {
-    max-width: 68%;
+    flex: 1 1 0;
+    min-width: 0;
+    max-width: none;
   }
 }
 
