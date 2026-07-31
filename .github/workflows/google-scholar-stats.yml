@@ -2,7 +2,10 @@ name: Update Google Scholar stats
 
 on:
   schedule:
-    - cron: '0 6 * * *'   # daily at 06:00 UTC; Scholar sometimes blocks runners, retries next day
+    # weekly, Monday 06:23 UTC (off the full hour — GitHub delays/drops
+    # on-the-hour cron spikes); Scholar sometimes blocks runners, in which
+    # case the next week's run picks it up
+    - cron: '23 6 * * 1'
   workflow_dispatch:       # allow manual runs from the Actions tab
 
 permissions:
@@ -11,6 +14,10 @@ permissions:
 jobs:
   update-stats:
     runs-on: ubuntu-latest
+    # scholarly retries forever once Scholar blacklists the runner IP; without
+    # this the job hangs to GitHub's 360-minute kill limit. 15 min covers any
+    # slow-but-successful run.
+    timeout-minutes: 15
     env:
       GOOGLE_SCHOLAR_ID: xH7mJ-0AAAAJ
     steps:
