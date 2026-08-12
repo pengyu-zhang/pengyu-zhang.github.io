@@ -10,7 +10,6 @@ title                    : "Pengyu Zhang"
 description              : "Machine learning that stays accurate as data drifts."
 url                      : "https://pengyu-zhang.github.io"
 repository               : "pengyu-zhang/pengyu-zhang.github.io"
-google_scholar_stats_use_cdn : false
 
 # google analytics
 google_analytics_id      : G-9PGZPE733E
@@ -43,7 +42,6 @@ exclude:
   - LICENSE
   - README.md
   - docker-compose.yml
-  - google_scholar_crawler
   # include_relative fragments only, never standalone pages (would leak into
   # sitemap.xml as duplicate-content pages via optional-front-matter)
   - _pages/includes

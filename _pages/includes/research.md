@@ -1,7 +1,7 @@
 ## Experience
 
 <div class='paper-box'><div class='paper-box-image'><div><div class="badge">Under review</div><a class="img-zoom" href="/images/timeroute.png"><img src='/images/timeroute.png' alt="TimeRoute" width="1600" height="900"></a>
-<div class="paper-links"><a href="https://arxiv.org">arXiv</a></div>
+<div class="paper-links"><a href="https://arxiv.org/abs/2608.10983">arXiv</a></div>
 </div></div>
 <div class='paper-box-text' markdown="1">
 
