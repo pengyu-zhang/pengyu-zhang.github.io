@@ -7,11 +7,14 @@
    ========================================================================== */
 
 :root {
-  /* brand: periwinkle indigo — one hue, three strengths */
-  --accent:         #4f46e5;   /* primary: links, active tab, buttons */
-  --accent-hover:   #4338ca;   /* pressed/hover on solid fills */
-  --accent-bright:  #6366f1;   /* lighter pop: dot hover, subtle accents */
-  --accent-soft:    #e0e7ff;   /* tinted pill / hover surfaces */
+  /* brand: periwinkle indigo — one hue, three strengths. Since 2026-09-02 a
+     softer, slightly desaturated periwinkle (Radix "iris" 9 family) instead
+     of Tailwind indigo-600, so the site stops reading as a framework default;
+     white on --accent stays ≥ 5.4:1. */
+  --accent:         #5b5bd6;   /* primary: links, active tab, buttons */
+  --accent-hover:   #4d4dc4;   /* pressed/hover on solid fills */
+  --accent-bright:  #6e6ade;   /* lighter pop: dot hover, subtle accents */
+  --accent-soft:    #e3e3fd;   /* tinted pill / hover surfaces */
   --on-accent:      #ffffff;   /* text on solid accent fills */
 
   /* surfaces & text */
@@ -24,16 +27,16 @@
   --border:         #e5eaf2;
   --code-bg:        #f2f5fa;
 
-  /* conference badges */
-  --badge-bg:       var(--accent);
-  --badge-text:     #ffffff;
-
   /* text selection */
   --selection-bg:   var(--accent);
   --selection-text: #ffffff;
 
   /* tinted callout surface (job-market banner) */
-  --callout-bg:     #eef2ff;
+  --callout-bg:     #f0f0fe;
+
+  /* prose-link underline: the accent at ~45% over the card, precomputed
+     (libsass does not compile color-mix) */
+  --link-underline: #b5b5ed;
 
   /* translucent floating chrome (frosted tab bar). Falls back to --card-bg
      where backdrop-filter is unsupported or the user reduces transparency.
@@ -41,14 +44,14 @@
   --glass-bg:       rgba(255, 255, 255, 0.72);
   --glass-edge:     rgba(255, 255, 255, 0.55);
 
-  --shadow-card:    0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 16px rgba(16, 24, 40, 0.06);
-  /* deeper shadow for floating chrome (the frosted tab bar) so it reads as
-     hovering above the content, not inline with the resting cards */
+  /* the ONLY shadow: floating chrome (tab bar, lightbox, floating buttons)
+     reads as hovering above the content; resting cards and figures are
+     border-only, so "has a shadow" = "floats" */
   --shadow-float:   0 2px 6px rgba(16, 24, 40, 0.06), 0 10px 30px rgba(16, 24, 40, 0.10);
 
   /* geometry — every rounded corner on the site uses one of these three */
-  --radius-card:    16px;
-  --radius-inner:   10px;
+  --radius-card:    20px;
+  --radius-inner:   12px;
   --radius-pill:    999px;
 
   /* motion — single source of truth for timing/easing (matches the color and
@@ -61,10 +64,10 @@
 }
 
 [data-theme="dark"] {
-  --accent:         #818cf8;
-  --accent-hover:   #a5b4fc;
-  --accent-bright:  #a5b4fc;
-  --accent-soft:    rgba(129, 140, 248, 0.16);
+  --accent:         #9f9cf6;
+  --accent-hover:   #b1a9ff;
+  --accent-bright:  #b1a9ff;
+  --accent-soft:    rgba(159, 156, 246, 0.16);
   --on-accent:      #0b0c0f;
 
   --bg-page:        #0f1115;
@@ -76,18 +79,15 @@
   --border:         #2a2f37;
   --code-bg:        #1b1e24;
 
-  --badge-bg:       #4f46e5;
-  --badge-text:     #ffffff;
-
-  --selection-bg:   #818cf8;
+  --selection-bg:   #9f9cf6;
   --selection-text: #0b0c0f;
 
-  --callout-bg:     rgba(129, 140, 248, 0.10);
+  --callout-bg:     rgba(159, 156, 246, 0.10);
+  --link-underline: #545581;
 
   --glass-bg:       rgba(23, 26, 33, 0.72);
   --glass-edge:     rgba(255, 255, 255, 0.07);
 
-  --shadow-card:    none;
   --shadow-float:   0 8px 30px rgba(0, 0, 0, 0.45);
 }
 
@@ -135,18 +135,40 @@ body {
 
 a {
   color: var(--accent);
+  /* prose links: a thin underline sitting a little below the baseline, tinted
+     down so the word reads first and the line second; it fills in on hover.
+     Nav, profile and link-row anchors set text-decoration: none themselves. */
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: var(--link-underline);
 
   &:hover {
     color: var(--accent-hover);
+    text-decoration-color: currentColor;
   }
 }
 
-/* conference badges (rendered from `` ``VENUE YEAR`` `` inline code) */
+/* _page.scss re-declares `.page__content a { text-decoration: underline }`
+   and that shorthand resets the underline colour to currentcolor, so the
+   prose-link treatment is restated at the same specificity here (theme is
+   imported last, so it wins) */
+.page__content a {
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+  text-decoration-color: var(--link-underline);
+
+  &:hover { text-decoration-color: currentColor; }
+}
+
+/* conference badges (rendered from `` ``VENUE YEAR`` `` inline code) — a
+   TONAL chip (soft tint + accent text, same as the date pills): labels are
+   not actions, so the solid accent fill is reserved for the active tab, the
+   CV button and the News "New" badge */
 .highlighter-rouge {
   padding: 0.14em 0.65em;
   border-radius: var(--radius-pill);
-  background-color: var(--badge-bg);
-  color: var(--badge-text);
+  background-color: var(--accent-soft);
+  color: var(--accent);
   font-family: inherit;
   font-size: 0.82em;
   font-weight: 600;
@@ -162,13 +184,6 @@ a {
   }
 }
 
-/* paper-box corner badge (Experience cards) */
-.badge {
-  background-color: var(--badge-bg);
-  border-radius: var(--radius-pill);
-  z-index: 1;
-}
-
 ::selection {
   background: var(--selection-bg);
   color: var(--selection-text);
@@ -181,7 +196,7 @@ a {
 
 /* Leading date labels in lists (News, Education) — keep upright so the
    italic digits don't collide with the trailing colon. */
-li em:first-child {
+li > em:first-child {
   font-style: normal;
 }
 
@@ -334,6 +349,18 @@ body::after {
   }
 }
 
+/* In the two-column layout the news card sits under the content at full
+   width; lay its rows out as a two-column grid instead of one long strip. */
+@media (min-width: 58.01em) and (max-width: 80em) {
+  .news-card ul {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.7em;
+  }
+
+  .news-card li { margin: 0; }
+}
+
 /* 58em ≈ 925px at the default font size */
 @media (max-width: 58em) {
   #main.layout {
@@ -355,11 +382,11 @@ body::after {
    ========================================================================== */
 
 .card {
+  --card-pad-x: 1.8em; /* read by the profile avatar to bleed to the card edge */
   background: var(--card-bg);
   border: 1px solid var(--card-border);
   border-radius: var(--radius-card);
-  box-shadow: var(--shadow-card);
-  padding: 1.6em 1.8em;
+  padding: 1.6em var(--card-pad-x);
 }
 
 .content-card {
@@ -407,7 +434,7 @@ body::after {
 
 /* small uppercase sub-labels inside a card (Awards / Service, skills rows) */
 .page__content h3.group-label,
-.skills-row h3 {
+.skills-rows h3 {
   margin: 1.4em 0 0.55em;
   font-size: 0.8em;
   font-weight: 600;
@@ -434,24 +461,39 @@ body::after {
   gap: 0.4em;
   margin-bottom: 1.5em;
   padding: 0.45em 0.6em;
-  /* frosted-glass material: content scrolls visibly under it */
-  background: var(--glass-bg);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  backdrop-filter: blur(20px) saturate(180%);
+  background: transparent;
   border: 1px solid var(--card-border);
-  border-radius: var(--radius-card);
-  /* inset top highlight: light catching the material's upper edge (skill 12) */
-  box-shadow: inset 0 1px 0 var(--glass-edge), var(--shadow-float);
+  border-radius: var(--radius-pill); /* capsule, concentric with the pill indicator inside */
+  box-shadow: var(--shadow-float);
+
+  /* Frosted-glass material: content scrolls visibly under it. It lives on a
+     pseudo-element, NOT on the bar itself: backdrop-filter turns its element
+     into the containing block for fixed descendants, which would pin the
+     phone-mode floating theme toggle (below) to the bar instead of the
+     viewport. The sticky bar is a stacking context, so z-index -1 keeps the
+     glass under the tabs but above the page. */
+  &::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    border-radius: inherit;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    /* inset top highlight: light catching the material's upper edge (skill 12) */
+    box-shadow: inset 0 1px 0 var(--glass-edge);
+  }
 }
 
 /* Where backdrop-filter is unsupported, or the user asked the OS for reduced
    transparency, fall back to the original opaque bar. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
-  .tabbar { background: var(--card-bg); }
+  .tabbar::before { background: var(--card-bg); }
 }
 
 @media (prefers-reduced-transparency: reduce) {
-  .tabbar {
+  .tabbar::before {
     background: var(--card-bg);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;
@@ -537,6 +579,56 @@ body::after {
   }
 }
 
+/* Phones (30em = 480px): four tabs plus the toggle never fit one row at
+   0.98em, and the wrapped bar left an orphan tab beside a floating toggle.
+   Tabs shrink with the viewport between two limits (nowrap + hidden
+   horizontal scroll as the safety net on 320px screens), and the toggle
+   leaves the bar for a floating glass button in the bottom-right corner;
+   the back-to-top button stacks above it (same size, one gap apart).
+   Bottom-left was rejected: at scroll 0 it sat on the profile card's link
+   list, while the card's right side is empty. */
+@media (max-width: 30em) {
+  #main.layout { padding: 0 0.85em; }
+  .card {
+    --card-pad-x: 1.2em;
+    padding: 1.3em var(--card-pad-x);
+  }
+
+  .tabbar { padding: 0.4em 0.45em; }
+
+  .tabbar__tabs {
+    flex-wrap: nowrap;
+    gap: 0.2em;
+    justify-content: space-between;
+    overflow-x: auto;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  .tabbar__tab {
+    padding: 0.5em 0.6em;
+    font-size: clamp(0.68em, 3.5vw, 0.92em);
+  }
+
+  .theme-toggle {
+    position: fixed;
+    right: 1.5em;
+    bottom: 1.5em;
+    z-index: 40;
+    width: 2.6em;
+    height: 2.6em;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--card-border);
+    box-shadow: inset 0 1px 0 var(--glass-edge), var(--shadow-float);
+  }
+}
+
 /* no-JS fallback: the indicator is JS-created, so restore the static pill */
 .no-js .tabbar__tab.is-active {
   background: var(--accent);
@@ -591,24 +683,38 @@ body::after {
 
 .profile-card {
   text-align: center;
+  padding-top: 0;
+  overflow: hidden; /* the card's own radius clips the bleeding avatar */
 }
 
+/* media-card style: the photo runs edge to edge across the top of the card
+   (cancelling the card's horizontal padding) and the card corners clip it,
+   instead of a framed picture floating inside the frame */
 .profile-card__avatar {
   display: block;
-  width: 100%;
-  border-radius: var(--radius-inner);
+  width: calc(100% + 2 * var(--card-pad-x));
+  max-width: none;
+  margin: 0 calc(-1 * var(--card-pad-x));
+  border-radius: 0;
 }
 
+/* name lockup: Latin name is the page's largest text (h1); the Chinese name
+   sits on its own line beneath it — side by side they no longer fit the
+   column at this size */
 .profile-card__name {
-  margin: 0.75em 0 0.3em;
-  font-size: 1.35em;
-  line-height: 1.3;
+  margin: 0.8em 0 0.35em;
+  font-size: 1.6em;
+  line-height: 1.15;
   /* the largest text on the page — tighten tracking as size grows (skill 15) */
   letter-spacing: -0.02em;
 }
 
 .profile-card__name-zh {
+  display: block;
+  margin-top: 0.3em;
+  font-size: 0.6em;
   font-weight: 500;
+  letter-spacing: 0.06em;
   color: var(--muted);
 }
 
@@ -726,7 +832,7 @@ body::after {
     border-radius: var(--radius-inner);
     line-height: 1.55;
 
-    em:first-child {
+    > em:first-child {
       display: inline-block;
       margin-bottom: 0.3em;
       padding: 0.1em 0.65em;
@@ -796,7 +902,6 @@ body::after {
   border-left: 3px solid var(--accent);
   border-radius: var(--radius-inner);
   background: var(--callout-bg);
-  box-shadow: var(--shadow-card);
 
   p { margin: 0; }
 }
@@ -809,53 +914,91 @@ body::after {
 }
 
 /* ==========================================================================
-   EXPERIENCE CARDS (paper-box) — keep the v5 tile look, tokens updated
+   EXPERIENCE TILES — media-top project tiles in a two-column grid (the old
+   image-left rows are gone: a 16:10 thumbnail next to eight lines of text
+   left the figure floating in whitespace). Each tile: figure (lightbox entry
+   point), title line with the venue pill, muted tag line, one short problem
+   + finding paragraph, link row. `.content-card--tiles` on the Experience
+   card (experience.md) turns the card into the grid; the h2 spans both
+   columns and the grid gap replaces its bottom margin.
    ========================================================================== */
 
-.paper-box {
-  border-bottom-color: var(--border);
+.content-card--tiles {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.6em 1.5em;
+  align-items: start;
 
-  &:last-of-type {
-    border-bottom: 0;
-    padding-bottom: 0.5em;
+  > h2 {
+    grid-column: 1 / -1;
+    margin-bottom: 0;
+  }
+}
+
+/* one column below 40em (640px): two tiles would leave ~22 characters/line */
+@media (max-width: 40em) {
+  .content-card--tiles { grid-template-columns: 1fr; }
+}
+
+.paper-box {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: 0;
+
+  .paper-box-image {
+    width: 100%;
   }
 
   .paper-box-image img {
+    display: block;
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16 / 9;
     object-fit: contain;
     background: #ffffff;
     padding: 0.5em;
     border: 1px solid var(--border);
     border-radius: var(--radius-inner);
-    box-shadow: var(--shadow-card);
+  }
+
+  .paper-box-text {
+    padding: 0.85em 0 0;
+
+    p {
+      margin: 0 0 0.6em;
+      font-size: 0.95em;
+      line-height: 1.55;
+    }
+
+    /* title line: name + venue pill (same inline-code pill as Publications) */
+    p.pb-title {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 0.55em;
+      margin: 0 0 0.15em;
+      font-size: 1.08em;
+      line-height: 1.3;
+
+      strong {
+        font-weight: 700;
+        letter-spacing: -0.01em; /* the tile's largest text: tighten a touch (skill 15) */
+      }
+
+      .highlighter-rouge { font-size: 0.72em; }
+    }
+
+    p.pb-tag {
+      margin: 0 0 0.6em;
+      font-size: 0.9em;
+      color: var(--muted);
+    }
   }
 }
 
 [data-theme="dark"] .paper-box .paper-box-image img {
   /* soften the glare of white paper figures on the dark background */
   filter: brightness(0.88);
-}
-
-/* Slimmer figure column: with the lightbox the thumbnail is an entry point,
-   not the content — give the reclaimed width to the text. (48em = 768px,
-   the template's $medium breakpoint, at the default font size.)
-   The text column MUST be flex:1 + min-width:0, not a % max-width: when the
-   center card gets squeezed (~930-1000px viewports / zoomed-in laptops) the
-   image column hits its 11.25rem floor above 32%, and a 68% text column
-   then overflows the flex line and wraps below the figure. */
-@media (min-width: 48em) {
-  .paper-box .paper-box-image {
-    flex: 0 0 auto;
-    min-width: 11.25rem;
-    max-width: 32%;
-  }
-
-  .paper-box .paper-box-text {
-    flex: 1 1 0;
-    min-width: 0;
-    max-width: none;
-  }
 }
 
 /* Thumbnails open a lightbox (JS); without JS the wrapping <a> just opens
@@ -916,19 +1059,45 @@ body::after {
   }
 }
 
-/* Paper/DOI/Code links directly beneath each project card image */
-.paper-box .paper-links {
-  margin-top: 0.5em;
-  font-size: 0.9em;
-  line-height: 1.7;
-  text-align: center;
+/* Link rows (Paper / DOI / Code …) under Experience figures and inside
+   Publications entries: compact semibold words, no underline until hover,
+   spaced by margin instead of typed separators; a label never breaks. */
+.paper-box .paper-links,
+.pub-links {
+  font-size: 0.88em;
+  line-height: 1.9;
 
-  a { white-space: nowrap; }  /* wrap only at separators, never inside a label */
+  a {
+    font-weight: 600;
+    text-decoration: none;
+    margin-right: 0.9em;
+    white-space: nowrap;
+
+    &:hover { text-decoration: underline; }
+    &:last-child { margin-right: 0; }
+  }
+}
+
+.paper-box .paper-links {
+  margin-top: 0.35em;
 }
 
 /* ==========================================================================
-   PUBLICATIONS
+   PUBLICATIONS — the title carries the weight; authors and venue recede
+   into muted meta text with only my own name lifted back out.
    ========================================================================== */
+
+.pub-title { font-weight: 600; }
+
+.pub-meta {
+  color: var(--muted);
+  font-size: 0.95em;
+
+  strong {
+    color: var(--text);
+    font-weight: 600;
+  }
+}
 
 .see-all {
   margin: 0.4em 0 0;
@@ -936,9 +1105,27 @@ body::after {
   a { font-weight: 600; }
 }
 
+/* Two short groups side by side (Awards | Service): four one-line rows in
+   a single column left the card mostly empty; a split fills the width and
+   halves the height. Rows inside it sit a little tighter than the
+   multi-line Publications entries. */
+.split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.5em 2em;
+  align-items: start;
+
+  ul.timeline li { padding-bottom: 0.6em; }
+}
+
+@media (max-width: 40em) {
+  .split { grid-template-columns: 1fr; }
+}
+
 /* ==========================================================================
-   TIMELINE MARKERS (Education & Awards, Publications) — solid indigo dots,
-   no connecting line; hovering a row pops the dot bigger and brighter.
+   TIMELINE LISTS (Education & Awards, Publications) — plain rows; the
+   leading date pill (or venue badge) is the row marker, so there is no
+   bullet or ring in front of it (the old ring doubled the pill).
    ========================================================================== */
 
 .page__content ul.timeline {
@@ -949,33 +1136,16 @@ body::after {
   li {
     position: relative;
     margin: 0;
-    padding: 0 0 1em 1.7em;
-
-    &::before {
-      content: "";
-      position: absolute;
-      left: 0;
-      top: 0.3em;
-      width: 12px;
-      height: 12px;
-      border-radius: var(--radius-pill);
-      background: var(--card-bg);
-      border: 2px solid var(--accent);
-      transition: background var(--dur-med) var(--ease), transform var(--dur-med) var(--ease-spring);
-    }
-
-    &:hover::before {
-      background: var(--accent);
-      transform: scale(1.35);
-    }
+    padding: 0 0 1em;
 
     &:last-child {
       padding-bottom: 0.2em;
     }
 
     /* leading date — same soft pill as the News dates */
-    em:first-child {
+    > em:first-child {
       display: inline-block;
+      margin-right: 0.15em;
       padding: 0.1em 0.65em;
       border-radius: var(--radius-pill);
       background: var(--accent-soft);
@@ -993,17 +1163,14 @@ body::after {
    ========================================================================== */
 
 .skills-rows {
-  display: flex;
-  flex-direction: column;
-  gap: 0.9em;
-  margin-top: 0.5em;
-}
-
-.skills-row {
+  /* one grid for all rows (h3, p, h3, p …) so the label column is shared:
+     it hugs the widest label (PROGRAMMING) instead of a fixed 11em that
+     left an ~85px void before the items */
   display: grid;
-  grid-template-columns: 11em 1fr;
-  gap: 1em;
+  grid-template-columns: max-content 1fr;
+  gap: 0.9em 1.5em;
   align-items: baseline;
+  margin-top: 0.5em;
 
   h3 {
     margin: 0;
@@ -1025,21 +1192,24 @@ body::after {
     white-space: nowrap;
   }
 
-  /* the separator glues to the item before it; the markup's whitespace after
-     it is the only break opportunity, so lines never start with a dot. The
-     smaller right margin compensates for that collapsed space (~0.25em). */
+  /* the comma glues to the item before it; the markup's whitespace after it
+     is the only break opportunity (a comma may end a line, an interpunct
+     could not without looking stranded) */
   .sep {
     color: var(--muted);
-    opacity: 0.6;
-    margin: 0 0.2em 0 0.45em;
+    margin: 0 0.1em 0 0;
   }
 }
 
-/* phones: label stacks above its items (48em = 768px at default font size) */
+/* phones: label stacks above its items (48em = 768px at default font size);
+   the row gap shrinks to the label-to-items distance and the group spacing
+   moves onto every label after the first */
 @media (max-width: 48em) {
-  .skills-row {
+  .skills-rows {
     grid-template-columns: 1fr;
-    gap: 0.2em;
+    row-gap: 0.2em;
+
+    h3 + p + h3 { margin-top: 1em; }
   }
 }
 
@@ -1077,7 +1247,7 @@ body::after {
    ========================================================================== */
 
 .photo-wall {
-  columns: 2 240px;
+  columns: 3 12rem;
   column-gap: 1em;
   margin-top: 0.5em;
 
@@ -1146,4 +1316,11 @@ body::after {
 .back-to-top:active {
   transform: translateY(0) scale(0.92);
   transition: transform 100ms ease-out;
+}
+
+/* Phones: the floating theme toggle owns the bottom-right corner, so the
+   back-to-top button stacks one gap above it (rule sits after the base
+   .back-to-top rule above so it wins at equal specificity). */
+@media (max-width: 30em) {
+  .back-to-top { bottom: calc(1.5em + 2.6em + 0.6em); }
 }
