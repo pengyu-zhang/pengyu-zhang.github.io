@@ -41,7 +41,7 @@ LLM-based entity disambiguation
 
 Dual-encoders force candidate retrieval and fine-grained selection into one embedding space, and need retraining whenever the knowledge base changes. With Fina Polat (lead), we split the two: an untrained BM25 retriever plus an LLM selector that may abstain beats the best trained dual-encoder on the ZELDA benchmark, with no retriever training at all.
 
-<div class="paper-links"><a href="https://github.com/FinaPolat/RAISED">Code</a></div>
+<div class="paper-links"><a href="https://arxiv.org/abs/2608.27470">arXiv</a> <a href="https://github.com/FinaPolat/RAISED">Code</a></div>
 </div>
 </div>
 

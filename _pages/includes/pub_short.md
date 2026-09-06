@@ -7,7 +7,7 @@
 <span class="pub-links">[arXiv](https://arxiv.org/abs/2607.09777)</span>
 
 - ``ISWC 2026`` <span class="pub-title">Select, Don't Train: The Benefits of Modular Entity Disambiguation with LLM-Based Selection.</span> <span class="pub-meta">Fina Polat, Daniel Daza, **Pengyu Zhang**, Klim Zaporojets, Paul Groth. International Semantic Web Conference.</span>  
-<span class="pub-links">[Code](https://github.com/FinaPolat/RAISED)</span>
+<span class="pub-links">[arXiv](https://arxiv.org/abs/2608.27470) [Code](https://github.com/FinaPolat/RAISED)</span>
 
 - ``ACL 2026`` <span class="pub-title">Fusion Training for Mathematical Generalization in Large Language Models.</span> <span class="pub-meta">Congfeng Cao, **Pengyu Zhang**, Jelke Bloem. Annual Meeting of the Association for Computational Linguistics (Student Research Workshop).</span>  
 <span class="pub-links">[Paper](/pdf/Fusion_Training.pdf) [DOI](https://doi.org/10.18653/v1/2026.acl-srw.64) [Code](https://github.com/caocongfeng/Fusion-Bench)</span>
