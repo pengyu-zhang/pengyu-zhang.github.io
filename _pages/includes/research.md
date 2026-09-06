@@ -129,8 +129,23 @@ An entity linker is trained on one snapshot of the knowledge graph and then used
 Interactive author name disambiguation
 {: .pb-tag}
 
-Research offices spend heavy manual effort separating authors who share a name, common for Chinese names, and a bare classifier gives them no way to check a decision. Pairing a multi-view graph classifier with linked views of collaboration structure and raw metadata let students and veteran administrators resolve 4,000 real university papers reliably, even where the classifier erred.
+Research offices spend heavy manual effort separating authors who share a name, common for Chinese names, and a bare classifier gives them no way to check a decision. Pairing a multi-view graph classifier with linked views of collaboration structure and raw metadata let students and veteran administrators resolve 4,000 real university papers reliably, even where the classifier erred. Classifier accuracy about 91% on ACM and DBLP; eleven users completed the tasks with over 95% success.
 
 <div class="paper-links"><a href="/pdf/Visual_Analysis.pdf">Paper</a> <a href="https://doi.org/10.3724/sp.j.1089.2022.19191">DOI</a> <a href="https://github.com/pengyu-zhang/Visual-Analysis-for-Name-Disambiguation-of-Academic-Papers">Code</a> <a href="https://pengyu-zhang.github.io/Visual-Analysis-for-Name-Disambiguation-of-Academic-Papers/">Demo</a> <a href="https://www.youtube.com/watch?v=jQ8MNu-L-Os">YouTube</a> <a href="https://www.bilibili.com/video/BV1QM4m1k77Q/">Bilibili</a></div>
+</div>
+</div>
+
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/dual_channel.png"><img src="/images/dual_channel.png" alt="DualChannel" width="1601" height="723" loading="lazy"></a></div>
+<div class="paper-box-text" markdown="1">
+
+**DualChannel** ``Information 2021``
+{: .pb-title}
+
+Author name disambiguation at scale
+{: .pb-tag}
+
+Authors who share a name scramble publication records. With Xin Zheng (lead), we combined fastText paper semantics with meta-path embeddings over a co-author, organisation and venue graph, summed the two similarity matrices and clustered papers with DBSCAN, so no cluster count is preset. F1 0.62 on AMiner WhoIsWho, 221 names and 205,000 papers, above six baselines with balanced precision and recall.
+
+<div class="paper-links"><a href="/pdf/Dual-Channel.pdf">Paper</a> <a href="https://doi.org/10.3390/info12090383">DOI</a> <a href="https://github.com/pengyu-zhang/Dual-channel-Heterogeneous-Graph-Network-for-Author-Name-Disambiguation">Code</a></div>
 </div>
 </div>

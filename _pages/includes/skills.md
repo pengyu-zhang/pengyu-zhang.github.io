@@ -17,6 +17,7 @@
       <span class="item">Vision-language models</span><span class="sep">,</span>
       <b class="item">Graph neural networks</b><span class="sep">,</span>
       <b class="item">Contrastive learning</b><span class="sep">,</span>
+      <b class="item">Entity linking and resolution</b><span class="sep">,</span>
       <b class="item">Recommendation</b></p>
   <h3>Languages</h3>
   <p><span class="item">Chinese (native)</span><span class="sep">,</span>
