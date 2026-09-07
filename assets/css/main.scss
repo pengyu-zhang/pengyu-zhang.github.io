@@ -1,28 +1,10 @@
 ---
 ---
 
-/*
- *    Minimal Mistakes Jekyll Theme
- *
- *  - Michael Rose
- *  - mademistakes.com
- *  - https://twitter.com/mmistakes
- *
-*/
+/* Site stylesheet. Design tokens, base elements and every component live in
+   _sass/_theme.scss; the self-hosted Inter faces in _sass/_fonts.scss.
+   Started from Michael Rose's Minimal Mistakes via Yi Ren's acad-homepage
+   template (MIT, see LICENSE); none of their SCSS remains. */
 
-@import "vendor/breakpoint/breakpoint"; // media query mixins
-@import "fonts"; // self-hosted Inter @font-face
-@import "variables";
-@import "mixins";
-
-@import "reset";
-@import "base";
-
-@import "utilities";
-@import "animations"; // keeps the `intro` keyframes _page.scss animates with
-
-@import "page";
-
-@import "print";
-
+@import "fonts";
 @import "theme";

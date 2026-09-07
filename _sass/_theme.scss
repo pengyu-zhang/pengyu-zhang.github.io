@@ -1,16 +1,14 @@
 /* ==========================================================================
-   V8 DESIGN SYSTEM
-   Three-column card layout (profile | tabbed content | news) inspired by
-   modern portfolio pages. Single source of truth for colors and geometry:
-   change a token here and it propagates everywhere. Dark mode overrides the
-   same tokens under [data-theme="dark"].
+   DESIGN SYSTEM — tokens, base elements and every component of the
+   three-column card layout (profile | tabbed content | news). Single source
+   of truth for colors and geometry: change a token here and it propagates
+   everywhere. Dark mode overrides the same tokens under [data-theme="dark"].
    ========================================================================== */
 
 :root {
-  /* brand: periwinkle indigo — one hue, three strengths. Since 2026-09-02 a
-     softer, slightly desaturated periwinkle (Radix "iris" 9 family) instead
-     of Tailwind indigo-600, so the site stops reading as a framework default;
-     white on --accent stays ≥ 5.4:1. */
+  /* brand: periwinkle indigo (Radix "iris" family) — one hue, three
+     strengths; white on --accent stays ≥ 5.4:1. The same hex is hard-coded in
+     tools/og-card.html: change both, regenerate og-card.png, bump og:image ?v= */
   --accent:         #5b5bd6;   /* primary: links, active tab, buttons */
   --accent-hover:   #4d4dc4;   /* pressed/hover on solid fills */
   --accent-bright:  #6e6ade;   /* lighter pop: dot hover, subtle accents */
@@ -105,8 +103,103 @@
   }
 }
 
+/* ==========================================================================
+   BASE ELEMENTS — the small reset/typography layer; only what the markup
+   actually uses. Components below override these defaults explicitly.
+   ========================================================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  position: relative;
+  min-height: 100%;
+  /* 100% honors the visitor's browser default (Dynamic Type). The whole type
+     scale is em-relative, so the layout scales with their chosen size instead
+     of being pinned to a fixed 16px. */
+  font-size: 100%;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 1em 0 0.5em;
+  line-height: 1.2;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+
+h1 { margin-top: 1.6em; font-size: 1.4em; }
+h2 { font-size: 1.2em; }
+h3 { font-size: 1em; }
+h4, h5, h6 { font-size: 0.85em; }
+
+p { margin-bottom: 0.5em; }
+
+ul {
+  padding-inline-start: 2em;
+  margin-block-start: 0.5em;
+}
+
+ul li,
+ol li { margin-bottom: 0.7em; }
+
+li ul,
+li ol { margin-top: 0.5em; }
+
+nav {
+  ul { margin: 0; padding: 0; }
+  li { list-style: none; }
+  a { text-decoration: none; }
+  ul li { margin-bottom: 0; }
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+  border: 0;
+}
+
+button {
+  margin: 0;
+  font-size: 100%;
+  line-height: normal;
+  vertical-align: middle;
+  -webkit-appearance: button;
+  cursor: pointer;
+}
+
+/* screen-reader-only text (the PJAX live region) */
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px !important;
+  width: 1px !important;
+  border: 0 !important;
+  overflow: hidden;
+}
+
+/* content column: paragraph rhythm, and a lift on hovered figure links */
+.page__content {
+  p { margin: 0 0 0.5em; }
+
+  a img { transition: box-shadow var(--dur-fast) var(--ease); }
+  a:hover img { box-shadow: 0 0 10px rgba(0, 0, 0, 0.25); }
+}
+
 /* --------------------------------------------------------------------------
-   Re-point core outputs to the tokens above
+   Core elements on the tokens above
    -------------------------------------------------------------------------- */
 
 html,
@@ -141,23 +234,12 @@ a {
   text-decoration-thickness: 1px;
   text-underline-offset: 0.18em;
   text-decoration-color: var(--link-underline);
+  transition: color var(--dur-fast) var(--ease), text-decoration-color var(--dur-fast) var(--ease);
 
   &:hover {
     color: var(--accent-hover);
     text-decoration-color: currentColor;
   }
-}
-
-/* _page.scss re-declares `.page__content a { text-decoration: underline }`
-   and that shorthand resets the underline colour to currentcolor, so the
-   prose-link treatment is restated at the same specificity here (theme is
-   imported last, so it wins) */
-.page__content a {
-  text-decoration-thickness: 1px;
-  text-underline-offset: 0.18em;
-  text-decoration-color: var(--link-underline);
-
-  &:hover { text-decoration-color: currentColor; }
 }
 
 /* conference badges (rendered from `` ``VENUE YEAR`` `` inline code) — a
@@ -173,15 +255,6 @@ a {
   font-size: 0.82em;
   font-weight: 600;
   white-space: nowrap;
-  /* _base.scss gives inline code a 1px light border and nbsp pseudo-spacers;
-     the badge owns its box instead (in ≤v8 a dead _syntax rule happened to
-     suppress both — without these the border shows white in dark mode) */
-  border: 0;
-
-  &::before,
-  &::after {
-    content: normal;
-  }
 }
 
 ::selection {
@@ -194,13 +267,11 @@ a {
   color: var(--selection-text);
 }
 
-/* Leading date labels in lists (News, Education) — keep upright so the
-   italic digits don't collide with the trailing colon. */
+/* Leading date labels in lists (News, Education) are written as *em* —
+   render them upright, the pill styling below does the emphasis. */
 li > em:first-child {
   font-style: normal;
 }
-
-hr { border-top-color: var(--border); }
 
 /* The template reset strips link outlines — restore a visible focus ring for
    keyboard navigation (focus-visible: keyboard only, not mouse clicks). */
@@ -251,7 +322,7 @@ summary:focus-visible {
 .theme-switching *::after {
   transition: background-color 0.2s var(--ease), color 0.2s var(--ease),
               border-color 0.2s var(--ease), box-shadow 0.2s var(--ease),
-              fill 0.2s var(--ease) !important;
+              fill 0.2s var(--ease), filter 0.2s var(--ease) !important;
 }
 
 /* ==========================================================================
@@ -274,8 +345,6 @@ summary:focus-visible {
     "left footer right";
   gap: 1.5em;
   align-items: start;
-  float: none;
-  width: auto;
   max-width: 87.5rem;
   margin: 1.5em auto 0;
   padding: 0 1.25em;
@@ -323,14 +392,6 @@ body::after {
   grid-area: right;
   position: sticky;
   top: 1.5em;
-}
-
-/* neutralise the template's Susy float grid on the content article */
-.layout .page {
-  float: none;
-  width: 100%;
-  margin: 0;
-  padding: 0;
 }
 
 /* 80em = 1280px at the default font size; em media queries track the
@@ -394,10 +455,8 @@ body::after {
 }
 
 /* Section titles: small-caps label with an accent dot and a hairline that
-   fills the rest of the row (tab names match these 1:1 where applicable).
-   Section headings are h2 in the markdown (the page's single h1 is the name
-   in the profile card); h1 is kept in the selector as a safety net. */
-.page__content h1,
+   fills the rest of the row. Section headings are h2 in the markdown (the
+   page's single h1 is the name in the profile card). */
 .page__content h2,
 .news-card__title {
   display: flex;
@@ -583,10 +642,9 @@ body::after {
    0.98em, and the wrapped bar left an orphan tab beside a floating toggle.
    Tabs shrink with the viewport between two limits (nowrap + hidden
    horizontal scroll as the safety net on 320px screens), and the toggle
-   leaves the bar for a floating glass button in the bottom-right corner;
-   the back-to-top button stacks above it (same size, one gap apart).
-   Bottom-left was rejected: at scroll 0 it sat on the profile card's link
-   list, while the card's right side is empty. */
+   leaves the bar for a floating glass button in the bottom-right corner
+   (bottom-left would sit on the profile card's link list at scroll 0); the
+   back-to-top button stacks above it (same size, one gap apart). */
 @media (max-width: 30em) {
   #main.layout { padding: 0 0.85em; }
   .card {
@@ -742,13 +800,6 @@ body::after {
   .pc-icon { color: var(--accent); }
 }
 
-.profile-card__tagline {
-  margin: 0 0 1em;
-  font-size: 0.88em;
-  font-style: italic;
-  color: var(--muted);
-}
-
 .profile-card__cta {
   display: block;
   padding: 0.65em 1em;
@@ -812,7 +863,7 @@ body::after {
 /* ==========================================================================
    RIGHT COLUMN — news card. Each item is a tinted rounded row with the
    leading date rendered as a small pill; the newest item gets an accent
-   "New" badge. The More/Less <details> folding carries over from v5.
+   "New" badge; older items fold under a More/Less <details>.
    ========================================================================== */
 
 .news-card {
@@ -906,19 +957,10 @@ body::after {
   p { margin: 0; }
 }
 
-.job-callout__meta {
-  display: inline-block;
-  margin-top: 0.35em;
-  font-size: 0.86em;
-  color: var(--muted);
-}
-
 /* ==========================================================================
-   EXPERIENCE TILES — media-top project tiles in a two-column grid (the old
-   image-left rows are gone: a 16:10 thumbnail next to eight lines of text
-   left the figure floating in whitespace). Each tile: figure (lightbox entry
-   point), title line with the venue pill, muted tag line, one short problem
-   + finding paragraph, link row. `.content-card--tiles` on the Experience
+   EXPERIENCE TILES — media-top project tiles in a two-column grid. Each
+   tile: figure (lightbox entry point), title line with the venue pill,
+   muted tag line, one short problem + finding paragraph, link row. `.content-card--tiles` on the Experience
    card (experience.md) turns the card into the grid; the h2 spans both
    columns and the grid gap replaces its bottom margin.
    ========================================================================== */
@@ -941,11 +983,6 @@ body::after {
 }
 
 .paper-box {
-  display: block;
-  margin: 0;
-  padding: 0;
-  border: 0;
-
   .paper-box-image {
     width: 100%;
   }
@@ -1099,12 +1136,6 @@ body::after {
   }
 }
 
-.see-all {
-  margin: 0.4em 0 0;
-
-  a { font-weight: 600; }
-}
-
 /* Two short groups side by side (Awards | Service): four one-line rows in
    a single column left the card mostly empty; a split fills the width and
    halves the height. Rows inside it sit a little tighter than the
@@ -1125,7 +1156,7 @@ body::after {
 /* ==========================================================================
    TIMELINE LISTS (Education & Awards, Publications) — plain rows; the
    leading date pill (or venue badge) is the row marker, so there is no
-   bullet or ring in front of it (the old ring doubled the pill).
+   bullet in front of it.
    ========================================================================== */
 
 .page__content ul.timeline {
@@ -1163,9 +1194,8 @@ body::after {
    ========================================================================== */
 
 .skills-rows {
-  /* one grid for all rows (h3, p, h3, p …) so the label column is shared:
-     it hugs the widest label (PROGRAMMING) instead of a fixed 11em that
-     left an ~85px void before the items */
+  /* one grid for all rows (h3, p, h3, p …) so the label column is shared
+     and hugs the widest label */
   display: grid;
   grid-template-columns: max-content 1fr;
   gap: 0.9em 1.5em;
