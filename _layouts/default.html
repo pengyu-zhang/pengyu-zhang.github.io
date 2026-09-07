@@ -2,7 +2,6 @@
 <html lang="en" class="no-js">
   <head>
     {% include head.html %}
-    {% include head/custom.html %}
   </head>
 
   <body>
@@ -15,13 +14,10 @@
 
       <div class="layout__center">
         {% include tabbar.html %}
-        <article class="page" itemscope itemtype="http://schema.org/CreativeWork">
-          {% if page.title %}<meta itemprop="headline" content="{{ page.title | markdownify | strip_html | strip_newlines | escape_once }}">{% endif %}
-          <div class="page__inner-wrap">
-            <section class="page__content" itemprop="text">
-              {{ content }}
-            </section>
-          </div>
+        <article class="page">
+          <section class="page__content">
+            {{ content }}
+          </section>
         </article>
       </div>
 
@@ -44,7 +40,7 @@
     announces the new page to screen readers, which otherwise hear nothing. {% endcomment %}
     <div id="pjax-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
 
-    {% include scripts.html %}
+    <script src="/assets/js/site.js?v={{ site.time | date: '%s' }}"></script>
 
   </body>
 </html>

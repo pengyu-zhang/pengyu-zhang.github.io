@@ -1,21 +1,11 @@
-/* Site scripts (vanilla JS, no jQuery).
-   The v6 layout uses a 4-tab pill navigation (real pages, active state set
-   server-side by Liquid). PJAX below makes tab clicks swap only the center
-   column (no full reload — the side columns never repaint); every tab is
-   still a real page, so direct links, SEO, and no-JS visitors work as
-   before. The sticky columns use native CSS position:sticky. */
+/* Site scripts (vanilla JS, no jQuery). Four real pages behind a pill tab
+   bar; PJAX swaps only the center column between them, so the sticky side
+   columns never repaint, while direct links, SEO and no-JS visitors get the
+   plain pages. Also here: the theme toggle, link targets, the figure
+   lightbox, back-to-top and smooth same-page anchors. */
 
 (function () {
   'use strict';
-
-  /* ==========================================================
-     PJAX navigation — intercept internal links (marked with
-     target="_self" because head.html sets <base target="_blank">),
-     fetch the target page, and swap only the center content.
-     Falls back to a normal navigation on any error.
-     ========================================================== */
-  var CONTENT_SEL = '.layout__center .page__content';
-  var content = document.querySelector(CONTENT_SEL);
 
   function prefersReducedMotion() {
     return !!(window.matchMedia &&
@@ -27,6 +17,61 @@
   function scrollBehavior() {
     return prefersReducedMotion() ? 'auto' : 'smooth';
   }
+
+  /* ==========================================================
+     Theme toggle. The pre-paint theme init (and syncThemeColor)
+     stays inline in head.html so the first frame is right.
+     ========================================================== */
+  (function () {
+    var btn = document.getElementById('theme-toggle');
+    if (!btn) return;
+    var root = document.documentElement;
+    var fadeTimer = null;
+    btn.addEventListener('click', function () {
+      var next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      // ease the page-wide brightness jump: .theme-switching turns the token
+      // flip into a ~200ms cross-fade (rule in _theme.scss), then leaves
+      clearTimeout(fadeTimer);
+      root.classList.add('theme-switching');
+      fadeTimer = setTimeout(function () { root.classList.remove('theme-switching'); }, 260);
+      root.setAttribute('data-theme', next);
+      try { localStorage.setItem('theme', next); } catch (e) {}
+      if (window.syncThemeColor) window.syncThemeColor(next); // browser chrome follows
+    });
+  })();
+
+  /* ==========================================================
+     Link targets. The site's own pages are the tab bar's four
+     URLs; links to them stay in this tab (and go through PJAX
+     below). Everything else — other sites, PDFs, full-size
+     images, the project demo pages — opens in a new tab. Set as
+     attributes so middle-click, the status bar and assistive
+     tech all see the same thing; re-run after every PJAX swap.
+     ========================================================== */
+  var tabPaths = Array.prototype.map.call(
+    document.querySelectorAll('.tabbar__tab'), function (t) { return t.pathname; });
+
+  function isSitePage(a) {
+    return a.origin === location.origin && tabPaths.indexOf(a.pathname) !== -1;
+  }
+
+  function markExternalLinks(root) {
+    Array.prototype.forEach.call(root.querySelectorAll('a[href]'), function (a) {
+      if (a.target || a.protocol === 'mailto:') return;
+      if (isSitePage(a) || (a.origin === location.origin && a.hash)) return;
+      a.target = '_blank';
+      a.rel = a.rel ? a.rel + ' noopener' : 'noopener';
+    });
+  }
+  markExternalLinks(document);
+
+  /* ==========================================================
+     PJAX navigation — intercept links to the site's own pages,
+     fetch the target page, and swap only the center content.
+     Falls back to a normal navigation on any error.
+     ========================================================== */
+  var CONTENT_SEL = '.layout__center .page__content';
+  var content = document.querySelector(CONTENT_SEL);
 
   /* Announce a PJAX route change to assistive tech (the center column is
      repainted in place, which is otherwise silent to screen readers). */
@@ -93,10 +138,9 @@
   }
 
   /* Resolve once the center column has finished fading out, so the DOM swap
-     provably happens at opacity 0 (no old content flashing through). This
-     replaces a fixed 120ms timer with the real end of the .page__content
-     fade; falls back to a timer if the transition is disabled (reduced
-     motion) or transitionend never fires. */
+     provably happens at opacity 0 (no old content flashing through); falls
+     back to a timer if the transition is disabled or transitionend never
+     fires. */
   function fadeOut(el) {
     el.classList.add('is-loading');
     return new Promise(function (resolve) {
@@ -114,10 +158,10 @@
   }
 
   /* Session cache of fetched pages, also fed by hover/focus prefetch: by the
-     time the click lands, the HTML is usually already here (kill latency —
-     the fetch starts on intent, not on commit). Static site, so a cached
-     copy never goes stale within a visit. Failures are evicted so a flaky
-     request doesn't poison the cache. */
+     time the click lands, the HTML is usually already here (the fetch starts
+     on intent, not on commit). Static site, so a cached copy never goes stale
+     within a visit. Failures are evicted so a flaky request doesn't poison
+     the cache. */
   var pageCache = {};
   function fetchPage(pathname) {
     if (!pageCache[pathname]) {
@@ -152,6 +196,7 @@
       announce(doc.title);
       window.scrollTo(0, scrollY || 0);
       content.classList.remove('is-loading');
+      markExternalLinks(content);
       document.dispatchEvent(new CustomEvent('pjax:content'));
     }).catch(function () {
       if (token !== navToken) return; // a newer navigation owns the UI now
@@ -160,13 +205,16 @@
   }
 
   if (content && window.fetch && window.history && history.pushState) {
+    var sitePageLink = function (e) {
+      var link = e.target.closest ? e.target.closest('a[href]') : null;
+      return link && isSitePage(link) && !link.hash ? link : null;
+    };
+
     /* Warm the cache the moment a tab shows intent (hover or keyboard focus).
        pointerover bubbles (pointerenter does not), so delegate on document. */
     var maybePrefetch = function (e) {
-      var link = e.target.closest ? e.target.closest('a[target="_self"]') : null;
-      if (!link || link.origin !== location.origin || link.hash) return;
-      if (link.pathname === location.pathname) return;
-      fetchPage(link.pathname);
+      var link = sitePageLink(e);
+      if (link && link.pathname !== location.pathname) fetchPage(link.pathname);
     };
     document.addEventListener('pointerover', maybePrefetch);
     document.addEventListener('focusin', maybePrefetch);
@@ -174,8 +222,8 @@
     document.addEventListener('click', function (e) {
       if (e.defaultPrevented || e.button !== 0 ||
           e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
-      var link = e.target.closest ? e.target.closest('a[target="_self"]') : null;
-      if (!link || link.origin !== location.origin || link.hash) return;
+      var link = sitePageLink(e);
+      if (!link) return;
       e.preventDefault();
       if (link.pathname === location.pathname) {
         window.scrollTo({ top: 0, behavior: scrollBehavior() });
@@ -202,10 +250,9 @@
      full image in a dimmed overlay; click anywhere or Escape
      closes it. Delegated on document, so it keeps working after
      PJAX swaps. Without JS the wrapping <a> simply opens the
-     image in a new tab (via <base target="_blank">).
-     Open/close are plain CSS transitions on .is-open, so a close
-     mid-open reverses from the CURRENT opacity (interruptible,
-     symmetric enter/exit) instead of jumping to a keyframe.
+     image file. Open/close are plain CSS transitions on
+     .is-open, so a close mid-open reverses from the CURRENT
+     opacity (interruptible, symmetric enter/exit).
      ========================================================== */
   var lightboxReturnFocus = null; // element focus returns to when the box closes
 
@@ -282,9 +329,21 @@
   });
 
   /* ==========================================================
+     Back to top: appears after a screen of scrolling.
+     ========================================================== */
+  (function () {
+    var btn = document.getElementById('back-to-top');
+    if (!btn) return;
+    function toggle() { btn.classList.toggle('is-visible', window.scrollY > 400); }
+    window.addEventListener('scroll', toggle, { passive: true });
+    toggle();
+    btn.addEventListener('click', function () {
+      window.scrollTo({ top: 0, behavior: scrollBehavior() });
+    });
+  })();
+
+  /* ==========================================================
      Smooth scroll for same-page anchors ("#news" and "/#news").
-     Interception also stops <base target="_blank"> from opening
-     fragment links in a new tab.
      ========================================================== */
   document.addEventListener('click', function (e) {
     var link = e.target.closest ? e.target.closest('a') : null;

@@ -1,10 +1,7 @@
 ---
 permalink: /beyond/
-title: ""
 seo_title: "Beyond | Pengyu Zhang"
-excerpt: ""
 description: "A few snapshots from life outside research: road cycling, bouldering, and the animal friends I meet along the way."
-author_profile: true
 ---
 
 <div class="card content-card" markdown="1">
