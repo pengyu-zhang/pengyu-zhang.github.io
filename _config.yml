@@ -1,101 +1,41 @@
-# Welcome to Jekyll!
-#
-# This config file is meant for settings that affect your entire site, values
-# which you are expected to set up once and rarely need to edit after that.
-# For technical reasons, this file is *NOT* reloaded automatically when you use
-# `jekyll serve`. If you change this file, please restart the server process.
+# Site
+title       : "Pengyu Zhang"
+description : "Machine learning that stays accurate as data drifts."
+url         : "https://pengyu-zhang.github.io"
+repository  : "pengyu-zhang/pengyu-zhang.github.io"
+timezone    : Europe/Amsterdam
 
-# Site Settings
-title                    : "Pengyu Zhang"
-description              : "Machine learning that stays accurate as data drifts."
-url                      : "https://pengyu-zhang.github.io"
-repository               : "pengyu-zhang/pengyu-zhang.github.io"
-
-# google analytics
-google_analytics_id      : G-9PGZPE733E
-
-# SEO Related
 google_site_verification : JQYCJePiikBIF4LcbMaXLkBezeiUW19_boIRD7N5nms
-bing_site_verification   : 
-baidu_site_verification  : 
 
-# Site Author (empty template fields removed; add keys back if a new profile
-# link is ever needed — author-profile.html and seo.html read them)
+# Profile card and JSON-LD (read by author-profile.html and seo.html)
 author:
-  name             : "Pengyu Zhang"
-  avatar           : "images/android-chrome-512x512.png"
-  employer         : "University of Amsterdam"
-  googlescholar    : "https://scholar.google.com/citations?user=xH7mJ-0AAAAJ&hl"
-  email            : "p.zhang@uva.nl"
-  github           : "pengyu-zhang"
-  linkedin         : "pengyuzhang03"
-  orcid            : "https://orcid.org/0000-0001-5111-4487"
-  twitter          : "pengyu_z"
+  name          : "Pengyu Zhang"
+  avatar        : "images/avatar.jpg"
+  employer      : "University of Amsterdam"
+  email         : "p.zhang@uva.nl"
+  googlescholar : "https://scholar.google.com/citations?user=xH7mJ-0AAAAJ&hl"
+  github        : "pengyu-zhang"
+  linkedin      : "pengyuzhang03"
+  orcid         : "https://orcid.org/0000-0001-5111-4487"
+  researchgate  : "https://www.researchgate.net/profile/Pengyu-Zhang-38"
 
-
-# Reading Files
+# Build. The four pages live in _pages/ (hence `include`); their content
+# fragments are ordinary _includes/*.md. Everything else is a Jekyll default.
 include:
   - _pages
 exclude:
-  - .sass-cache
-  - Gemfile
   - LICENSE
   - README.md
   - docker-compose.yml
-  # include_relative fragments only, never standalone pages (would leak into
-  # sitemap.xml as duplicate-content pages via optional-front-matter)
-  - _pages/includes
-keep_files:
-  - .git
-  - .svn
-encoding: "utf-8"
-markdown_ext: "markdown,mkdown,mkdn,mkd,md"
-
-
-# Conversion
-markdown: kramdown
-highlighter: rouge
-lsi: false
-excerpt_separator: "\n\n"
-incremental: false
-
-
-# Markdown Processing
-kramdown:
-  input: GFM
-  hard_wrap: false
-  auto_ids: true
-  footnote_nr: 1
-  entity_output: as_char
-  toc_levels: 1..6
-  smart_quotes: lsquo,rsquo,ldquo,rdquo
-  enable_coderay: false
-
-# Defaults
 defaults:
-  # _pages
   - scope:
       path: ""
       type: pages
     values:
       layout: default
-      author_profile: true
-
-
-# Sass/SCSS
 sass:
   sass_dir: _sass
-  style: compressed # http://sass-lang.com/documentation/file.SASS_REFERENCE.html#output_style
-
-
-# Outputting
-permalink: /:categories/:title/
-timezone: Europe/Amsterdam # http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-
-
-# Plugins (the github-pages gem force-loads its own default set on top;
-# only the ones actually used are declared here)
+  style: compressed
 plugins:
   - jekyll-sitemap
-  - jekyll-feed
   - jekyll-redirect-from
