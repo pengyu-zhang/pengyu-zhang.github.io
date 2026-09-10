@@ -12,7 +12,7 @@ Science at the University of Amsterdam.
 - Started from the [acad-homepage](https://github.com/RayeRen/acad-homepage.github.io)
   template by Yi Ren, since rebuilt: card-based four-tab layout with PJAX
   navigation, light/dark theme, self-hosted Inter font, inline SVG icons,
-  vanilla-JS lightbox. No jQuery, no icon fonts, no analytics.
+  vanilla-JS lightbox. No jQuery, no icon fonts.
 
 ## Local preview
 

@@ -2,10 +2,14 @@
 title       : "Pengyu Zhang"
 description : "Machine learning that stays accurate as data drifts."
 url         : "https://pengyu-zhang.github.io"
+baseurl     : ""   # explicit: otherwise jekyll-github-metadata fills it in and local production builds get a wrong prefix
 repository  : "pengyu-zhang/pengyu-zhang.github.io"
 timezone    : Europe/Amsterdam
 
 google_site_verification : JQYCJePiikBIF4LcbMaXLkBezeiUW19_boIRD7N5nms
+
+# GA4 measurement id; head.html emits the gtag snippet in production builds only
+google_analytics         : G-9PGZPE733E
 
 # Profile card and JSON-LD (read by author-profile.html and seo.html)
 author:
@@ -33,6 +37,11 @@ defaults:
       type: pages
     values:
       layout: default
+  # keep the PDFs out of sitemap.xml (jekyll-sitemap honours this key on static files)
+  - scope:
+      path: "pdf"
+    values:
+      sitemap: false
 sass:
   sass_dir: _sass
   style: compressed
