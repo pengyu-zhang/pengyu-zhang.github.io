@@ -1,5 +1,6 @@
 ---
 permalink: /experience/
+last_modified_at: 2026-09-10
 seo_title: "Experience | Pengyu Zhang"
 description: "Research projects of Pengyu Zhang: time-aware recommendation, temporally robust entity linking, LLM-based entity disambiguation, multi-modal knowledge graph enrichment, and hybrid-reasoning LLMs, with open-source code."
 ---

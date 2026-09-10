@@ -1,5 +1,6 @@
 ---
 permalink: /
+last_modified_at: 2026-09-10
 seo_title: "Pengyu Zhang | PhD Candidate, University of Amsterdam"
 description: "Final-year Computer Science Ph.D. candidate at the University of Amsterdam, building models that keep entity linking, knowledge graph completion, and recommendation accurate as data drifts and on look-alike entities. On the job market for industry and postdoctoral positions."
 redirect_from:
