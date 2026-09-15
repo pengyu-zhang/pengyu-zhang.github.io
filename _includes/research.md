@@ -90,6 +90,21 @@ Existing software-mention data has no graph structure and no time axis. With Con
 </div>
 </div>
 
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/graph_learning_challenges.png"><img src="/images/graph_learning_challenges.png" alt="Graph Learning Challenges" width="1600" height="1204" loading="lazy"></a></div>
+<div class="paper-box-text" markdown="1">
+
+**Graph Learning Challenges** ``ESWA 2026``
+{: .pb-title}
+
+LLMs for data challenges in graphs
+{: .pb-tag}
+
+Real graph data is missing pieces, imbalanced, split across domains and constantly changing, and most remedies are built for one task at a time. With Mengran Li (lead), we screened over a thousand papers and organised more than 380 of them around these four data challenges, traditional methods first and then where large language models help, with an open literature repository. The dynamic instability sections connect directly to the temporal drift my own entity-linking work addresses.
+
+<div class="paper-links"><a href="/pdf/Graph-Learning-Challenges.pdf">Paper</a> <a href="https://doi.org/10.1016/j.eswa.2025.129643">DOI</a> <a href="https://github.com/limengran98/Awesome-Literature-Graph-Learning-Challenges">Code</a></div>
+</div>
+</div>
+
 <div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/understanding_el.png"><img src="/images/understanding_el.png" alt="Understanding Entity Linking" width="1600" height="900" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
@@ -117,6 +132,36 @@ Temporally robust entity linking
 An entity linker is trained on one snapshot of the knowledge graph and then used for years while the graph moves on, so accuracy decays. TIGER shows that graph structure keeps entity representations separable as descriptions drift; CYCLE shows the change itself is supervision, turning relations that appear or vanish between snapshots into contrastive examples. Both come with public yearly-snapshot benchmarks.
 
 <div class="paper-links">CYCLE: <a href="/pdf/CYCLE.pdf">Paper</a> <a href="https://doi.org/10.1145/3627673.3679702">DOI</a> <a href="https://github.com/pengyu-zhang/CYCLE-Cross-Year-Contrastive-Learning-in-Entity-Linking">Code</a><br>TIGER: <a href="/pdf/TIGER.pdf">Paper</a> <a href="https://doi.org/10.3233/FAIA240933">DOI</a> <a href="https://github.com/pengyu-zhang/TIGER-Temporally-Improved-Graph-Entity-Linker">Code</a></div>
+</div>
+</div>
+
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/runcl.png"><img src="/images/runcl.png" alt="RUNCL" width="1600" height="908" loading="lazy"></a></div>
+<div class="paper-box-text" markdown="1">
+
+**RUNCL** ``Physica A 2024``
+{: .pb-title}
+
+Graph structure learning for low-degree nodes
+{: .pb-tag}
+
+Node degrees follow a power law, so missing or wrong edges hurt the sparsely connected nodes most, yet GNNs treat the input graph as ground truth. I generate candidate neighbourhood graphs from node features, pick the most likely one with Bayesian inference over a stochastic block model, and train the feature and relationship views against each other with contrastive learning. On six benchmarks it is best in most few-label settings, and the gain on low-degree nodes grows as labels get scarcer.
+
+<div class="paper-links"><a href="/pdf/RUNCL.pdf">Paper</a> <a href="https://doi.org/10.1016/j.physa.2024.129874">DOI</a> <a href="https://github.com/pengyu-zhang/RUNCL-Relationship-Updating-Network-with-Contrastive-Learning">Code</a></div>
+</div>
+</div>
+
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/mvma_gcn.png"><img src="/images/mvma_gcn.png" alt="MVMA-GCN" width="1600" height="914" loading="lazy"></a></div>
+<div class="paper-box-text" markdown="1">
+
+**MVMA-GCN** ``EAAI 2023``
+{: .pb-title}
+
+Multi-view graph learning
+{: .pb-tag}
+
+Real networks carry several kinds of links, such as co-author, co-keyword and co-conference, but most GNNs use one at a time or average views that deserve different weights. I feed every view into the model at once: an HSIC term keeps each view's representation distinct, one attention layer weighs neighbours and a second weighs views, and an autoencoder branch keeps the feature structure from collapsing. On eight benchmarks it beats the strongest baseline in most settings, and removing any module lowers accuracy.
+
+<div class="paper-links"><a href="/pdf/MVMA-GCN.pdf">Paper</a> <a href="https://doi.org/10.1016/j.engappai.2023.106717">DOI</a> <a href="https://github.com/pengyu-zhang/MVMA-GCN">Code</a></div>
 </div>
 </div>
 
