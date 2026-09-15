@@ -1,6 +1,6 @@
 ## Experience
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/timeroute.png"><img src="/images/timeroute.png" alt="TimeRoute" width="1600" height="900"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/timeroute.png"><img src="/images/timeroute.png" alt="TimeRoute" width="1600" height="908"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **TimeRoute** ``Under review``
@@ -15,7 +15,7 @@ Which modality matters for a purchase shifts over time, and differently for each
 </div>
 </div>
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/time_imprint.png"><img src="/images/time_imprint.png" alt="Time Imprint" width="1600" height="1090" loading="lazy"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/time_imprint.png"><img src="/images/time_imprint.png" alt="Time Imprint" width="1600" height="1094" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **Time Imprint** ``Under review``
