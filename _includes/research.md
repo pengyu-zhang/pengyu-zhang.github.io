@@ -194,3 +194,18 @@ Authors who share a name scramble publication records. With Xin Zheng (lead), we
 <div class="paper-links"><a href="/pdf/Dual-Channel.pdf">Paper</a> <a href="https://doi.org/10.3390/info12090383">DOI</a> <a href="https://github.com/pengyu-zhang/Dual-channel-Heterogeneous-Graph-Network-for-Author-Name-Disambiguation">Code</a></div>
 </div>
 </div>
+
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/research_overview.png"><img src="/images/research_overview.png" alt="Research Overview slides" width="1600" height="900" loading="lazy"></a></div>
+<div class="paper-box-text" markdown="1">
+
+**Research Overview** ``Slides``
+{: .pb-title}
+
+A ten-minute talk through my research
+{: .pb-tag}
+
+Similar entities are hard to tell apart, and it gets harder as the data changes. This deck follows one thread through my work: where the failure shows up, which signals I added so that look-alike entities stay separable (the graph, how it changes, time itself, the words hidden in images), and where the same idea moved next, into recommendation and LLM pipelines. Nine slides, then one backup slide per paper.
+
+<div class="paper-links"><a href="/pdf/Pengyu_Zhang_Research_Overview.pdf">Slides (PDF)</a></div>
+</div>
+</div>
