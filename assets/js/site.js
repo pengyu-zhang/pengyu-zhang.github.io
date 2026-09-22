@@ -2,7 +2,7 @@
    bar; PJAX swaps only the center column between them, so the sticky side
    columns never repaint, while direct links, SEO and no-JS visitors get the
    plain pages. Also here: the theme toggle, link targets, the figure
-   lightbox, back-to-top and smooth same-page anchors. */
+   lightbox and back-to-top. */
 
 (function () {
   'use strict';
@@ -237,7 +237,7 @@
     });
 
     window.addEventListener('popstate', function (e) {
-      /* Hash-only traversals (e.g. Back from "#news") stay on this page: the
+      /* Hash-only traversals (e.g. Back from "#education") stay on this page: the
          browser restores the scroll position itself — swapping content here
          would refetch the same page and jump the viewport. */
       if (location.pathname === currentPath) return;
@@ -342,22 +342,4 @@
     });
   })();
 
-  /* ==========================================================
-     Smooth scroll for same-page anchors ("#news" and "/#news").
-     ========================================================== */
-  document.addEventListener('click', function (e) {
-    var link = e.target.closest ? e.target.closest('a') : null;
-    if (!link) return;
-
-    var href = link.getAttribute('href') || '';
-    if (href.charAt(0) === '/') href = href.slice(1); // "/#news" -> "#news"
-    if (href.charAt(0) !== '#' || href.length < 2) return;
-
-    var target = document.getElementById(href.slice(1));
-    if (!target) return;
-
-    e.preventDefault();
-    target.scrollIntoView({ behavior: scrollBehavior() });
-    if (history.pushState) history.pushState(null, '', href);
-  });
 })();

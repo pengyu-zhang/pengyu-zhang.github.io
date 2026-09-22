@@ -6,12 +6,14 @@
    ========================================================================== */
 
 :root {
+  /* native UI (scrollbars, form controls) follows the site theme, not the OS */
+  color-scheme: light;
+
   /* brand: periwinkle indigo (Radix "iris" family) — one hue, three
      strengths; white on --accent stays ≥ 5.4:1. The same hex is hard-coded in
      tools/og-card.html: change both, regenerate og-card.png, bump og:image ?v= */
   --accent:         #5b5bd6;   /* primary: links, active tab, buttons */
   --accent-hover:   #4d4dc4;   /* pressed/hover on solid fills */
-  --accent-bright:  #6e6ade;   /* lighter pop: dot hover, subtle accents */
   --accent-soft:    #e3e3fd;   /* tinted pill / hover surfaces */
   --on-accent:      #ffffff;   /* text on solid accent fills */
 
@@ -23,7 +25,6 @@
   --text:           #1f2937;
   --muted:          #5d6b82;  /* ≥4.5:1 on every surface it appears on */
   --border:         #e5eaf2;
-  --code-bg:        #f2f5fa;
 
   /* text selection */
   --selection-bg:   var(--accent);
@@ -42,10 +43,12 @@
   --glass-bg:       rgba(255, 255, 255, 0.72);
   --glass-edge:     rgba(255, 255, 255, 0.55);
 
-  /* the ONLY shadow: floating chrome (tab bar, lightbox, floating buttons)
-     reads as hovering above the content; resting cards and figures are
-     border-only, so "has a shadow" = "floats" */
+  /* the ONLY resting shadow: floating chrome (tab bar, lightbox, floating
+     buttons) reads as hovering above the content; resting cards and figures
+     are border-only, so "has a shadow" = "floats" */
   --shadow-float:   0 2px 6px rgba(16, 24, 40, 0.06), 0 10px 30px rgba(16, 24, 40, 0.10);
+  /* transient hover glow on figure links (thumbnails, Beyond photos) */
+  --shadow-hover:   0 0 10px rgba(0, 0, 0, 0.25);
 
   /* geometry — every rounded corner on the site uses one of these three */
   --radius-card:    20px;
@@ -62,9 +65,10 @@
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
+
   --accent:         #9f9cf6;
   --accent-hover:   #b1a9ff;
-  --accent-bright:  #b1a9ff;
   --accent-soft:    rgba(159, 156, 246, 0.16);
   --on-accent:      #0b0c0f;
 
@@ -75,7 +79,6 @@
   --text:           #d7dadf;
   --muted:          #969ba3;
   --border:         #2a2f37;
-  --code-bg:        #1b1e24;
 
   --selection-bg:   #9f9cf6;
   --selection-text: #0b0c0f;
@@ -195,7 +198,7 @@ button {
   p { margin: 0 0 0.5em; }
 
   a img { transition: box-shadow var(--dur-fast) var(--ease); }
-  a:hover img { box-shadow: 0 0 10px rgba(0, 0, 0, 0.25); }
+  a:hover img { box-shadow: var(--shadow-hover); }
 }
 
 /* --------------------------------------------------------------------------
@@ -1039,7 +1042,7 @@ body::after {
 }
 
 /* Thumbnails open a lightbox (JS); without JS the wrapping <a> just opens
-   the full image in a new tab via <base target="_blank">. */
+   the full image file. */
 .paper-box .img-zoom {
   display: block;
   cursor: zoom-in;

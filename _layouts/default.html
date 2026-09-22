@@ -6,20 +6,22 @@
 
   <body>
 
-    <div id="main" class="layout" role="main">
+    <div id="main" class="layout">
 
       <aside class="layout__left">
         {% include author-profile.html %}
       </aside>
 
-      <div class="layout__center">
+      {% comment %} Only the center column is the main landmark; the profile
+      and news columns are complementary asides, the footer is contentinfo. {% endcomment %}
+      <main class="layout__center">
         {% include tabbar.html %}
         <article class="page">
           <section class="page__content">
             {{ content }}
           </section>
         </article>
-      </div>
+      </main>
 
       <aside class="layout__right">
         {% include news-card.html %}
