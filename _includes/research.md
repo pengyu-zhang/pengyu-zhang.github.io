@@ -9,7 +9,7 @@
 Time-aware multi-modal recommendation
 {: .pb-tag}
 
-Which modality matters for a purchase changes over time, and differently for each user, but recommenders fuse text, images and audio with one global weighting. I route the modalities for each user based on their own interaction times, and use time-conditioned diffusion to filter out outdated edges. This beats the strongest baselines on three datasets, and the gain disappears when the router gets noise instead of time.
+Which modality matters for a purchase changes over time and differs from user to user, but recommenders fuse text, images and audio with one global weighting. I route the modalities for each user based on their own interaction times, and use time-conditioned diffusion to filter out outdated edges. This beats the strongest baselines on three datasets, and the gain disappears when the router gets noise instead of time.
 
 <div class="paper-links"><a href="https://arxiv.org/abs/2608.10983">arXiv</a></div>
 </div>
@@ -24,7 +24,7 @@ Which modality matters for a purchase changes over time, and differently for eac
 Time as a modality for look-alike entities
 {: .pb-tag}
 
-Some entities have almost the same text and images, like Napoleon Bonaparte and the 2023 film *Napoleon*, but their years are very different. I treat time as a modality of each entity, pooled from its own timestamps and used in the encoder, the scoring function and a contrastive objective. It helps most on the one percent of entities that are hardest to tell apart.
+Some entities have almost the same text and images, like Napoleon Bonaparte and the 2023 film *Napoleon*, but their years are very different. I treat time as a modality of each entity: its own timestamps are pooled into one signal and used in the encoder, the scoring function and a contrastive objective. It helps most on the one percent of entities that are hardest to tell apart.
 
 <div class="paper-links"><a href="https://arxiv.org/abs/2607.09777">arXiv</a></div>
 </div>
@@ -48,13 +48,13 @@ Dual-encoders force candidate retrieval and fine-grained selection into one embe
 <div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/fusion_training.png"><img src="/images/fusion_training.png" alt="Fusion Training" width="1600" height="904" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
-**Fusion Training** ``ACL 2026``
+**Fusion Training** ``ACL 2026 SRW``
 {: .pb-title}
 
 Hybrid-reasoning LLMs
 {: .pb-tag}
 
-Hybrid models like Qwen3 can answer quickly or think step by step with the same weights, but the two kinds of training data interfere with each other. With Congfeng Cao (lead), we tried seven data ratios and three training schedules on an open benchmark. More short-answer data lowers the accuracy of long-form reasoning, and interleaving the two kinds of data is the most robust schedule.
+Hybrid models like Qwen3 can answer quickly or think step by step with the same weights, but the two kinds of training data interfere with each other. With Congfeng Cao (lead), we tried seven data ratios and three training schedules on Qwen3-4B, and released the benchmark as Fusion Bench. More short-answer data lowers the accuracy of long-form reasoning, and interleaving the two kinds of data is the most robust schedule.
 
 <div class="paper-links"><a href="/pdf/Fusion_Training.pdf">Paper</a> <a href="https://doi.org/10.18653/v1/2026.acl-srw.64">DOI</a> <a href="https://github.com/caocongfeng/Fusion-Bench">Code</a></div>
 </div>
@@ -69,7 +69,7 @@ Hybrid models like Qwen3 can answer quickly or think step by step with the same 
 Knowledge-graph data enrichment
 {: .pb-tag}
 
-Curated image sets leave out ambiguous pictures such as logos and symbols, because visual encoders turn them into noise. I caption every image of an entity with a vision-language model and let an LLM fuse the captions into one text summary, so these pictures become useful evidence. Link prediction improves on every dataset and model I tested, most on entities shown by logos or symbols, and the models themselves stay unchanged.
+Curated image sets leave out ambiguous pictures such as logos and symbols, because visual encoders turn them into noise. I caption every image of an entity with a vision-language model and let an LLM fuse the captions into one text summary, so these pictures become useful evidence. Link prediction improves on every dataset and model I tested, most on entities whose images are mainly logos or symbols, and the models themselves stay unchanged.
 
 <div class="paper-links"><a href="/pdf/Beyond_Images.pdf">Paper</a> <a href="https://doi.org/10.1007/978-3-032-25156-5_5">DOI</a> <a href="https://github.com/pengyu-zhang/Beyond-Images">Code</a> <a href="https://pengyu-zhang.github.io/Beyond-Images/">Demo</a> <a href="https://youtu.be/PHaukQic-N4">YouTube</a> <a href="https://www.bilibili.com/video/BV13445zLEp4">Bilibili</a></div>
 </div>
@@ -189,7 +189,7 @@ Research offices spend a lot of manual work separating authors who share a name,
 Author name disambiguation at scale
 {: .pb-tag}
 
-Authors who share a name mix up publication records. With Xin Zheng (lead), we combined the text of each paper (fastText) with a graph of co-authors, organisations and venues (meta-path embeddings), then clustered the papers with DBSCAN, so the number of authors does not have to be set in advance. On AMiner WhoIsWho, about 205,000 papers, it beats six baselines with balanced precision and recall.
+When authors share a name, their publication records get mixed up. With Xin Zheng (lead), we combined the text of each paper (fastText) with a graph of co-authors, organisations and venues (meta-path embeddings), then clustered the papers with DBSCAN, so the number of authors does not have to be set in advance. On AMiner WhoIsWho, about 205,000 papers, it beats six baselines with balanced precision and recall.
 
 <div class="paper-links"><a href="/pdf/Dual-Channel.pdf">Paper</a> <a href="https://doi.org/10.3390/info12090383">DOI</a> <a href="https://github.com/pengyu-zhang/Dual-channel-Heterogeneous-Graph-Network-for-Author-Name-Disambiguation">Code</a></div>
 </div>

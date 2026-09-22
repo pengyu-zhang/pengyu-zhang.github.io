@@ -21,6 +21,6 @@
       <b class="item">Recommendation</b></p>
   <h3>Languages</h3>
   <p><span class="item">Chinese (native)</span><span class="sep">,</span>
-      <span class="item">English (fluent, IELTS 7.0)</span><span class="sep">,</span>
-      <span class="item">Dutch (elementary)</span></p>
+      <span class="item">English (fluent)</span><span class="sep">,</span>
+      <span class="item">Dutch (A2)</span></p>
 </div>
