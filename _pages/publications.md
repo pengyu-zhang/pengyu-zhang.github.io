@@ -1,6 +1,6 @@
 ---
 permalink: /publications/
-last_modified_at: 2026-09-15
+last_modified_at: 2026-09-22
 seo_title: "Publications | Pengyu Zhang"
 description: "Publications by Pengyu Zhang on multi-modal knowledge graphs, entity linking, link prediction, and recommendation, with paper, code, and DOI links."
 ---

@@ -13,4 +13,4 @@ I am a final-year Ph.D. candidate in Computer Science at the University of Amste
 </ul>
 </div>
 
-I work on machine learning for knowledge graphs, where the data keeps changing and many entities look alike. I build models that use signals others ignore, such as how the graph evolves and time itself, so entity linking, link prediction and recommendation stay accurate on sparse, long-tail and look-alike entities. In industry terms, this is entity resolution and matching under data drift.
+I work on machine learning for knowledge graphs, where the data keeps changing and many entities look alike. I build models that add signals which are usually left out, such as how the graph changes and time itself, so that entity linking, link prediction and recommendation stay accurate on sparse, long-tail and look-alike entities. In industry terms, this is entity resolution and matching under data drift.

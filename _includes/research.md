@@ -9,7 +9,7 @@
 Time-aware multi-modal recommendation
 {: .pb-tag}
 
-Which modality matters for a purchase shifts over time, and differently for each user, but recommenders fuse text, images and audio with one global weighting. Routing modalities per user from their own interaction timestamps, and filtering outdated edges with time-conditioned diffusion, beats the strongest baselines on three datasets. Swap the timing signal for noise and the gain vanishes.
+Which modality matters for a purchase changes over time, and differently for each user, but recommenders fuse text, images and audio with one global weighting. I route the modalities for each user based on their own interaction times, and use time-conditioned diffusion to filter out outdated edges. This beats the strongest baselines on three datasets, and the gain disappears when the router gets noise instead of time.
 
 <div class="paper-links"><a href="https://arxiv.org/abs/2608.10983">arXiv</a></div>
 </div>
@@ -24,7 +24,7 @@ Which modality matters for a purchase shifts over time, and differently for each
 Time as a modality for look-alike entities
 {: .pb-tag}
 
-Some entities share almost identical text and images, like Napoleon Bonaparte and the 2023 film *Napoleon*. Treating time as an entity-level modality, pooled from each entity's own timestamps and injected into the encoder, the scoring function and a contrastive objective, tells them apart. The gain is largest exactly on the most ambiguous one percent of entities.
+Some entities have almost the same text and images, like Napoleon Bonaparte and the 2023 film *Napoleon*, but their years are very different. I treat time as a modality of each entity, pooled from its own timestamps and used in the encoder, the scoring function and a contrastive objective. It helps most on the one percent of entities that are hardest to tell apart.
 
 <div class="paper-links"><a href="https://arxiv.org/abs/2607.09777">arXiv</a></div>
 </div>
@@ -39,7 +39,7 @@ Some entities share almost identical text and images, like Napoleon Bonaparte an
 LLM-based entity disambiguation
 {: .pb-tag}
 
-Dual-encoders force candidate retrieval and fine-grained selection into one embedding space, and need retraining whenever the knowledge base changes. With Fina Polat (lead), we split the two: an untrained BM25 retriever plus an LLM selector that may abstain beats the best trained dual-encoder on the ZELDA benchmark, with no retriever training at all.
+Dual-encoders force candidate retrieval and fine-grained selection into one embedding space, and need retraining whenever the knowledge base changes. With Fina Polat (lead), we split the two steps. A plain BM25 retriever finds the candidates, and an LLM picks one or says that none of them fits. Without training any retriever, this beats the best trained dual-encoder on the ZELDA benchmark.
 
 <div class="paper-links"><a href="https://arxiv.org/abs/2608.27470">arXiv</a> <a href="https://github.com/FinaPolat/RAISED">Code</a></div>
 </div>
@@ -54,7 +54,7 @@ Dual-encoders force candidate retrieval and fine-grained selection into one embe
 Hybrid-reasoning LLMs
 {: .pb-tag}
 
-Hybrid models like Qwen3 answer quickly or think step by step from one set of weights, but the two kinds of training data interfere. With Congfeng Cao (lead), we swept seven data ratios and three training schedules on an open benchmark: more short-answer data steadily erodes long-form reasoning, and interleaving the two is the most robust schedule.
+Hybrid models like Qwen3 can answer quickly or think step by step with the same weights, but the two kinds of training data interfere with each other. With Congfeng Cao (lead), we tried seven data ratios and three training schedules on an open benchmark. More short-answer data lowers the accuracy of long-form reasoning, and interleaving the two kinds of data is the most robust schedule.
 
 <div class="paper-links"><a href="/pdf/Fusion_Training.pdf">Paper</a> <a href="https://doi.org/10.18653/v1/2026.acl-srw.64">DOI</a> <a href="https://github.com/caocongfeng/Fusion-Bench">Code</a></div>
 </div>
@@ -69,7 +69,7 @@ Hybrid models like Qwen3 answer quickly or think step by step from one set of we
 Knowledge-graph data enrichment
 {: .pb-tag}
 
-Curated image sets drop ambiguous pictures such as logos and symbols because visual encoders turn them into noise. Captioning every image an entity has with a vision-language model, and fusing the captions with an LLM into one text summary, turns that noise into usable evidence: link prediction improves on every dataset and model tested, most on logo-heavy entities, with no model changes.
+Curated image sets leave out ambiguous pictures such as logos and symbols, because visual encoders turn them into noise. I caption every image of an entity with a vision-language model and let an LLM fuse the captions into one text summary, so these pictures become useful evidence. Link prediction improves on every dataset and model I tested, most on entities shown by logos or symbols, and the models themselves stay unchanged.
 
 <div class="paper-links"><a href="/pdf/Beyond_Images.pdf">Paper</a> <a href="https://doi.org/10.1007/978-3-032-25156-5_5">DOI</a> <a href="https://github.com/pengyu-zhang/Beyond-Images">Code</a> <a href="https://pengyu-zhang.github.io/Beyond-Images/">Demo</a> <a href="https://youtu.be/PHaukQic-N4">YouTube</a> <a href="https://www.bilibili.com/video/BV13445zLEp4">Bilibili</a></div>
 </div>
@@ -84,7 +84,7 @@ Curated image sets drop ambiguous pictures such as logos and symbols because vis
 Large-scale temporal link prediction
 {: .pb-tag}
 
-Existing software-mention data has no graph structure and no time axis. With Congfeng Cao (lead), we turned mentions from 1.5 million biomedical papers into a publication-software graph and framed software usage as temporal link prediction: a GraphSAGE model beats feature-based baselines, and its accuracy decays as the gap between training and test years grows.
+Existing software-mention data has no graph structure and no time axis. With Congfeng Cao (lead), we turned mentions from 1.5 million biomedical papers into a publication-software graph and framed software usage as temporal link prediction. A GraphSAGE model does better than feature-based baselines, and its accuracy drops as the gap between the training year and the test year grows.
 
 <div class="paper-links"><a href="/pdf/Graph-TempCZ.pdf">Paper</a> <a href="https://doi.org/10.63317/2jopizgg4dzo">DOI</a> <a href="https://github.com/caocongfeng/Graph-TempCZ">Code</a></div>
 </div>
@@ -99,7 +99,7 @@ Existing software-mention data has no graph structure and no time axis. With Con
 LLMs for data challenges in graphs
 {: .pb-tag}
 
-Real graph data is missing pieces, imbalanced, split across domains and constantly changing, and most remedies are built for one task at a time. With Mengran Li (lead), we screened over a thousand papers and organised more than 380 of them around these four data challenges, traditional methods first and then where large language models help, with an open literature repository. The dynamic instability sections connect directly to the temporal drift my own entity-linking work addresses.
+Real graph data often has missing parts, is imbalanced, comes from different domains and keeps changing, and most existing methods handle one of these problems for one task. With Mengran Li (lead), we organised more than 380 papers around these four data challenges, first the traditional methods and then where large language models help, and keep the literature list open on GitHub. My part was the section on graphs that change over time, which is closest to my own work.
 
 <div class="paper-links"><a href="/pdf/Graph-Learning-Challenges.pdf">Paper</a> <a href="https://doi.org/10.1016/j.eswa.2025.129643">DOI</a> <a href="https://github.com/limengran98/Awesome-Literature-Graph-Learning-Challenges">Code</a></div>
 </div>
@@ -114,7 +114,7 @@ Real graph data is missing pieces, imbalanced, split across domains and constant
 Entity linking for social media analysis
 {: .pb-tag}
 
-Network analysis of tweets rests on whichever entities a linker extracts, and short, messy text offers no ground truth for choosing one. With James Nevin (lead), we ran two established linkers at five thresholds each over 21 million tweets: they agree on only about 40% of the entities, and the resulting networks change shape and even their top entities. Report results across linkers, not from one.
+Network analysis of tweets depends on which entities a linker extracts, and for short, messy text there is no ground truth to choose a linker. With James Nevin (lead), we ran two established linkers at several thresholds over 21 million tweets. They agree on only about 40% of the entities, and the networks change in shape and even in their top entities. So we suggest reporting results across several linkers.
 
 <div class="paper-links"><a href="/pdf/Understanding_Entity_Linking.pdf">Paper</a> <a href="https://doi.org/10.1007/978-3-031-77792-9_5">DOI</a> <a href="https://github.com/jim-g-n/Tweet-Linked-Entity-Co-occurrence">Code</a></div>
 </div>
@@ -129,7 +129,7 @@ Network analysis of tweets rests on whichever entities a linker extracts, and sh
 Temporally robust entity linking
 {: .pb-tag}
 
-An entity linker is trained on one snapshot of the knowledge graph and then used for years while the graph moves on, so accuracy decays. TIGER shows that graph structure keeps entity representations separable as descriptions drift; CYCLE shows the change itself is supervision, turning relations that appear or vanish between snapshots into contrastive examples. Both come with public yearly-snapshot benchmarks.
+An entity linker is trained on one snapshot of the knowledge graph and then used for years while the graph keeps changing, so its accuracy decays. In TIGER I add graph structure, which keeps entities separable when their descriptions drift. In CYCLE I use the change itself as supervision: relations that appear or disappear between snapshots become contrastive examples. For both I built public benchmarks from yearly snapshots.
 
 <div class="paper-links">CYCLE: <a href="/pdf/CYCLE.pdf">Paper</a> <a href="https://doi.org/10.1145/3627673.3679702">DOI</a> <a href="https://github.com/pengyu-zhang/CYCLE-Cross-Year-Contrastive-Learning-in-Entity-Linking">Code</a><br>TIGER: <a href="/pdf/TIGER.pdf">Paper</a> <a href="https://doi.org/10.3233/FAIA240933">DOI</a> <a href="https://github.com/pengyu-zhang/TIGER-Temporally-Improved-Graph-Entity-Linker">Code</a></div>
 </div>
@@ -144,7 +144,7 @@ An entity linker is trained on one snapshot of the knowledge graph and then used
 Graph structure learning for low-degree nodes
 {: .pb-tag}
 
-Node degrees follow a power law, so missing or wrong edges hurt the sparsely connected nodes most, yet GNNs treat the input graph as ground truth. I generate candidate neighbourhood graphs from node features, pick the most likely one with Bayesian inference over a stochastic block model, and train the feature and relationship views against each other with contrastive learning. On six benchmarks it is best in most few-label settings, and the gain on low-degree nodes grows as labels get scarcer.
+Node degrees follow a power law, so missing or wrong edges hurt the sparsely connected nodes most, but GNNs take the input graph as correct. I generate candidate neighbourhood graphs from node features, choose the most likely one with Bayesian inference over a stochastic block model, and let the feature view and the relationship view supervise each other through contrastive learning. On six benchmarks it is best in most settings with few labels, and on low-degree nodes the gain grows as labels get scarcer.
 
 <div class="paper-links"><a href="/pdf/RUNCL.pdf">Paper</a> <a href="https://doi.org/10.1016/j.physa.2024.129874">DOI</a> <a href="https://github.com/pengyu-zhang/RUNCL-Relationship-Updating-Network-with-Contrastive-Learning">Code</a></div>
 </div>
@@ -159,7 +159,7 @@ Node degrees follow a power law, so missing or wrong edges hurt the sparsely con
 Multi-view graph learning
 {: .pb-tag}
 
-Real networks carry several kinds of links, such as co-author, co-keyword and co-conference, but most GNNs use one at a time or average views that deserve different weights. I feed every view into the model at once: an HSIC term keeps each view's representation distinct, one attention layer weighs neighbours and a second weighs views, and an autoencoder branch keeps the feature structure from collapsing. On eight benchmarks it beats the strongest baseline in most settings, and removing any module lowers accuracy.
+Real networks have several kinds of links, such as co-author, co-keyword and co-conference, but most GNNs use one view at a time or give all views the same weight. I feed all views into the model together. Two attention layers decide how much each neighbour and each view counts, and an HSIC term keeps the views distinct from each other. On eight benchmarks it beats the strongest baseline in most settings.
 
 <div class="paper-links"><a href="/pdf/MVMA-GCN.pdf">Paper</a> <a href="https://doi.org/10.1016/j.engappai.2023.106717">DOI</a> <a href="https://github.com/pengyu-zhang/MVMA-GCN">Code</a></div>
 </div>
@@ -174,7 +174,7 @@ Real networks carry several kinds of links, such as co-author, co-keyword and co
 Interactive author name disambiguation
 {: .pb-tag}
 
-Research offices spend heavy manual effort separating authors who share a name, common for Chinese names, and a bare classifier gives them no way to check a decision. Pairing a multi-view graph classifier with linked views of collaboration structure and raw metadata let students and veteran administrators resolve 4,000 real university papers reliably, even where the classifier erred. Classifier accuracy about 91% on ACM and DBLP; eleven users completed the tasks with over 95% success.
+Research offices spend a lot of manual work separating authors who share a name, which is common for Chinese names, and a classifier alone gives them no way to check its decisions. I paired a multi-view graph classifier with linked views of the collaboration network and the raw metadata, so users can still decide when the classifier is wrong. In a user study on 4,000 real university papers, students and experienced administrators completed the tasks reliably.
 
 <div class="paper-links"><a href="/pdf/Visual_Analysis.pdf">Paper</a> <a href="https://doi.org/10.3724/sp.j.1089.2022.19191">DOI</a> <a href="https://github.com/pengyu-zhang/Visual-Analysis-for-Name-Disambiguation-of-Academic-Papers">Code</a> <a href="https://pengyu-zhang.github.io/Visual-Analysis-for-Name-Disambiguation-of-Academic-Papers/">Demo</a> <a href="https://www.youtube.com/watch?v=jQ8MNu-L-Os">YouTube</a> <a href="https://www.bilibili.com/video/BV1QM4m1k77Q/">Bilibili</a></div>
 </div>
@@ -189,7 +189,7 @@ Research offices spend heavy manual effort separating authors who share a name, 
 Author name disambiguation at scale
 {: .pb-tag}
 
-Authors who share a name scramble publication records. With Xin Zheng (lead), we combined fastText paper semantics with meta-path embeddings over a co-author, organisation and venue graph, summed the two similarity matrices and clustered papers with DBSCAN, so no cluster count is preset. F1 0.62 on AMiner WhoIsWho, 221 names and 205,000 papers, above six baselines with balanced precision and recall.
+Authors who share a name mix up publication records. With Xin Zheng (lead), we combined the text of each paper (fastText) with a graph of co-authors, organisations and venues (meta-path embeddings), then clustered the papers with DBSCAN, so the number of authors does not have to be set in advance. On AMiner WhoIsWho, about 205,000 papers, it beats six baselines with balanced precision and recall.
 
 <div class="paper-links"><a href="/pdf/Dual-Channel.pdf">Paper</a> <a href="https://doi.org/10.3390/info12090383">DOI</a> <a href="https://github.com/pengyu-zhang/Dual-channel-Heterogeneous-Graph-Network-for-Author-Name-Disambiguation">Code</a></div>
 </div>
