@@ -1,6 +1,6 @@
 # pengyu-zhang.github.io
 
-Personal academic homepage of **Pengyu Zhang**, Ph.D. candidate in Computer
+Personal academic homepage of **Pengyu Zhang**, PhD candidate in Computer
 Science at the University of Amsterdam.
 
 **Live site: <https://pengyu-zhang.github.io/>**

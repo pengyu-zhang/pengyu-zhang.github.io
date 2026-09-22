@@ -17,6 +17,6 @@
 - *2024.09* Our paper on entity linking in co-occurrence networks was accepted at **EKAW 2024**.
 - *2024.07* *CYCLE* was accepted at **CIKM 2024**.
 - *2024.07* *TIGER* was accepted at **ECAI 2024**.
-- *2022.09* Joined **INDElab** at the University of Amsterdam to start my Ph.D.
+- *2022.09* Joined **INDElab** at the University of Amsterdam to start my PhD
 
 </details>
