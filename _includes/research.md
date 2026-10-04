@@ -204,7 +204,7 @@ When authors share a name, their publication records get mixed up. With Xin Zhen
 A ten-minute talk through my research
 {: .pb-tag}
 
-Similar entities are hard to tell apart, and it gets harder as the data changes. This deck follows one thread through my work: where the failure shows up, which signals I added so that look-alike entities stay separable (the graph, how it changes, time itself, the words hidden in images), and where the same idea moved next, into recommendation and LLM pipelines. Eight slides, then one backup slide per paper.
+Similar entities are hard to tell apart, and it gets harder as the data changes. This deck follows one thread through my work: where the failure shows up, which signals I added so that look-alike entities stay separable (the graph, how it changes, time itself, the words hidden in images), and where the same idea moved next, into recommendation and LLM pipelines.
 
 <div class="paper-links"><a href="/pdf/Pengyu_Zhang_Research_Overview.pdf">Slides (PDF)</a></div>
 </div>
