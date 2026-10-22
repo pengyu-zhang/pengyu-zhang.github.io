@@ -1,6 +1,6 @@
 ## Experience
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/timeroute.png"><img src="/images/timeroute.png" alt="TimeRoute" width="1600" height="908"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/hd/timeroute.png"><img src="/images/timeroute.png" alt="TimeRoute" width="1600" height="908"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **TimeRoute** ``Under review``
@@ -15,7 +15,7 @@ Which modality matters for a purchase changes over time and differs from user to
 </div>
 </div>
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/time_imprint.png"><img src="/images/time_imprint.png" alt="Time Imprint" width="1600" height="1094" loading="lazy"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/hd/time_imprint.png"><img src="/images/time_imprint.png" alt="Time Imprint" width="1600" height="1094" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **Time Imprint** ``Under review``
@@ -30,7 +30,7 @@ Some entities have almost the same text and images, like Napoleon Bonaparte and 
 </div>
 </div>
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/Select-Dont-Train.png"><img src="/images/Select-Dont-Train.png" alt="Select, Don't Train" width="1600" height="898" loading="lazy"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/hd/Select-Dont-Train.png"><img src="/images/Select-Dont-Train.png" alt="Select, Don't Train" width="1600" height="898" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **Select, Don't Train** ``ISWC 2026``
@@ -45,7 +45,7 @@ Dual-encoders force candidate retrieval and fine-grained selection into one embe
 </div>
 </div>
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/fusion_training.png"><img src="/images/fusion_training.png" alt="Fusion Training" width="1600" height="904" loading="lazy"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/hd/fusion_training.png"><img src="/images/fusion_training.png" alt="Fusion Training" width="1600" height="904" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **Fusion Training** ``ACL 2026 SRW``
@@ -60,7 +60,7 @@ Hybrid models like Qwen3 can answer quickly or think step by step with the same 
 </div>
 </div>
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/beyond_images.png"><img src="/images/beyond_images.png" alt="Beyond Images" width="1600" height="903" loading="lazy"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/hd/beyond_images.png"><img src="/images/beyond_images.png" alt="Beyond Images" width="1600" height="903" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **Beyond Images** ``ESWC 2026``
@@ -75,7 +75,7 @@ Curated image sets leave out ambiguous pictures such as logos and symbols, becau
 </div>
 </div>
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/graph_tempcz.png"><img src="/images/graph_tempcz.png" alt="Graph-TempCZ" width="1184" height="328" loading="lazy"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/hd/graph_tempcz.png"><img src="/images/graph_tempcz.png" alt="Graph-TempCZ" width="1184" height="328" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **Graph-TempCZ** ``LREC 2026``
@@ -90,7 +90,7 @@ Existing software-mention data has no graph structure and no time axis. With Con
 </div>
 </div>
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/graph_learning_challenges.png"><img src="/images/graph_learning_challenges.png" alt="Graph Learning Challenges" width="1600" height="1204" loading="lazy"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/hd/graph_learning_challenges.png"><img src="/images/graph_learning_challenges.png" alt="Graph Learning Challenges" width="1600" height="1204" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **Graph Learning Challenges** ``ESWA 2026``
@@ -105,7 +105,7 @@ Real graph data often has missing parts, is imbalanced, comes from different dom
 </div>
 </div>
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/understanding_el.png"><img src="/images/understanding_el.png" alt="Understanding Entity Linking" width="1600" height="900" loading="lazy"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/hd/understanding_el.png"><img src="/images/understanding_el.png" alt="Understanding Entity Linking" width="1600" height="900" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **Understanding Entity Linking** ``EKAW 2024``
@@ -120,7 +120,7 @@ Network analysis of tweets depends on which entities a linker extracts, and for 
 </div>
 </div>
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/cycle.png"><img src="/images/cycle.png" alt="CYCLE and TIGER" width="1600" height="573" loading="lazy"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/hd/cycle.png"><img src="/images/cycle.png" alt="CYCLE and TIGER" width="1600" height="573" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **CYCLE & TIGER** ``CIKM & ECAI 2024``
@@ -135,7 +135,7 @@ An entity linker is trained on one snapshot of the knowledge graph and then used
 </div>
 </div>
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/runcl.png"><img src="/images/runcl.png" alt="RUNCL" width="1600" height="908" loading="lazy"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/hd/runcl.png"><img src="/images/runcl.png" alt="RUNCL" width="1600" height="908" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **RUNCL** ``Physica A 2024``
@@ -150,7 +150,7 @@ Node degrees follow a power law, so missing or wrong edges hurt the sparsely con
 </div>
 </div>
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/mvma_gcn.png"><img src="/images/mvma_gcn.png" alt="MVMA-GCN" width="1600" height="914" loading="lazy"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/hd/mvma_gcn.png"><img src="/images/mvma_gcn.png" alt="MVMA-GCN" width="1600" height="914" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **MVMA-GCN** ``EAAI 2023``
@@ -165,7 +165,7 @@ Real networks have several kinds of links, such as co-author, co-keyword and co-
 </div>
 </div>
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/Visual_Analysis.png"><img src="/images/Visual_Analysis.png" alt="Visual Analysis" width="1600" height="832" loading="lazy"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/hd/Visual_Analysis.png"><img src="/images/Visual_Analysis.png" alt="Visual Analysis" width="1600" height="832" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **Visual Analysis** ``JCAD 2022``
@@ -180,7 +180,7 @@ Research offices spend a lot of manual work separating authors who share a name,
 </div>
 </div>
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/dual_channel.png"><img src="/images/dual_channel.png" alt="DualChannel" width="1601" height="723" loading="lazy"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/hd/dual_channel.png"><img src="/images/dual_channel.png" alt="DualChannel" width="1601" height="723" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **DualChannel** ``Information 2021``
@@ -195,7 +195,7 @@ When authors share a name, their publication records get mixed up. With Xin Zhen
 </div>
 </div>
 
-<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/research_overview.png"><img src="/images/research_overview.png" alt="Research Overview slides" width="1600" height="900" loading="lazy"></a></div>
+<div class="paper-box"><div class="paper-box-image"><a class="img-zoom" href="/images/hd/research_overview.png"><img src="/images/research_overview.png" alt="Research Overview slides" width="1600" height="900" loading="lazy"></a></div>
 <div class="paper-box-text" markdown="1">
 
 **Research Overview** ``Slides``
