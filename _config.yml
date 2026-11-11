@@ -15,6 +15,7 @@ google_analytics         : G-9PGZPE733E
 author:
   name          : "Pengyu Zhang"
   avatar        : "images/avatar.jpg"
+  jobtitle      : "PhD Candidate in Computer Science"
   employer      : "University of Amsterdam"
   email         : "p.y.zhang3@gmail.com"
   googlescholar : "https://scholar.google.com/citations?user=xH7mJ-0AAAAJ"
@@ -27,10 +28,14 @@ author:
 # fragments are ordinary _includes/*.md. Everything else is a Jekyll default.
 include:
   - _pages
+# Jekyll 3 replaces its default exclude list with this one, so Gemfile and
+# Gemfile.lock have to be named here or they are published.
 exclude:
   - LICENSE
   - README.md
   - docker-compose.yml
+  - Gemfile
+  - Gemfile.lock
 defaults:
   - scope:
       path: ""
@@ -48,3 +53,6 @@ sass:
 plugins:
   - jekyll-sitemap
   - jekyll-redirect-from
+# the /about/ redirect stubs are enough; no redirects.json
+redirect_from:
+  json: false
