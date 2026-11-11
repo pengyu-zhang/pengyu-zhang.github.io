@@ -1,0 +1,261 @@
+# Every paper, once. This file feeds
+#   - the Publications list        (_includes/pub_short.md)
+#   - its structured data          (_includes/publications-jsonld.html)
+#   - the link rows of the tiles   (_includes/research.md via paper-links.html)
+# in the order written here (newest first).
+#
+#   id          key the Experience tiles use: {% include paper-links.html id="..." %}
+#   venue       the pill, e.g. "ISWC 2026" or "Under review"
+#   kind        conference | journal | preprint
+#   venue_name  full venue name printed after the authors (not for preprints)
+#   container   only when the structured-data name differs from "venue_name (venue)"
+#   title       without the final full stop
+#   title_note  optional, set in italics after the title
+#   language    optional, "en" unless given
+#   authors     in paper order; the site owner's name is set in bold
+#   date        publication date for the structured data: "YYYY", "YYYY-MM" or
+#               "YYYY-MM-DD", always quoted
+#   links       any of arxiv, paper, doi, code, demo, youtube, bilibili;
+#               they are always shown in that order
+
+- id: timeroute
+  venue: "Under review"
+  kind: preprint
+  title: "TimeRoute: Time-Aware Modality Routing and Diffusion for Multi-Modal Recommendation"
+  authors:
+    - Pengyu Zhang
+    - Yangqin Jiang
+    - Klim Zaporojets
+    - Congfeng Cao
+    - Paul Groth
+  date: "2026-08"
+  links:
+    arxiv: https://arxiv.org/abs/2608.10983
+
+- id: time_imprint
+  venue: "Under review"
+  kind: preprint
+  title: "Time Imprint: Learning Time-Aware Representations in Multi-Modal Knowledge Graphs"
+  authors:
+    - Pengyu Zhang
+    - Klim Zaporojets
+    - Congfeng Cao
+    - Jia-Hong Huang
+    - Paul Groth
+  date: "2026-07-08"
+  links:
+    arxiv: https://arxiv.org/abs/2607.09777
+
+- id: select_dont_train
+  venue: "ISWC 2026"
+  kind: conference
+  venue_name: "International Semantic Web Conference"
+  title: "Select, Don't Train: The Benefits of Modular Entity Disambiguation with LLM-Based Selection"
+  authors:
+    - Fina Polat
+    - Daniel Daza
+    - Pengyu Zhang
+    - Klim Zaporojets
+    - Paul Groth
+  date: "2026-10-24"
+  links:
+    arxiv: https://arxiv.org/abs/2608.27470
+    doi: https://doi.org/10.1007/978-3-032-42015-2_3
+    code: https://github.com/FinaPolat/RAISED
+
+- id: fusion_training
+  venue: "ACL 2026 SRW"
+  kind: conference
+  venue_name: "Annual Meeting of the Association for Computational Linguistics (Student Research Workshop)"
+  container: "Annual Meeting of the Association for Computational Linguistics, Student Research Workshop (ACL 2026)"
+  title: "Fusion Training for Mathematical Generalization in Large Language Models"
+  authors:
+    - Congfeng Cao
+    - Pengyu Zhang
+    - Jelke Bloem
+  date: "2026-07"
+  links:
+    paper: /pdf/Fusion_Training.pdf
+    doi: https://doi.org/10.18653/v1/2026.acl-srw.64
+    code: https://github.com/caocongfeng/Fusion-Bench
+
+- id: beyond_images
+  venue: "ESWC 2026"
+  kind: conference
+  venue_name: "European Semantic Web Conference"
+  title: "Are a Thousand Words Better Than a Single Picture? Beyond Images - A Framework for Multi-Modal Knowledge Graph Dataset Enrichment"
+  authors:
+    - Pengyu Zhang
+    - Klim Zaporojets
+    - Jie Liu
+    - Jia-Hong Huang
+    - Paul Groth
+  date: "2026"
+  links:
+    paper: /pdf/Beyond_Images.pdf
+    doi: https://doi.org/10.1007/978-3-032-25156-5_5
+    code: https://github.com/pengyu-zhang/Beyond-Images
+    demo: https://pengyu-zhang.github.io/Beyond-Images/
+    youtube: https://youtu.be/PHaukQic-N4
+    bilibili: https://www.bilibili.com/video/BV13445zLEp4
+
+- id: graph_tempcz
+  venue: "LREC 2026"
+  kind: conference
+  venue_name: "International Conference on Language Resources and Evaluation"
+  title: "Graph-TempCZ: A Graph Representation of Software Mentions for Predicting Software Usage in Scientific Publications"
+  authors:
+    - Congfeng Cao
+    - Pengyu Zhang
+    - Jelke Bloem
+  date: "2026-05"
+  links:
+    paper: /pdf/Graph-TempCZ.pdf
+    doi: https://doi.org/10.63317/2jopizgg4dzo
+    code: https://github.com/caocongfeng/Graph-TempCZ
+
+- id: graph_learning_challenges
+  venue: "ESWA 2026"
+  kind: journal
+  venue_name: "Expert Systems with Applications"
+  title: "A Survey of Large Language Models for Data Challenges in Graphs"
+  authors:
+    - Mengran Li
+    - Pengyu Zhang
+    - Wenbin Xing
+    - Yijia Zheng
+    - Klim Zaporojets
+    - Junzhou Chen
+    - Ronghui Zhang
+    - Yong Zhang
+    - Siyuan Gong
+    - Jia Hu
+    - Xiaolei Ma
+    - Zhiyuan Liu
+    - Paul Groth
+    - Marcel Worring
+  date: "2025-09-08"
+  links:
+    paper: /pdf/Graph-Learning-Challenges.pdf
+    doi: https://doi.org/10.1016/j.eswa.2025.129643
+    code: https://github.com/limengran98/Awesome-Literature-Graph-Learning-Challenges
+
+- id: understanding_el
+  venue: "EKAW 2024"
+  kind: conference
+  venue_name: "International Conference on Knowledge Engineering and Knowledge Management"
+  title: "Understanding the Impact of Entity Linking on the Topology of Entity Co-occurrence Networks for Social Media Analysis"
+  authors:
+    - James Nevin
+    - Pengyu Zhang
+    - Dimitar Dimitrov
+    - Michael Lees
+    - Paul Groth
+    - Stefan Dietze
+  date: "2025"
+  links:
+    paper: /pdf/Understanding_Entity_Linking.pdf
+    doi: https://doi.org/10.1007/978-3-031-77792-9_5
+    code: https://github.com/jim-g-n/Tweet-Linked-Entity-Co-occurrence
+
+- id: cycle
+  venue: "CIKM 2024"
+  kind: conference
+  venue_name: "ACM International Conference on Information and Knowledge Management"
+  title: "CYCLE: Cross-Year Contrastive Learning in Entity-Linking"
+  authors:
+    - Pengyu Zhang
+    - Congfeng Cao
+    - Klim Zaporojets
+    - Paul Groth
+  date: "2024-10"
+  links:
+    paper: /pdf/CYCLE.pdf
+    doi: https://doi.org/10.1145/3627673.3679702
+    code: https://github.com/pengyu-zhang/CYCLE-Cross-Year-Contrastive-Learning-in-Entity-Linking
+
+- id: tiger
+  venue: "ECAI 2024"
+  kind: conference
+  venue_name: "European Conference on Artificial Intelligence"
+  title: "TIGER: Temporally Improved Graph Entity Linker"
+  authors:
+    - Pengyu Zhang
+    - Congfeng Cao
+    - Paul Groth
+  date: "2024-10"
+  links:
+    paper: /pdf/TIGER.pdf
+    doi: https://doi.org/10.3233/FAIA240933
+    code: https://github.com/pengyu-zhang/TIGER-Temporally-Improved-Graph-Entity-Linker
+
+- id: runcl
+  venue: "Physica A 2024"
+  kind: journal
+  venue_name: "Physica A: Statistical Mechanics and its Applications"
+  title: "Relationship Updating Network with Contrastive Learning"
+  authors:
+    - Pengyu Zhang
+    - Yong Zhang
+    - Xinglin Piao
+    - Yongliang Sun
+    - Baocai Yin
+  date: "2024-06-04"
+  links:
+    paper: /pdf/RUNCL.pdf
+    doi: https://doi.org/10.1016/j.physa.2024.129874
+    code: https://github.com/pengyu-zhang/RUNCL-Relationship-Updating-Network-with-Contrastive-Learning
+
+- id: mvma_gcn
+  venue: "EAAI 2023"
+  kind: journal
+  venue_name: "Engineering Applications of Artificial Intelligence"
+  title: "MVMA-GCN: Multi-view Multi-layer Attention Graph Convolutional Networks"
+  authors:
+    - Pengyu Zhang
+    - Yong Zhang
+    - Jingcheng Wang
+    - Baocai Yin
+  date: "2023"
+  links:
+    paper: /pdf/MVMA-GCN.pdf
+    doi: https://doi.org/10.1016/j.engappai.2023.106717
+    code: https://github.com/pengyu-zhang/MVMA-GCN
+
+- id: visual_analysis
+  venue: "JCAD 2022"
+  kind: journal
+  venue_name: "Journal of Computer-Aided Design and Computer Graphics"
+  title: "Visual Analysis for Name Disambiguation of Academic Papers"
+  title_note: "(in Chinese)"
+  language: zh
+  authors:
+    - Pengyu Zhang
+    - Yong Zhang
+    - Yanjie Cui
+    - Baocai Yin
+  date: "2022-11"
+  links:
+    paper: /pdf/Visual_Analysis.pdf
+    doi: https://doi.org/10.3724/sp.j.1089.2022.19191
+    code: https://github.com/pengyu-zhang/Visual-Analysis-for-Name-Disambiguation-of-Academic-Papers
+    demo: https://pengyu-zhang.github.io/Visual-Analysis-for-Name-Disambiguation-of-Academic-Papers/
+    youtube: https://www.youtube.com/watch?v=jQ8MNu-L-Os
+    bilibili: https://www.bilibili.com/video/BV1QM4m1k77Q/
+
+- id: dual_channel
+  venue: "Information 2021"
+  kind: journal
+  venue_name: "Information"
+  title: "Dual-Channel Heterogeneous Graph Network for Author Name Disambiguation"
+  authors:
+    - Xin Zheng
+    - Pengyu Zhang
+    - Yanjie Cui
+    - Rong Du
+    - Yong Zhang
+  date: "2021-09-18"
+  links:
+    paper: /pdf/Dual-Channel.pdf
+    doi: https://doi.org/10.3390/info12090383
+    code: https://github.com/pengyu-zhang/Dual-channel-Heterogeneous-Graph-Network-for-Author-Name-Disambiguation

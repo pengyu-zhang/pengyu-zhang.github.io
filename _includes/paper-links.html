@@ -1,0 +1,18 @@
+{%- comment -%}
+  The link row of one paper from _data/publications.yml; pass its id, for
+  example id="cycle". aria=true (Publications list) gives the "Paper" link a
+  label with the paper title, because that list has many links that all
+  read "Paper".
+{%- endcomment -%}
+{%- assign pub = site.data.publications | where: "id", include.id | first -%}
+{%- assign l = pub.links -%}
+{%- capture row -%}
+{%- if l.arxiv %}<a href="{{ l.arxiv }}">arXiv</a> {% endif -%}
+{%- if l.paper %}<a href="{{ l.paper }}"{% if include.aria %} aria-label="{{ pub.title | escape }}{% if pub.title_note %} {{ pub.title_note | escape }}{% endif %} (PDF)"{% endif %}>Paper</a> {% endif -%}
+{%- if l.doi %}<a href="{{ l.doi }}">DOI</a> {% endif -%}
+{%- if l.code %}<a href="{{ l.code }}">Code</a> {% endif -%}
+{%- if l.demo %}<a href="{{ l.demo }}">Demo</a> {% endif -%}
+{%- if l.youtube %}<a href="{{ l.youtube }}">YouTube</a> {% endif -%}
+{%- if l.bilibili %}<a href="{{ l.bilibili }}">Bilibili</a> {% endif -%}
+{%- endcapture -%}
+{{- row | strip -}}
