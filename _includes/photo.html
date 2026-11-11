@@ -1,0 +1,8 @@
+{%- comment -%}
+  One photo of the Beyond wall. The wall shows images/beyond/sm/NAME.webp
+  (made by tools/thumbs.py); the lightbox opens images/beyond/NAME.jpg, whose
+  size is width x height. Parameters: file (NAME.jpg), alt, width, height,
+  and eager=true for the photos at the top of the wall.
+{%- endcomment -%}
+{%- assign name = include.file | split: "." | first -%}
+<a class="img-zoom" href="/images/beyond/{{ include.file }}"><img src="/images/beyond/{{ include.file }}" srcset="/images/beyond/sm/{{ name }}.webp" alt="{{ include.alt }}" width="{{ include.width }}" height="{{ include.height }}"{% unless include.eager %} loading="lazy"{% endunless %}></a>

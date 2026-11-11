@@ -1,0 +1,11 @@
+{%- comment -%}
+  Figure of an Experience tile. Three files share one name:
+    images/NAME.png      the 1600-px figure (src: fallback and canonical URL;
+                         width and height are its size)
+    images/sm/NAME.webp  the copy the tile shows, made by tools/thumbs.py
+    images/hd/NAME.png   the 2800-px copy the lightbox opens
+  Parameters: image (NAME.png), alt, width, height, and eager=true for the
+  first tile only (the others load lazily).
+{%- endcomment -%}
+{%- assign name = include.image | split: "." | first -%}
+<div class="paper-box-image"><a class="img-zoom" href="/images/hd/{{ include.image }}"><img src="/images/{{ include.image }}" srcset="/images/sm/{{ name }}.webp" alt="{{ include.alt }}" width="{{ include.width }}" height="{{ include.height }}"{% unless include.eager %} loading="lazy"{% endunless %}></a></div>
