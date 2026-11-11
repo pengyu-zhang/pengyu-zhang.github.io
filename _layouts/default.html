@@ -1,10 +1,14 @@
 <!doctype html>
-<html lang="en" class="no-js">
+{% comment %} data-page names the current page (home, experience, …) for the
+few styles that differ per page; site.js keeps it current after PJAX swaps. {% endcomment %}
+<html lang="en" class="no-js" data-page="{{ page.url | remove: '/' | default: 'home' }}">
   <head>
     {% include head.html %}
   </head>
 
   <body>
+
+    <a class="skip-link" href="#content">Skip to content</a>
 
     <div id="main" class="layout">
 
@@ -12,9 +16,9 @@
         {% include author-profile.html %}
       </aside>
 
-      {% comment %} Only the center column is the main landmark; the profile
-      and news columns are complementary asides, the footer is contentinfo. {% endcomment %}
-      <main class="layout__center">
+      {% comment %} Only the content column is the main landmark; the profile
+      column is a complementary aside, the footer is contentinfo. {% endcomment %}
+      <main id="content" class="layout__center">
         {% include tabbar.html %}
         <article class="page">
           <section class="page__content">
@@ -23,22 +27,18 @@
         </article>
       </main>
 
-      <aside class="layout__right">
-        {% include news-card.html %}
-      </aside>
-
-      {% comment %} The footer lives inside the grid (row 2, center column) so
-      the sticky side columns' containing block reaches the very bottom of the
-      page — otherwise a footer below the grid shoves them up at full scroll. {% endcomment %}
+      {% comment %} The footer lives inside the grid (row 2, content column) so
+      the sticky profile column's containing block reaches the very bottom of
+      the page — otherwise a footer below the grid shoves it up at full scroll. {% endcomment %}
       <footer class="site-footer">
         &copy; {{ site.time | date: "%Y" }} {{ site.author.name }} &middot; Last updated {{ site.time | date: "%B %Y" }}
       </footer>
 
     </div>
 
-    <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top">&uarr;</button>
+    <button type="button" id="back-to-top" class="back-to-top" aria-label="Back to top" title="Back to top"><svg class="back-to-top__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><line x1="12" y1="19" x2="12" y2="5"/><polyline points="5 12 12 5 19 12"/></svg></button>
 
-    {% comment %} PJAX swaps the center column in place; this polite live region
+    {% comment %} PJAX swaps the content column in place; this polite live region
     announces the new page to screen readers, which otherwise hear nothing. {% endcomment %}
     <div id="pjax-live" class="visually-hidden" aria-live="polite" aria-atomic="true"></div>
 

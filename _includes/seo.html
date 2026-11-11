@@ -1,26 +1,28 @@
 {% assign seo_title = page.seo_title | default: site.title %}
 {% assign seo_description = page.description | default: site.description | markdownify | strip_html | strip_newlines | escape_once %}
 {% assign page_url = page.url | prepend: site.url | replace: "/index.html", "/" %}
+{% comment %} share card: regenerate with tools/make_og_card.py and bump ?v=
+when it changes, so LinkedIn and friends drop their cached copy {% endcomment %}
+{% assign og_image = site.url | append: "/images/og-card.png?v=6" %}
+{% capture og_image_alt %}{{ site.author.name }}, {{ site.author.jobtitle }}. {{ site.description }}{% endcapture %}
 
 <title>{{ seo_title }}</title>
 <meta name="description" content="{{ seo_description }}">
 <link rel="canonical" href="{{ page_url }}">
 
-<meta property="og:locale" content="en">
+<meta property="og:locale" content="en_US">
 <meta property="og:site_name" content="{{ site.title }}">
 <meta property="og:type" content="website">
 <meta property="og:title" content="{{ seo_title }}">
 <meta property="og:url" content="{{ page_url }}">
 <meta property="og:description" content="{{ seo_description }}">
-{% comment %} share card: regenerate with tools/make_og_card.py and bump ?v=
-when it changes, so LinkedIn and friends drop their cached copy {% endcomment %}
-<meta property="og:image" content="{{ site.url }}/images/og-card.png?v=5">
+<meta property="og:image" content="{{ og_image }}">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
-<meta property="og:image:alt" content="Pengyu Zhang, PhD Candidate in Computer Science. Machine learning that stays accurate as data drifts.">
-<meta name="twitter:image:alt" content="Pengyu Zhang, PhD Candidate in Computer Science. Machine learning that stays accurate as data drifts.">
+<meta property="og:image:alt" content="{{ og_image_alt }}">
+<meta name="twitter:image:alt" content="{{ og_image_alt }}">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="{{ site.url }}/images/og-card.png?v=5">
+<meta name="twitter:image" content="{{ og_image }}">
 
 {% if site.google_site_verification %}
 <meta name="google-site-verification" content="{{ site.google_site_verification }}">
@@ -34,10 +36,10 @@ when it changes, so LinkedIn and friends drop their cached copy {% endcomment %}
   "url": "{{ site.url }}/",
   "image": "{{ site.url }}/{{ site.author.avatar }}",
   "email": "mailto:{{ site.author.email }}",
-  "jobTitle": "PhD Candidate in Computer Science",
+  "jobTitle": "{{ site.author.jobtitle }}",
   "affiliation": {
     "@type": "CollegeOrUniversity",
-    "name": "University of Amsterdam"
+    "name": "{{ site.author.employer }}"
   },
   "alumniOf": {
     "@type": "CollegeOrUniversity",

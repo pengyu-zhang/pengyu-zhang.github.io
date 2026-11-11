@@ -1,108 +1,105 @@
 /* ==========================================================================
    DESIGN SYSTEM — tokens, base elements and every component of the
-   three-column card layout (profile | tabbed content | news). Single source
-   of truth for colors and geometry: change a token here and it propagates
-   everywhere. Dark mode overrides the same tokens under [data-theme="dark"].
+   two-column layout (profile | tabbed content). Single source of truth for
+   colors and geometry: change a token here and it propagates everywhere.
+   Dark mode overrides the same tokens under [data-theme="dark"].
    ========================================================================== */
 
 :root {
   /* native UI (scrollbars, form controls) follows the site theme, not the OS */
   color-scheme: light;
 
-  /* brand: periwinkle indigo (Radix "iris" family) — one hue, three
-     strengths; white on --accent stays ≥ 5.4:1. The same hex is hard-coded in
-     tools/og-card.html: change both, regenerate og-card.png, bump og:image ?v= */
-  --accent:         #5b5bd6;   /* primary: links, active tab, buttons */
-  --accent-hover:   #4d4dc4;   /* pressed/hover on solid fills */
-  --accent-soft:    #e3e3fd;   /* tinted pill / hover surfaces */
+  /* Colour roles. Text is ink on warm paper; solid controls (active tab, CV
+     button, back-to-top) are ink too; the accent is for links, venue labels
+     and the "New" badge only. Every text/background pair below is ≥ 4.5:1,
+     also under simulated protanopia, deuteranopia and tritanopia, and
+     nothing is told by hue alone: prose links are underlined (the underline
+     itself is ≥ 3:1), labels differ by typeface, the active tab by its fill.
+     The accent hex is also hard-coded in tools/og-card.html: change both,
+     regenerate og-card.png, bump og:image ?v= */
+  --accent:         #8a2c3c;
+  --accent-hover:   #73222f;
   --on-accent:      #ffffff;   /* text on solid accent fills */
+  --link-underline: #ad6b74;   /* the accent at 70% over the card, precomputed
+                                  (libsass does not compile color-mix) */
 
-  /* surfaces & text */
-  --bg-page:        #f5f7fb;
-  --card-bg:        #ffffff;
-  --card-border:    #eaeef5;
-  --tint-bg:        #f6f8fc;   /* item surfaces inside cards (news rows) */
-  --text:           #1f2937;
-  --muted:          #5d6b82;  /* ≥4.5:1 on every surface it appears on */
-  --border:         #e5eaf2;
+  --bg-page:        #f4f1ea;
+  --card-bg:        #fffdf8;
+  --card-border:    #d6cdb9;
+  --text:           #26231d;
+  --muted:          #6a6356;
+  --border:         #e7e0d2;   /* hairlines inside cards */
 
-  /* text selection */
+  --ink:            var(--text);     /* solid controls */
+  --on-ink:         var(--card-bg);
+  --hover-bg:       rgba(38, 35, 29, 0.08);
+
   --selection-bg:   var(--accent);
   --selection-text: #ffffff;
 
-  /* tinted callout surface (job-market banner) */
-  --callout-bg:     #f0f0fe;
-
-  /* prose-link underline: the accent at ~45% over the card, precomputed
-     (libsass does not compile color-mix) */
-  --link-underline: #b5b5ed;
-
-  /* translucent floating chrome (frosted tab bar). Falls back to --card-bg
-     where backdrop-filter is unsupported or the user reduces transparency.
-     --glass-edge is the bright top edge: light catching the material. */
-  --glass-bg:       rgba(255, 255, 255, 0.72);
-  --glass-edge:     rgba(255, 255, 255, 0.55);
+  /* translucent tab bar; falls back to --card-bg where backdrop-filter is
+     unsupported or the user reduces transparency */
+  --glass-bg:       rgba(255, 253, 248, 0.84);
 
   /* the ONLY resting shadow: floating chrome (tab bar, lightbox, floating
      buttons) reads as hovering above the content; resting cards and figures
      are border-only, so "has a shadow" = "floats" */
-  --shadow-float:   0 2px 6px rgba(16, 24, 40, 0.06), 0 10px 30px rgba(16, 24, 40, 0.10);
+  --shadow-float:   0 1px 2px rgba(60, 50, 30, 0.08), 0 6px 18px rgba(60, 50, 30, 0.08);
   /* transient hover glow on figure links (thumbnails, Beyond photos) */
   --shadow-hover:   0 0 10px rgba(0, 0, 0, 0.25);
 
-  /* geometry — every rounded corner on the site uses one of these three */
-  --radius-card:    20px;
-  --radius-inner:   12px;
-  --radius-pill:    999px;
+  /* geometry — every rounded corner on the site uses one of these two;
+     --label-col is the column in which dates and venues hang */
+  --radius-card:    6px;
+  --radius-inner:   4px;
+  --label-col:      8.6em;
 
-  /* motion — single source of truth for timing/easing (matches the color and
-     geometry token philosophy above). The spring is the one intentional
-     overshoot accent; everything else settles without bounce. */
+  /* type — text in IBM Plex Sans, the small labels (dates, venues, group
+     labels) in IBM Plex Mono */
+  --font-body:      "IBM Plex Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --font-label:     "IBM Plex Mono", ui-monospace, "SFMono-Regular", Consolas, monospace;
+
+  /* motion — single source of truth for timing/easing */
   --dur-fast:       0.15s;
   --dur-med:        0.2s;
   --ease:           ease;
-  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
 [data-theme="dark"] {
   color-scheme: dark;
 
-  --accent:         #9f9cf6;
-  --accent-hover:   #b1a9ff;
-  --accent-soft:    rgba(159, 156, 246, 0.16);
+  --accent:         #f09aa6;
+  --accent-hover:   #f4b1ba;
   --on-accent:      #0b0c0f;
+  --link-underline: #b1747b;
 
-  --bg-page:        #0f1115;
-  --card-bg:        #171a21;
-  --card-border:    #262b35;
-  --tint-bg:        #1d212a;
-  --text:           #d7dadf;
-  --muted:          #969ba3;
-  --border:         #2a2f37;
+  --bg-page:        #151410;
+  --card-bg:        #1d1b16;
+  --card-border:    #3d382d;
+  --text:           #e3ddd0;
+  --muted:          #a69e8d;
+  --border:         #2e2a22;
 
-  --selection-bg:   #9f9cf6;
+  --hover-bg:       rgba(227, 221, 208, 0.1);
+
+  --selection-bg:   #f09aa6;
   --selection-text: #0b0c0f;
 
-  --callout-bg:     rgba(159, 156, 246, 0.10);
-  --link-underline: #545581;
-
-  --glass-bg:       rgba(23, 26, 33, 0.72);
-  --glass-edge:     rgba(255, 255, 255, 0.07);
+  --glass-bg:       rgba(29, 27, 22, 0.84);
 
   --shadow-float:   0 8px 30px rgba(0, 0, 0, 0.45);
 }
 
-/* Higher contrast on request: the near-invisible card/tab borders get a
-   clearly-defined edge (skill section 14 — prefers-contrast). Token-only
-   override, same indigo/neutral palette, no new hue. */
+/* Higher contrast on request: the quiet card and hairline borders get a
+   clearly-defined edge. Token-only override, same palette. */
 @media (prefers-contrast: more) {
   :root {
-    --card-border: #a9b4c9;
-    --border:      #a9b4c9;
+    --card-border: #8f8672;
+    --border:      #8f8672;
   }
   [data-theme="dark"] {
-    --card-border: #545c69;
-    --border:      #545c69;
+    --card-border: #6b6452;
+    --border:      #6b6452;
   }
 }
 
@@ -117,104 +114,15 @@
   box-sizing: border-box;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
-  /* 100% honors the visitor's browser default (Dynamic Type). The whole type
-     scale is em-relative, so the layout scales with their chosen size instead
-     of being pinned to a fixed 16px. */
-  font-size: 100%;
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  margin: 0;
-  font-family: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-  line-height: 1.6;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-h1, h2, h3, h4, h5, h6 {
-  margin: 1em 0 0.5em;
-  line-height: 1.2;
-  font-weight: 700;
-  letter-spacing: -0.015em;
-}
-
-h1 { margin-top: 1.6em; font-size: 1.4em; }
-h2 { font-size: 1.2em; }
-h3 { font-size: 1em; }
-h4, h5, h6 { font-size: 0.85em; }
-
-p { margin-bottom: 0.5em; }
-
-ul {
-  padding-inline-start: 2em;
-  margin-block-start: 0.5em;
-}
-
-ul li,
-ol li { margin-bottom: 0.7em; }
-
-li ul,
-li ol { margin-top: 0.5em; }
-
-nav {
-  ul { margin: 0; padding: 0; }
-  li { list-style: none; }
-  a { text-decoration: none; }
-  ul li { margin-bottom: 0; }
-}
-
-img {
-  max-width: 100%;
-  height: auto;
-  vertical-align: middle;
-  border: 0;
-}
-
-button {
-  margin: 0;
-  font-size: 100%;
-  line-height: normal;
-  vertical-align: middle;
-  -webkit-appearance: button;
-  cursor: pointer;
-}
-
-/* screen-reader-only text (the PJAX live region) */
-.visually-hidden {
-  position: absolute !important;
-  clip: rect(1px, 1px, 1px, 1px);
-  height: 1px !important;
-  width: 1px !important;
-  border: 0 !important;
-  overflow: hidden;
-}
-
-/* content column: paragraph rhythm, and a lift on hovered figure links */
-.page__content {
-  p { margin: 0 0 0.5em; }
-
-  a img { transition: box-shadow var(--dur-fast) var(--ease); }
-  a:hover img { box-shadow: var(--shadow-hover); }
-}
-
-/* --------------------------------------------------------------------------
-   Core elements on the tokens above
-   -------------------------------------------------------------------------- */
-
-html,
-body {
-  background-color: var(--bg-page);
-}
-
-/* Keep the viewport width constant whether or not a vertical scrollbar is
+/* The root font size is left at the visitor's browser default, and the whole
+   type scale is em-relative, so the layout follows their chosen text size.
+   The viewport width stays constant whether or not a vertical scrollbar is
    present, so short pages (or the instant before images lay out) don't make
-   the whole layout jump sideways. Old browsers without scrollbar-gutter get
-   an always-visible scrollbar track instead. */
+   the layout jump sideways; browsers without scrollbar-gutter get an
+   always-visible scrollbar track instead. */
 html {
+  -webkit-text-size-adjust: 100%;
+  background-color: var(--bg-page);
   overflow-y: scroll;
 }
 
@@ -226,7 +134,39 @@ html {
 }
 
 body {
+  margin: 0;
+  font-family: var(--font-body);
+  line-height: 1.6;
   color: var(--text);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* every heading, paragraph and list on the site sets its own margins and
+   size in its component; these are the shared remainders */
+h1, h2, h3 { line-height: 1.2; }
+
+p { margin: 0 0 0.5em; }
+
+img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+
+button {
+  margin: 0;
+  cursor: pointer;
+}
+
+/* screen-reader-only text (the PJAX live region) */
+.visually-hidden {
+  position: absolute !important;
+  clip: rect(1px, 1px, 1px, 1px);
+  height: 1px !important;
+  width: 1px !important;
+  border: 0 !important;
+  overflow: hidden;
 }
 
 a {
@@ -245,19 +185,26 @@ a {
   }
 }
 
-/* conference badges (rendered from `` ``VENUE YEAR`` `` inline code) — a
-   TONAL chip (soft tint + accent text, same as the date pills): labels are
-   not actions, so the solid accent fill is reserved for the active tab, the
-   CV button and the News "New" badge */
-.highlighter-rouge {
-  padding: 0.14em 0.65em;
-  border-radius: var(--radius-pill);
-  background-color: var(--accent-soft);
-  color: var(--accent);
-  font-family: inherit;
-  font-size: 0.82em;
-  font-weight: 600;
+/* Small labels. Venues are written as `` ``VENUE YEAR`` `` (inline code; the
+   class comes from rouge), dates as *em* at the start of a list item. Both
+   are plain monospaced text labels: the typeface sets them apart, with no
+   background. */
+.highlighter-rouge,
+li > em:first-child {
+  font-family: var(--font-label);
+  font-size: 0.82em;   /* 13 px at the default size; smaller is hard to read in monospace */
+  font-style: normal;
+  font-weight: 500;
   white-space: nowrap;
+}
+
+.highlighter-rouge {
+  color: var(--accent);
+}
+
+li > em:first-child {
+  color: var(--muted);
+  font-variant-numeric: tabular-nums;
 }
 
 ::selection {
@@ -265,24 +212,36 @@ a {
   color: var(--selection-text);
 }
 
-::-moz-selection {
-  background: var(--selection-bg);
-  color: var(--selection-text);
-}
-
-/* Leading date labels in lists (News, Education) are written as *em* —
-   render them upright, the pill styling below does the emphasis. */
-li > em:first-child {
-  font-style: normal;
-}
-
-/* The template reset strips link outlines — restore a visible focus ring for
-   keyboard navigation (focus-visible: keyboard only, not mouse clicks). */
+/* A visible focus ring for keyboard navigation (focus-visible: keyboard
+   only, not mouse clicks). */
 a:focus-visible,
 button:focus-visible,
 summary:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* Skip link: the first focusable element on every page, so keyboard users
+   reach the tabs and the content without tabbing through the profile card.
+   Off-screen until it has focus, then a floating label in the top-left
+   corner (floating chrome, hence the shadow). */
+.skip-link {
+  position: fixed;
+  top: 0.75em;
+  left: 0.75em;
+  z-index: 50;
+  padding: 0.55em 1.1em;
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-inner);
+  background: var(--card-bg);
+  box-shadow: var(--shadow-float);
+  font-weight: 600;
+  text-decoration: none;
+  transform: translateY(-200%);
+
+  &:focus {
+    transform: none;
+  }
 }
 
 /* Press feedback: acknowledge the touch/click on pointer-DOWN, not on
@@ -299,10 +258,10 @@ summary:focus-visible {
 }
 
 /* Honor the OS "reduce motion" setting. Reduced motion does not mean no
-   feedback (skill section 14): keep the short opacity/color cross-fades that
-   aid comprehension, and make only movement — transforms, the elastic dot
-   overshoot, slides — instant. Opacity stays in the transition whitelist, so
-   transitionend still fires for the PJAX fade and the lightbox close. */
+   feedback: keep the short opacity/color cross-fades that aid comprehension,
+   and make only movement — transforms, slides — instant. Opacity stays in
+   the transition whitelist, so transitionend still fires for the PJAX fade
+   and the lightbox close. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -314,11 +273,11 @@ summary:focus-visible {
   }
 }
 
-/* Ease dark↔light switches instead of hard-cutting the whole page (skill
-   section 14: avoid abrupt brightness jumps). The toggle adds this class for
-   ~260ms around the data-theme flip, so the blanket transition never lingers
-   to slow down other interactions. Deliberately NOT gated on reduced motion:
-   softening a full-viewport brightness jump is itself the accessible option. */
+/* Ease dark↔light switches instead of hard-cutting the whole page. The toggle
+   adds this class for ~260ms around the data-theme flip, so the blanket
+   transition never lingers to slow down other interactions. Deliberately NOT
+   gated on reduced motion: softening a full-viewport brightness jump is
+   itself the accessible option. */
 .theme-switching,
 .theme-switching *,
 .theme-switching *::before,
@@ -329,34 +288,33 @@ summary:focus-visible {
 }
 
 /* ==========================================================================
-   THREE-COLUMN LAYOUT
-   Grid areas: left profile (sticky) | center tabbed content | right news
-   (sticky). Collapses to two columns (news drops under the content), then
-   to a single stacked column on phones.
+   LAYOUT — profile column (sticky) | content column. One stacked column on
+   narrow screens, where the tab bar is fixed to the top of the viewport and
+   the profile card shrinks to a compact header on every page but Home.
+   Home is a column of cards: About, News, Education, Awards & Service,
+   Skills.
    ========================================================================== */
 
 /* Column widths and breakpoints in rem/em, not px, so the layout scales
-   along with the user's text-size setting (skill 15, Dynamic Type). Values
-   are exact conversions at the 16px default: 18.75rem = 300px,
-   20rem = 320px, 87.5rem = 1400px — identical rendering unless the user
-   has raised their font size, in which case the columns now grow with it. */
+   along with the user's text-size setting (18.75rem = 300px and
+   78rem = 1248px at the 16px default). */
 #main.layout {
   display: grid;
-  grid-template-columns: 18.75rem minmax(0, 1fr) 20rem;
+  grid-template-columns: 18.75rem minmax(0, 1fr);
   grid-template-areas:
-    "left center right"
-    "left footer right";
+    "left center"
+    "left footer";
   gap: 1.5em;
   align-items: start;
-  max-width: 87.5rem;
+  max-width: 78rem;
   margin: 1.5em auto 0;
   padding: 0 1.25em;
 }
 
-/* Soft scroll-edge fade over the top of the viewport: center-column content
-   scrolling up dissolves into the page color as it approaches the floating
-   tab bar, instead of being sliced by a hard opaque strip. Sits below the tab
-   bar (z-index 25 < 30) so it only masks content, never the bar. */
+/* Soft scroll-edge fade over the top of the viewport: content scrolling up
+   dissolves into the page color as it approaches the floating tab bar,
+   instead of being sliced by a hard strip. Sits below the tab bar (z-index
+   25 < 30) so it only masks content, never the bar. */
 body::after {
   content: "";
   position: fixed;
@@ -369,8 +327,8 @@ body::after {
   pointer-events: none;
 }
 
-/* The three sticky elements (left card, tab bar, news card) all pin at
-   1.5em — exactly their initial offset — so they never shift on scroll. */
+/* The two sticky elements (profile card, tab bar) pin at 1.5em — exactly
+   their initial offset — so they never shift on scroll. */
 .layout__left {
   grid-area: left;
   position: sticky;
@@ -382,58 +340,37 @@ body::after {
   min-width: 0;
 }
 
-/* PJAX swap: quick fade of the center content while the next page loads */
+/* The content column is a size container: the tile grid inside it follows
+   the width the column actually gets, not the viewport. Also here: the quick
+   PJAX fade while the next page loads, and a lift on hovered figure links. */
 .page__content {
+  container-type: inline-size;
   transition: opacity var(--dur-fast) var(--ease);
 
   &.is-loading {
     opacity: 0;
   }
+
+  a img { transition: box-shadow var(--dur-fast) var(--ease); }
+  a:hover img { box-shadow: var(--shadow-hover); }
 }
 
-.layout__right {
-  grid-area: right;
-  position: sticky;
-  top: 1.5em;
-}
-
-/* 80em = 1280px at the default font size; em media queries track the
-   browser's base font size, so larger text collapses columns sooner. */
-@media (max-width: 80em) {
+/* 72em = 1152px: a slightly narrower profile column */
+@media (max-width: 72em) {
   #main.layout {
     grid-template-columns: 17.5rem minmax(0, 1fr);
-    grid-template-areas:
-      "left center"
-      "left right"
-      "left footer";
-  }
-
-  .layout__right {
-    position: static;
   }
 }
 
-/* In the two-column layout the news card sits under the content at full
-   width; lay its rows out as a two-column grid instead of one long strip. */
-@media (min-width: 58.01em) and (max-width: 80em) {
-  .news-card ul {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 0.7em;
-  }
-
-  .news-card li { margin: 0; }
-}
-
-/* 58em ≈ 925px at the default font size */
+/* 58em ≈ 925px at the default font size: one column */
 @media (max-width: 58em) {
   #main.layout {
     grid-template-columns: minmax(0, 1fr);
     grid-template-areas:
       "left"
       "center"
-      "right"
       "footer";
+    margin-top: 5em; /* room for the fixed tab bar */
   }
 
   .layout__left {
@@ -442,7 +379,7 @@ body::after {
 }
 
 /* ==========================================================================
-   CARDS — every module is a white rounded rectangle
+   CARDS — every module is a bordered rounded rectangle
    ========================================================================== */
 
 .card {
@@ -453,55 +390,40 @@ body::after {
   padding: 1.6em var(--card-pad-x);
 }
 
+/* A content card is a size container: what is inside it (split lists,
+   skills rows, hanging labels) lays itself out from the card's own width,
+   which differs between Home's narrower column and the other pages. */
 .content-card {
+  container-type: inline-size;
   margin-bottom: 1.5em;
-}
 
-/* Section titles: small-caps label with an accent dot and a hairline that
-   fills the rest of the row. Section headings are h2 in the markdown (the
-   page's single h1 is the name in the profile card). */
-.page__content h2,
-.news-card__title {
-  display: flex;
-  align-items: center;
-  gap: 0.6em;
-  margin: 0 0 1.1em;
-  padding: 0;
-  border-bottom: 0;
-  font-size: 0.95em;
-  font-weight: 700;
-  letter-spacing: 0.09em;
-  text-transform: uppercase;
-  color: var(--accent);
+  /* running text keeps a readable line length in the wide column */
+  > p {
+    max-width: 50em;
+    margin: 0 0 0.9em;
 
-  &::before {
-    content: "";
-    display: block;
-    flex: none;
-    width: 0.55em;
-    height: 0.55em;
-    margin: 0;
-    border-radius: var(--radius-pill);
-    background: var(--accent);
-    position: static;
-  }
-
-  &::after {
-    content: "";
-    flex: 1;
-    height: 1px;
-    background: var(--border);
+    &:last-child { margin-bottom: 0; }
   }
 }
 
-/* small uppercase sub-labels inside a card (Awards / Service, skills rows) */
+/* Section titles are h2 in the markdown (the page's single h1 is the name in
+   the profile card): a plain heading, a little larger than the text. */
+.page__content h2 {
+  margin: 0 0 0.9em;
+  font-size: 1.2em;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+/* small sub-labels inside a card (Awards / Service, skills rows) */
 .page__content h3.group-label,
 .skills-rows h3 {
   margin: 1.4em 0 0.55em;
-  font-size: 0.8em;
-  font-weight: 600;
-  text-transform: uppercase;
+  font-family: var(--font-label);
+  font-size: 0.75em;
+  font-weight: 500;
   letter-spacing: 0.05em;
+  text-transform: uppercase;
   color: var(--muted);
 }
 
@@ -510,8 +432,8 @@ body::after {
 }
 
 /* ==========================================================================
-   TAB BAR — pill navigation in a rounded card, sticky at the top of the
-   content column. Active tab = solid accent pill.
+   TAB BAR — segmented navigation, sticky at the top of the content column.
+   Active tab = solid ink.
    ========================================================================== */
 
 .tabbar {
@@ -522,18 +444,17 @@ body::after {
   align-items: center;
   gap: 0.4em;
   margin-bottom: 1.5em;
-  padding: 0.45em 0.6em;
-  background: transparent;
+  padding: 0.35em;
   border: 1px solid var(--card-border);
-  border-radius: var(--radius-pill); /* capsule, concentric with the pill indicator inside */
+  border-radius: var(--radius-card);
   box-shadow: var(--shadow-float);
 
   /* Frosted-glass material: content scrolls visibly under it. It lives on a
      pseudo-element, NOT on the bar itself: backdrop-filter turns its element
      into the containing block for fixed descendants, which would pin the
      phone-mode floating theme toggle (below) to the bar instead of the
-     viewport. The sticky bar is a stacking context, so z-index -1 keeps the
-     glass under the tabs but above the page. */
+     viewport. The bar is a stacking context, so z-index -1 keeps the glass
+     under the tabs but above the page. */
   &::before {
     content: "";
     position: absolute;
@@ -543,13 +464,11 @@ body::after {
     background: var(--glass-bg);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     backdrop-filter: blur(20px) saturate(180%);
-    /* inset top highlight: light catching the material's upper edge (skill 12) */
-    box-shadow: inset 0 1px 0 var(--glass-edge);
   }
 }
 
 /* Where backdrop-filter is unsupported, or the user asked the OS for reduced
-   transparency, fall back to the original opaque bar. */
+   transparency, fall back to an opaque bar. */
 @supports not ((backdrop-filter: blur(1px)) or (-webkit-backdrop-filter: blur(1px))) {
   .tabbar::before { background: var(--card-bg); }
 }
@@ -571,36 +490,23 @@ body::after {
   margin: 0;
   padding: 0;
   list-style: none;
-
-  li {
-    margin: 0;
-    padding: 0;
-  }
 }
 
-/* Sliding active pill (skill 7/8 — spatial consistency): one shared element
-   that site.js glides from the old tab to the new one, so selection reads as
-   a physical object moving, not two unrelated repaints. Position/size are
-   measured (FLIP) and set inline; this rule supplies the look and the glide.
-   Same accent + pill-radius tokens as the static pill it replaces. Reduced
-   motion excludes transform/width from the transition whitelist, so the pill
-   snaps there — the right fallback. Without JS the element never exists and
-   .no-js below restores the static pill. */
+/* Sliding active block: one shared element that site.js glides from the old
+   tab to the new one, so selection reads as a physical object moving, not
+   two unrelated repaints. Position/size are measured (FLIP) and set inline;
+   this rule supplies the look and the glide. Reduced motion excludes
+   transform/width from the transition whitelist, so the block snaps there —
+   the right fallback. Without JS the element never exists and .no-js below
+   restores the static fill. */
 .tabbar__indicator {
   position: absolute;
   top: 0;
   left: 0;
-  border-radius: var(--radius-pill);
-  background: var(--accent);
-  transition: transform var(--dur-med) var(--ease), width var(--dur-med) var(--ease), height var(--dur-med) var(--ease), background var(--dur-fast) var(--ease);
+  border-radius: var(--radius-inner);
+  background: var(--ink);
+  transition: transform var(--dur-med) var(--ease), width var(--dur-med) var(--ease), height var(--dur-med) var(--ease);
   will-change: transform;
-}
-
-/* hover-darken carries over from the static pill (clicking the active tab
-   scrolls to top, so hover feedback on it stays meaningful); older browsers
-   without :has() just lose the darken */
-.tabbar__tabs:has(.tabbar__tab.is-active:hover) .tabbar__indicator {
-  background: var(--accent-hover);
 }
 
 .tabbar__tab {
@@ -608,45 +514,53 @@ body::after {
   z-index: 1; /* label text rides above the sliding indicator */
   display: block;
   padding: 0.5em 1.2em;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-inner);
   font-size: 0.98em;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--text);
   text-decoration: none;
-  /* label color timing is asymmetric around the pill's glide: this base rule
-     governs the OUTGOING tab (class removed), whose label starts darkening
-     the moment the pill leaves — no delay. The .is-active rule below governs
-     the INCOMING tab. Keeps white text from sitting on the bare card, and
-     dark text from sitting under the arriving pill. */
+  /* label color timing is asymmetric around the block's glide: this base
+     rule governs the OUTGOING tab (class removed), whose label starts
+     darkening the moment the block leaves — no delay. The .is-active rule
+     below governs the INCOMING tab. Keeps light text from sitting on the
+     bare bar, and dark text from sitting under the arriving block. */
   transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 
   &:hover {
-    background: var(--accent-soft);
-    color: var(--accent);
-    text-decoration: none;
+    background: var(--hover-bg);
   }
 
   &.is-active {
     /* background is painted by .tabbar__indicator (JS); only the text state
        lives on the tab itself */
-    color: var(--on-accent);
-    /* INCOMING: wait out the glide's first leg, then finish turning white
-       exactly as the pill lands (delay + duration = --dur-med, the glide) */
+    color: var(--on-ink);
+    /* INCOMING: wait out the glide's first leg, then finish turning light
+       exactly as the block lands (delay + duration = --dur-med, the glide) */
     transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease) calc(var(--dur-med) - var(--dur-fast));
 
     &:hover {
       background: transparent;
-      color: var(--on-accent);
     }
   }
 }
 
+/* One column: the bar leaves the flow and stays at the top of the viewport,
+   so the tabs are the first thing on every page and remain reachable while
+   scrolling (in the flow it would start below the profile card). */
+@media (max-width: 58em) {
+  .tabbar {
+    position: fixed;
+    top: 0.75em;
+    left: 1.25em;
+    right: 1.25em;
+    margin: 0;
+  }
+}
+
 /* Phones (30em = 480px): four tabs plus the toggle never fit one row at
-   0.98em, and the wrapped bar left an orphan tab beside a floating toggle.
-   Tabs shrink with the viewport between two limits (nowrap + hidden
+   0.98em. Tabs shrink with the viewport between two limits (nowrap + hidden
    horizontal scroll as the safety net on 320px screens), and the toggle
-   leaves the bar for a floating glass button in the bottom-right corner
-   (bottom-left would sit on the profile card's link list at scroll 0); the
+   leaves the bar for a floating glass button in the bottom-right corner; the
    back-to-top button stacks above it (same size, one gap apart). */
 @media (max-width: 30em) {
   #main.layout { padding: 0 0.85em; }
@@ -655,7 +569,11 @@ body::after {
     padding: 1.3em var(--card-pad-x);
   }
 
-  .tabbar { padding: 0.4em 0.45em; }
+  .tabbar {
+    left: 0.85em;
+    right: 0.85em;
+    padding: 0.3em;
+  }
 
   .tabbar__tabs {
     flex-wrap: nowrap;
@@ -686,17 +604,14 @@ body::after {
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     backdrop-filter: blur(20px) saturate(180%);
     border: 1px solid var(--card-border);
-    box-shadow: inset 0 1px 0 var(--glass-edge), var(--shadow-float);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-float);
   }
 }
 
-/* no-JS fallback: the indicator is JS-created, so restore the static pill */
+/* no-JS fallback: the indicator is JS-created, so restore the static fill */
 .no-js .tabbar__tab.is-active {
-  background: var(--accent);
-
-  &:hover {
-    background: var(--accent-hover);
-  }
+  background: var(--ink);
 }
 
 /* theme toggle lives at the right end of the tab bar */
@@ -710,21 +625,19 @@ body::after {
   padding: 0.3em 0.45em;
   background: transparent;
   border: 0;
-  border-radius: var(--radius-pill);
+  border-radius: var(--radius-inner);
   font-size: 1.1em;
   line-height: 1;
-  cursor: pointer;
   color: inherit;
   transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 
   &:hover {
-    background: var(--accent-soft);
+    background: var(--hover-bg);
   }
 }
 
-/* moon/sun as inline SVGs on currentColor (emoji render inconsistently across
-   platforms and fight the single-hue system). CSS picks the icon: moon in
-   light mode ("switch to dark"), sun in dark mode. */
+/* moon/sun as inline SVGs on currentColor. CSS picks the icon: moon in light
+   mode ("switch to dark"), sun in dark mode. */
 .theme-toggle__icon {
   display: block;
   width: 1.05em;
@@ -739,7 +652,7 @@ body::after {
 }
 
 /* ==========================================================================
-   LEFT COLUMN — profile card
+   PROFILE CARD — photo, name, role, CV button, contact links
    ========================================================================== */
 
 .profile-card {
@@ -748,26 +661,23 @@ body::after {
   overflow: hidden; /* the card's own radius clips the bleeding avatar */
 }
 
-/* media-card style: the photo runs edge to edge across the top of the card
-   (cancelling the card's horizontal padding) and the card corners clip it,
-   instead of a framed picture floating inside the frame */
+/* the photo runs edge to edge across the top of the card (cancelling the
+   card's horizontal padding) and the card corners clip it */
 .profile-card__avatar {
   display: block;
   width: calc(100% + 2 * var(--card-pad-x));
   max-width: none;
   margin: 0 calc(-1 * var(--card-pad-x));
-  border-radius: 0;
 }
 
-/* name lockup: Latin name is the page's largest text (h1); the Chinese name
-   sits on its own line beneath it — side by side they no longer fit the
-   column at this size */
+/* name lockup: the Latin name is the page's largest text (h1); the Chinese
+   name sits on its own line beneath it */
 .profile-card__name {
   margin: 0.8em 0 0.35em;
   font-size: 1.6em;
+  font-weight: 600;
   line-height: 1.15;
-  /* the largest text on the page — tighten tracking as size grows (skill 15) */
-  letter-spacing: -0.02em;
+  letter-spacing: -0.01em; /* tighten tracking as size grows */
 }
 
 .profile-card__name-zh {
@@ -784,9 +694,11 @@ body::after {
   font-size: 0.95em;
   line-height: 1.5;
   color: var(--muted);
+
+  span { display: block; }
 }
 
-/* inline SVG icons (profile card): sized in em, riding the text baseline */
+/* inline SVG icons: sized in em, riding the text baseline */
 .pc-icon {
   display: inline-block;
   flex: none;
@@ -796,27 +708,24 @@ body::after {
 }
 
 .profile-card__location {
-  margin: 0 0 0.6em;
+  margin: 0 0 0.8em;
   font-size: 0.88em;
   color: var(--muted);
-
-  .pc-icon { color: var(--accent); }
 }
 
 .profile-card__cta {
   display: block;
-  padding: 0.65em 1em;
-  border-radius: var(--radius-pill);
-  background: var(--accent);
-  color: var(--on-accent);
+  padding: 0.6em 1em;
+  border-radius: var(--radius-inner);
+  background: var(--ink);
+  color: var(--on-ink);
   font-weight: 600;
   text-decoration: none;
-  transition: background var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
+  transition: background var(--dur-fast) var(--ease), color var(--dur-fast) var(--ease), transform var(--dur-fast) var(--ease);
 
   &:hover {
-    background: var(--accent-hover);
+    background: var(--accent);
     color: var(--on-accent);
-    text-decoration: none;
   }
 }
 
@@ -829,13 +738,11 @@ body::after {
 
   li {
     margin: 0 0 0.1em;
-    padding: 0;
 
     &:last-child { margin-bottom: 0; }
   }
 
-  /* borderless icon + text links — lighter than filled pills, the email stays
-     readable; the whole row turns indigo on hover */
+  /* icon + text links; the whole row turns to the accent on hover */
   a {
     display: flex;
     align-items: center;
@@ -856,60 +763,150 @@ body::after {
 
     &:hover {
       color: var(--accent);
-      text-decoration: none;
 
       .pc-icon { color: var(--accent); }
     }
   }
 }
 
+/* One column, every page but Home: a compact header instead of the full
+   card (small photo beside name and role; CV button and icon-only links in
+   one row), so the page's own content starts on the first screen.
+   Home keeps the full card: there it is the introduction. */
+@media (max-width: 58em) {
+  :root:not([data-page="home"]) {
+    .profile-card {
+      display: grid;
+      grid-template-columns: 4.5em minmax(0, 1fr);
+      column-gap: 1em;
+      align-items: center;
+      padding: 1em var(--card-pad-x);
+      text-align: left;
+    }
+
+    .profile-card__avatar {
+      grid-row: 1 / span 2;
+      width: 4.5em;
+      height: 4.5em;
+      margin: 0;
+      border-radius: var(--radius-inner);
+      object-fit: cover;
+    }
+
+    .profile-card__name {
+      align-self: end;
+      margin: 0;
+      font-size: 1.25em;
+    }
+
+    .profile-card__name-zh {
+      display: inline;
+      margin: 0 0 0 0.4em;
+      font-size: 0.7em;
+    }
+
+    .profile-card__role {
+      align-self: start;
+      margin: 0.2em 0 0;
+      font-size: 0.82em;
+
+      span { display: inline; }
+      span + span::before { content: "\00B7\00A0"; }
+    }
+
+    .profile-card__location { display: none; }
+
+    .profile-card__actions {
+      grid-column: 1 / -1;
+      display: flex;
+      align-items: center;
+      gap: 0.6em;
+      margin-top: 0.8em;
+      padding-top: 0.8em;
+      border-top: 1px solid var(--border);
+    }
+
+    .profile-card__cta {
+      flex: none;
+      padding: 0.4em 1em;
+      font-size: 0.9em;
+    }
+
+    .profile-card__links {
+      display: flex;
+      flex: 1;
+      justify-content: flex-end;
+      margin: 0;
+      padding: 0;
+      border: 0;
+
+      li { margin: 0; }
+      a { padding: 0.45em; }
+
+      /* icons only; the labels stay for screen readers */
+      .pc-label {
+        position: absolute;
+        clip: rect(1px, 1px, 1px, 1px);
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+      }
+    }
+  }
+}
+
 /* ==========================================================================
-   RIGHT COLUMN — news card. Each item is a tinted rounded row with the
-   leading date rendered as a small pill; the newest item gets an accent
-   "New" badge; older items fold under a More/Less <details>.
+   NEWS (second card on Home) — one item per line, the date in the label
+   column like the Education dates. The newest item carries a "New" badge
+   while it is recent (site.js sets .is-new); older items fold under a
+   More/Less <details>.
    ========================================================================== */
 
 .news-card {
-  font-size: 0.95em;
-
+  /* the smaller size is on the lists, not the card, so the card's em-based
+     padding and its heading match the other cards */
   ul {
     margin: 0;
     padding: 0;
     list-style: none;
+    font-size: 0.95em;
   }
 
   li {
-    position: relative;
-    margin: 0 0 0.7em;
-    padding: 0.75em 0.9em;
-    background: var(--tint-bg);
-    border-radius: var(--radius-inner);
-    line-height: 1.55;
+    margin: 0 0 0.55em;
+    line-height: 1.5;
 
+    /* narrow card: the date on its own line above the item */
     > em:first-child {
-      display: inline-block;
-      margin-bottom: 0.3em;
-      padding: 0.1em 0.65em;
-      border-radius: var(--radius-pill);
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 0.85em;
-      font-weight: 600;
+      display: block;
+      margin-bottom: 0.1em;
+    }
+
+    &.is-new > em:first-child::after {
+      content: "New";
+      margin-left: 0.7em;
+      padding: 0.08em 0.5em;
+      border-radius: var(--radius-inner);
+      background: var(--accent);
+      color: var(--on-accent);
+      font-size: 0.9em;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
     }
   }
+}
 
-  /* newest item — "New" badge floats in the top-right corner; only the
-     first line wraps around it, the rest of the text uses the full width */
-  > ul:first-of-type > li:first-child::before {
-    content: "New";
-    float: right;
-    margin: 0.1em 0 0.25em 0.55em;
-    padding: 0.12em 0.6em;
-    border-radius: var(--radius-pill);
-    background: var(--accent);
-    color: var(--on-accent);
-    font-size: 0.74em;
-    font-weight: 600;
+@container (min-width: 30em) {
+  .news-card li {
+    position: relative;
+    padding-left: calc(var(--label-col) / 0.95); /* the list is set at 0.95em */
+
+    > em:first-child {
+      position: absolute;
+      left: 0;
+      top: 0.18em;
+      margin: 0;
+    }
   }
 }
 
@@ -939,7 +936,7 @@ body::after {
   .less-label { display: none; }
 
   &[open] {
-    summary { margin-bottom: 0.6em; }
+    summary { margin-bottom: 0.8em; }
     summary::after { transform: rotate(180deg); }
     .more-label { display: none; }
     .less-label { display: inline; }
@@ -947,31 +944,17 @@ body::after {
 }
 
 /* ==========================================================================
-   JOB-SEARCH CALLOUT (About card) — tinted indigo highlight
-   ========================================================================== */
-
-.job-callout {
-  margin: 1.1em 0;
-  padding: 0.75em 1em;
-  border-left: 3px solid var(--accent);
-  border-radius: var(--radius-inner);
-  background: var(--callout-bg);
-
-  p { margin: 0; }
-}
-
-/* ==========================================================================
    EXPERIENCE TILES — media-top project tiles in a two-column grid. Each
-   tile: figure (lightbox entry point), title line with the venue pill,
-   muted tag line, one short problem + finding paragraph, link row. `.content-card--tiles` on the Experience
-   card (experience.md) turns the card into the grid; the h2 spans both
-   columns and the grid gap replaces its bottom margin.
+   tile: figure (lightbox entry point), title line with the venue label,
+   muted tag line, one paragraph, link row. `.content-card--tiles` on the
+   Experience card (experience.md) turns the card into the grid; the h2 spans
+   both columns and the grid gap replaces its bottom margin.
    ========================================================================== */
 
 .content-card--tiles {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.6em 1.5em;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 1.8em 1.6em;
   align-items: start;
 
   > h2 {
@@ -980,16 +963,12 @@ body::after {
   }
 }
 
-/* one column below 40em (640px): two tiles would leave ~22 characters/line */
-@media (max-width: 40em) {
-  .content-card--tiles { grid-template-columns: 1fr; }
+/* two tiles side by side once each gets a readable line length */
+@container (min-width: 38em) {
+  .content-card--tiles { grid-template-columns: repeat(2, minmax(0, 1fr)); }
 }
 
 .paper-box {
-  .paper-box-image {
-    width: 100%;
-  }
-
   .paper-box-image img {
     display: block;
     width: 100%;
@@ -1010,22 +989,22 @@ body::after {
       line-height: 1.55;
     }
 
-    /* title line: name + venue pill (same inline-code pill as Publications) */
+    /* title line: name + venue label */
     p.pb-title {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       flex-wrap: wrap;
-      gap: 0.55em;
+      gap: 0.6em;
       margin: 0 0 0.15em;
       font-size: 1.08em;
       line-height: 1.3;
 
       strong {
         font-weight: 700;
-        letter-spacing: -0.01em; /* the tile's largest text: tighten a touch (skill 15) */
+        letter-spacing: -0.01em;
       }
 
-      .highlighter-rouge { font-size: 0.72em; }
+      .highlighter-rouge { font-size: 0.76em; }
     }
 
     p.pb-tag {
@@ -1050,10 +1029,7 @@ body::after {
 
 .lightbox {
   position: fixed;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  left: 0;
+  inset: 0;
   z-index: 100;
   display: flex;
   align-items: center;
@@ -1076,9 +1052,9 @@ body::after {
     padding: 0.75em;
     border-radius: var(--radius-inner);
     background: #ffffff; /* paper figures assume a light background */
-    /* the image materializes (grows in slightly) rather than just blinking
-       on; reduced motion drops the scale (transform is excluded there) and
-       keeps the fade */
+    /* the image grows in slightly rather than just blinking on; reduced
+       motion drops the scale (transform is excluded there) and keeps the
+       fade */
     transform: scale(0.96);
     transition: transform 0.18s var(--ease);
   }
@@ -1139,27 +1115,25 @@ body::after {
   }
 }
 
-/* Two short groups side by side (Awards | Service): four one-line rows in
-   a single column left the card mostly empty; a split fills the width and
-   halves the height. Rows inside it sit a little tighter than the
-   multi-line Publications entries. */
+/* Two short groups side by side (Awards | Service) when there is room */
 .split {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: minmax(0, 1fr);
   gap: 0.5em 2em;
   align-items: start;
 
   ul.timeline li { padding-bottom: 0.6em; }
 }
 
-@media (max-width: 40em) {
-  .split { grid-template-columns: 1fr; }
+@container (min-width: 30em) {
+  .split { grid-template-columns: 1fr 1fr; }
 }
 
 /* ==========================================================================
-   TIMELINE LISTS (Education & Awards, Publications) — plain rows; the
-   leading date pill (or venue badge) is the row marker, so there is no
-   bullet in front of it.
+   TIMELINE LISTS (Education, Awards, Service, Publications) — rows without
+   bullets; each starts with its label (a date or a venue). In the full-width
+   lists (Education, Publications) the labels hang in a column of their own
+   when there is room, so dates and venues line up down the left edge.
    ========================================================================== */
 
 .page__content ul.timeline {
@@ -1168,46 +1142,54 @@ body::after {
   list-style: none;
 
   li {
-    position: relative;
-    margin: 0;
     padding: 0 0 1em;
 
     &:last-child {
       padding-bottom: 0.2em;
     }
 
-    /* leading date — same soft pill as the News dates */
-    > em:first-child {
-      display: inline-block;
-      margin-right: 0.15em;
-      padding: 0.1em 0.65em;
-      border-radius: var(--radius-pill);
-      background: var(--accent-soft);
-      color: var(--accent);
-      font-size: 0.85em;
-      font-weight: 600;
+    > em:first-child { margin-right: 0.5em; }
+    > p { margin: 0; }
+  }
+
+  .highlighter-rouge { margin-right: 0.35em; }
+}
+
+@container (min-width: 30em) {
+  .content-card > ul.timeline {
+    > li:has(> em:first-child),
+    > li > p:has(> .highlighter-rouge:first-child) {
+      position: relative;
+      padding-left: var(--label-col);
+    }
+
+    > li > em:first-child,
+    > li > p > .highlighter-rouge:first-child {
+      position: absolute;
+      left: 0;
+      top: 0.22em;
+      margin: 0;
     }
   }
 }
 
 /* ==========================================================================
-   SKILLS — typographic rows: label column plus interpunct-separated plain
-   text, hierarchy by weight (core items bold), no pills. The pill chips
-   below survive only for the About-card interest tags (.intro-chips).
+   SKILLS — typographic rows: label column plus comma-separated plain text
    ========================================================================== */
 
 .skills-rows {
-  /* one grid for all rows (h3, p, h3, p …) so the label column is shared
-     and hugs the widest label */
+  /* one grid for all rows (h3, p, h3, p …): labels stacked above their
+     items by default, a shared label column when there is room */
   display: grid;
-  grid-template-columns: max-content 1fr;
-  gap: 0.9em 1.5em;
+  grid-template-columns: 1fr;
+  gap: 0.2em 1.5em;
   align-items: baseline;
-  margin-top: 0.5em;
 
   h3 {
     margin: 0;
   }
+
+  h3 + p + h3 { margin-top: 1em; }
 
   p {
     margin: 0;
@@ -1215,64 +1197,26 @@ body::after {
     line-height: 1.9;
   }
 
-  b {
-    font-weight: 650; /* variable Inter; non-variable fallbacks snap to 700 */
-  }
-
-  /* lines break only at separators, never inside an item (same rule as the
-     paper-links labels) */
+  /* lines break only at separators, never inside an item */
   .item {
     white-space: nowrap;
   }
 
   /* the comma glues to the item before it; the markup's whitespace after it
-     is the only break opportunity (a comma may end a line, an interpunct
-     could not without looking stranded) */
+     is the only break opportunity */
   .sep {
     color: var(--muted);
     margin: 0 0.1em 0 0;
   }
 }
 
-/* phones: label stacks above its items (48em = 768px at default font size);
-   the row gap shrinks to the label-to-items distance and the group spacing
-   moves onto every label after the first */
-@media (max-width: 48em) {
+@container (min-width: 26em) {
   .skills-rows {
-    grid-template-columns: 1fr;
-    row-gap: 0.2em;
+    grid-template-columns: max-content 1fr;
+    row-gap: 0.9em;
 
-    h3 + p + h3 { margin-top: 1em; }
+    h3 + p + h3 { margin-top: 0; }
   }
-}
-
-.skill-chips {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.45em;
-
-  /* borderless neutral pills — quieter than the indigo date chips */
-  li {
-    margin: 0;
-    padding: 0.28em 0.75em;
-    border-radius: var(--radius-pill);
-    background: var(--tint-bg);
-    color: var(--text);
-    font-size: 0.82em;
-    font-weight: 500;
-    line-height: 1.35;
-  }
-}
-
-/* research-interest chips inside the job callout: card-bg pills so they stand
-   out on the tinted callout surface (--tint-bg would blend into it) */
-.intro-chips {
-  margin: 0.7em 0 0.2em;
-
-  li { background: var(--card-bg); }
 }
 
 /* ==========================================================================
@@ -1293,14 +1237,12 @@ body::after {
     cursor: zoom-in;
   }
 
+  /* width: 100% + the base height: auto + the width/height attributes
+     reserve the aspect ratio before the file loads — no layout jump */
   img {
     display: block;
     width: 100%;
-    height: auto;   /* with the width/height attrs this reserves the aspect
-                       ratio before the file loads — no layout jump */
-    margin: 0;
     border-radius: var(--radius-inner);
-    break-inside: avoid;
   }
 }
 
@@ -1325,24 +1267,33 @@ body::after {
   height: 2.6em;
   padding: 0;
   border: 0;
-  border-radius: var(--radius-pill);
-  background: var(--accent);
-  color: var(--on-accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--radius-card);
+  background: var(--ink);
+  color: var(--on-ink);
   font-size: 1.1em;
-  line-height: 1;
-  cursor: pointer;
   box-shadow: var(--shadow-float);  /* floating chrome, same as the tab bar */
   opacity: 0;
   visibility: hidden;
   transform: translateY(8px);
-  transition: opacity var(--dur-med) var(--ease), transform var(--dur-med) var(--ease), visibility var(--dur-med) var(--ease), background var(--dur-med) var(--ease);
+  transition: opacity var(--dur-med) var(--ease), transform var(--dur-med) var(--ease), visibility var(--dur-med) var(--ease), background var(--dur-med) var(--ease), color var(--dur-med) var(--ease);
+}
+/* the arrow is an inline SVG on currentColor, like the other icons */
+.back-to-top__icon {
+  width: 1.15em;
+  height: 1.15em;
 }
 .back-to-top.is-visible {
   opacity: 1;
   visibility: visible;
   transform: translateY(0);
 }
-.back-to-top:hover { background: var(--accent-hover); }
+.back-to-top:hover {
+  background: var(--accent);
+  color: var(--on-accent);
+}
 /* Dedicated press: the shared :active rule can't reach this button because its
    own translateY on .is-visible outranks it, so keep the translateY and add
    the scale here (this rule comes after .is-visible, so it wins). */

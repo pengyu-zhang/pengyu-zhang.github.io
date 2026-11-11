@@ -11,7 +11,7 @@ Science at the University of Amsterdam.
   (classic Pages build, `github-pages` gem).
 - Started from the [acad-homepage](https://github.com/RayeRen/acad-homepage.github.io)
   template by Yi Ren, since rebuilt: card-based four-tab layout with PJAX
-  navigation, light/dark theme, self-hosted Inter font, inline SVG icons,
+  navigation, light/dark theme, self-hosted IBM Plex fonts, inline SVG icons,
   vanilla-JS lightbox. No jQuery, no icon fonts.
 
 ## Local preview
@@ -27,11 +27,15 @@ restart; everything else reloads on save.
 ## Layout
 
 - `_pages/` the four pages (Home, Experience, Publications, Beyond)
-- `_includes/` their content fragments (about, education, awards, skills,
-  experience tiles, publications, news) plus the layout partials
-- `_sass/` design tokens and components (`_theme.scss`), Inter faces (`_fonts.scss`)
+- `_data/publications.yml` every paper, once: the Publications list, its
+  structured data and the link rows on Experience are generated from it
+- `_includes/` the content fragments (about, education, awards, skills,
+  experience tiles, news) plus the layout partials
+- `_sass/` design tokens and components (`_theme.scss`), font faces (`_fonts.scss`)
 - `assets/` stylesheet entry, fonts, and `js/site.js`
-- `images/`, `pdf/` figures, photos, papers, and CV
+- `images/` figures and photos; `sm/` holds the small copies the pages show,
+  `hd/` the large copies the lightbox opens
+- `pdf/` papers, slides, and CV
 
 ## License
 
