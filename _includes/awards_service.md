@@ -11,7 +11,7 @@
 <div markdown="1">
 <h3 class="group-label">Service</h3>
 
-- Reviewer / sub-reviewer: CIKM, ECAI, ESWC, PKDD.
+- Reviewer / sub-reviewer: CIKM, ECAI, ESWC, ECML PKDD.
 - *2020 - 2021* Teaching assistant, Data Engineering (BJUT).
 {: .timeline}
 </div>
