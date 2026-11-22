@@ -319,7 +319,9 @@ summary:focus-visible {
    the transition whitelist, so transitionend still fires for the PJAX fade;
    display and overlay stay too (they only matter where an element asks for
    them with transition-behavior: the lightbox, which needs them to stay on
-   screen while it fades out). */
+   screen while it fades out). The site has no keyframe animations, so there
+   is nothing to say about `animation` here; a future one handles reduced
+   motion in its own rule. */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
@@ -327,10 +329,17 @@ summary:focus-visible {
   ::backdrop {
     transition-property: opacity, color, background, background-color, border-color, box-shadow, display, overlay !important;
     transition-duration: 0.15s !important;
-    animation-duration: 0.001ms !important;
-    animation-iteration-count: 1 !important;
   }
 }
+
+/* Forced colours (the contrast themes of Windows): the browser replaces
+   every colour with the visitor's system colours and drops shadows, so a
+   fill no longer tells anything apart. What the design says with a fill
+   (the current tab, the solid buttons, the "New" badge) gets a border
+   there, in a system colour; each rule sits with its component, inside
+   `@media (forced-colors: active)`. Translucent floating surfaces become
+   opaque, because a forced background keeps its transparency and the text
+   behind would show through. */
 
 /* Ease dark↔light switches instead of hard-cutting the whole page. The toggle
    adds this class for ~260ms around the scheme flip, so the blanket
@@ -523,6 +532,12 @@ body::after {
     background: var(--glass-bg);
     -webkit-backdrop-filter: blur(20px) saturate(180%);
     backdrop-filter: blur(20px) saturate(180%);
+
+    @media (forced-colors: active) {
+      background: Canvas;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
   }
 }
 
@@ -600,6 +615,20 @@ body::after {
     &:hover {
       background: transparent;
     }
+
+    /* forced colours: the ink block is gone, so the current tab is framed.
+       On the tab, not on the sliding block, so that it also shows without
+       JS; a pseudo-element, so that the focus ring (an outline) stays free */
+    @media (forced-colors: active) {
+      &::after {
+        content: "";
+        position: absolute;
+        inset: 0;
+        border: 2px solid CanvasText;
+        border-radius: inherit;
+        pointer-events: none;
+      }
+    }
   }
 }
 
@@ -648,24 +677,7 @@ body::after {
     padding: 0.5em 0.6em;
     font-size: clamp(0.68em, 3.5vw, 0.92em);
   }
-
-  .theme-toggle {
-    position: fixed;
-    right: 1.5em;
-    bottom: 1.5em;
-    z-index: 40;
-    width: 2.6em;
-    height: 2.6em;
-    min-width: 0;
-    min-height: 0;
-    padding: 0;
-    background: var(--glass-bg);
-    -webkit-backdrop-filter: blur(20px) saturate(180%);
-    backdrop-filter: blur(20px) saturate(180%);
-    border: 1px solid var(--card-border);
-    border-radius: var(--radius-card);
-    box-shadow: var(--shadow-float);
-  }
+  /* the floating toggle: with the .theme-toggle rule below */
 }
 
 /* no-JS fallback: the indicator is JS-created, so restore the static fill */
@@ -692,6 +704,49 @@ body::after {
 
   &:hover {
     background: var(--hover-bg);
+  }
+
+  /* Phones: the floating button in the bottom-right corner, the same glass,
+     border and shadow as the tab bar and the same size and corners as
+     back-to-top above it. Written here, after the declarations above, so
+     that it wins over them (as a separate rule earlier in the file it lost
+     its background, border and radius to this one). */
+  @media (max-width: 30em) {
+    position: fixed;
+    right: 1.5em;
+    bottom: 1.5em;
+    z-index: 40;
+    width: 2.6em;
+    height: 2.6em;
+    min-width: 0;
+    min-height: 0;
+    padding: 0;
+    background: var(--glass-bg);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    backdrop-filter: blur(20px) saturate(180%);
+    border: 1px solid var(--card-border);
+    border-radius: var(--radius-card);
+    box-shadow: var(--shadow-float);
+
+    /* the hover tint alone would replace the glass and let the text under
+       the button through; the solid card colour is the feedback here */
+    &:hover {
+      background: var(--card-bg);
+    }
+
+    @media (prefers-reduced-transparency: reduce) {
+      background: var(--card-bg);
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
+
+    /* forced colours: an opaque face and a border in system colours */
+    @media (forced-colors: active) {
+      border-color: ButtonText;
+      background: Canvas;
+      -webkit-backdrop-filter: none;
+      backdrop-filter: none;
+    }
   }
 }
 
@@ -790,6 +845,11 @@ body::after {
   &:hover {
     background: var(--accent);
     color: var(--on-accent);
+  }
+
+  /* forced colours: without its fill the button is a bare link; frame it */
+  @media (forced-colors: active) {
+    border: 1px solid LinkText;
   }
 }
 
@@ -958,6 +1018,10 @@ body::after {
       font-size: 0.9em;
       letter-spacing: 0.04em;
       text-transform: uppercase;
+
+      @media (forced-colors: active) {
+        border: 1px solid CanvasText;
+      }
     }
   }
 }
@@ -1390,6 +1454,11 @@ body::after {
   visibility: hidden;
   transform: translateY(8px);
   transition: opacity var(--dur-med) var(--ease), transform var(--dur-med) var(--ease), visibility var(--dur-med) var(--ease), background var(--dur-med) var(--ease), color var(--dur-med) var(--ease);
+
+  /* forced colours: fill and shadow are gone; a border keeps it a button */
+  @media (forced-colors: active) {
+    border: 1px solid ButtonText;
+  }
 }
 /* the arrow is an inline SVG on currentColor, like the other icons */
 .back-to-top__icon {

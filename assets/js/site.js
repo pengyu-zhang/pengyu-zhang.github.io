@@ -393,12 +393,24 @@
   document.addEventListener('pjax:content', markNewestNews);
 
   /* ==========================================================
-     Back to top: appears after a screen of scrolling.
+     Back to top: appears after a screen of scrolling. When it
+     goes away while it has keyboard focus (it was just used, or
+     Home / Page Up scrolled the page), focus would be left on a
+     hidden button, so it moves to the first stop of the page,
+     the skip link: the reader is at the top, and so is focus.
+     Keyboard focus only (:focus-visible): after a mouse click
+     the skip link would pop up for no reason.
      ========================================================== */
   {
     const btn = document.getElementById('back-to-top');
     if (btn) {
-      const toggle = () => btn.classList.toggle('is-visible', window.scrollY > 400);
+      const toggle = () => {
+        const show = window.scrollY > 400;
+        if (!show && btn.matches(':focus-visible')) {
+          document.querySelector('.skip-link')?.focus({ preventScroll: true });
+        }
+        btn.classList.toggle('is-visible', show);
+      };
       window.addEventListener('scroll', toggle, { passive: true });
       toggle();
       btn.addEventListener('click', () => {
