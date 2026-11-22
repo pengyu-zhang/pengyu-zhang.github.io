@@ -23,47 +23,51 @@
     !e.metaKey && !e.ctrlKey && !e.shiftKey && !e.altKey;
 
   /* ==========================================================
-     Theme. The pre-paint theme init (and syncThemeColor) stays
-     inline in head.html so the first frame is right. Without a
-     saved choice the page follows the OS, also when the OS
-     switches while the page is open. The toggle saves a choice
-     only when it differs from the OS; toggling back to what the
-     OS asks for drops the saved choice, so the page follows the
-     OS again instead of staying pinned for good.
+     Colour scheme. The page follows the OS unless a scheme is
+     pinned. The pin is the content of <meta name="color-scheme">
+     ("light dark" = follow the OS, "light" / "dark" = pinned):
+     _theme.scss maps it to the CSS color-scheme property, so
+     nothing here touches colours. The inline script in
+     head.html restores a saved pin before first paint.
+     The toggle switches to the opposite of what is on screen.
+     That choice is saved only when it differs from the OS;
+     toggling back to what the OS asks for drops the pin, so the
+     page follows the OS again instead of staying pinned for
+     good. A pin is kept when the OS later comes to match it.
      ========================================================== */
   {
+    const schemeMeta = document.querySelector('meta[name="color-scheme"]');
+    const osDark = window.matchMedia('(prefers-color-scheme: dark)');
+    const osScheme = () => (osDark.matches ? 'dark' : 'light');
+    const asScheme = (value) => (value === 'light' || value === 'dark' ? value : null);
+    const pinned = () => asScheme(schemeMeta?.content);
+
     let fadeTimer;
-    const applyTheme = (theme) => {
-      // ease the page-wide brightness jump: .theme-switching turns the token
+    /* pin 'light' or 'dark'; null follows the OS again */
+    const pin = (scheme) => {
+      if (!schemeMeta || scheme === pinned()) return;
+      // ease the page-wide brightness jump: .theme-switching turns the colour
       // flip into a ~200ms cross-fade (rule in _theme.scss), then leaves
       clearTimeout(fadeTimer);
       root.classList.add('theme-switching');
       fadeTimer = setTimeout(() => root.classList.remove('theme-switching'), 260);
-      root.dataset.theme = theme;
+      schemeMeta.content = scheme || 'light dark';
+      window.syncThemeColor?.(scheme); // browser chrome: the pin, or back to the media split
     };
-    const savedTheme = () => {
-      try { return localStorage.getItem('theme'); } catch (e) { return null; }
-    };
-
-    const osDark = window.matchMedia('(prefers-color-scheme: dark)');
 
     document.getElementById('theme-toggle')?.addEventListener('click', () => {
-      const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
-      const pinned = next !== (osDark.matches ? 'dark' : 'light');
-      applyTheme(next);
+      const next = (pinned() || osScheme()) === 'dark' ? 'light' : 'dark';
+      const choice = next === osScheme() ? null : next;
+      pin(choice);
       try {
-        if (pinned) localStorage.setItem('theme', next);
+        if (choice) localStorage.setItem('theme', choice);
         else localStorage.removeItem('theme');
       } catch (e) {}
-      // browser chrome: the pinned theme, or back to the media split
-      window.syncThemeColor?.(pinned ? next : null);
     });
 
-    // No saved choice: the theme-color metas are split by media query, so
-    // only the page itself has to follow. A saved choice is kept even when
-    // the OS comes to match it.
-    osDark.addEventListener('change', (e) => {
-      if (!savedTheme()) applyTheme(e.matches ? 'dark' : 'light');
+    /* the choice was changed in another tab of this site (key null: storage cleared) */
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'theme' || e.key === null) pin(asScheme(e.newValue));
     });
   }
 
@@ -267,43 +271,60 @@
 
   /* ==========================================================
      Lightbox for figure thumbnails (a.img-zoom). Click opens the
-     link's full-size image in a dimmed overlay; click anywhere
-     or Escape closes it. Delegated on document, so it keeps
-     working after PJAX swaps. Without JS the wrapping <a> simply
-     opens the image file. Open/close are plain CSS transitions
-     on .is-open, so a close mid-open reverses from the CURRENT
-     opacity (interruptible, symmetric enter/exit).
+     link's full-size image in the page's <dialog class="lightbox">
+     (in the layout), as a modal: the browser makes the page behind
+     it inert, keeps focus inside, closes it on Escape or the back
+     gesture and returns focus to the figure link, so none of that
+     is written here. A click anywhere, the image included, closes
+     it too. Delegated on document, so it keeps working after PJAX
+     swaps. Without JS the wrapping <a> simply opens the image
+     file. The fades are CSS transitions (_theme.scss).
      ========================================================== */
   const HD_WIDTH = 2800; // the lightbox copies in images/hd/ are this wide
-  let lightboxReturnFocus = null; // element focus returns to when the box closes
+  const lightbox = document.querySelector('dialog.lightbox');
 
-  /* aria-modal alone doesn't stop Tab from reaching the page behind the
-     dialog — inert does. The skip link and the back-to-top button sit
-     outside #main, so they need their own flag. */
-  function setBackgroundInert(on) {
-    for (const el of document.querySelectorAll('.skip-link, #main, #back-to-top')) {
-      el.toggleAttribute('inert', on);
+  /* The closing fade runs after close() where the browser can transition
+     `display` and `overlay` (the dialog then stays on screen until the fade
+     is over). Firefox and Safari cannot yet: there [data-closing] plays the
+     same fade while the dialog is still open, and close() follows it.
+     Firefox accepts `transition-behavior: allow-discrete` without
+     transitioning `display`, so the probe tests what actually happens. */
+  let exitFadesInCss;
+  function canFadeOutInCss() {
+    if (exitFadesInCss === undefined) {
+      exitFadesInCss = false;
+      if (window.CSS?.supports?.('overlay', 'auto')) {
+        const probe = document.createElement('div');
+        probe.style.cssText = 'transition: display 1s allow-discrete !important; display: block;';
+        document.body.append(probe);
+        getComputedStyle(probe).display; // flush: the next change is a transition
+        probe.style.display = 'none';
+        exitFadesInCss = getComputedStyle(probe).display === 'block';
+        probe.remove();
+      }
     }
+    return exitFadesInCss;
   }
 
-  function closeLightbox() {
-    const box = document.querySelector('.lightbox.is-open');
-    if (!box) return; // absent or already closing
-    const remove = () => {
-      if (!box.isConnected) return;
-      box.remove();
-      setBackgroundInert(false);
-      lightboxReturnFocus?.focus();
-      lightboxReturnFocus = null;
-    };
-    /* Reduced motion keeps short opacity fades (see _theme.scss), so
-       transitionend still fires there; the timer is the safety net. */
-    box.classList.remove('is-open');
-    box.addEventListener('transitionend', (e) => {
-      if (e.propertyName === 'opacity') remove();
-    });
-    setTimeout(remove, 300);
+  async function closeLightbox() {
+    if (!lightbox?.open || lightbox.hasAttribute('data-closing')) return;
+    if (!canFadeOutInCss()) {
+      lightbox.setAttribute('data-closing', '');
+      const fades = lightbox.getAnimations({ subtree: true });
+      await Promise.race([
+        Promise.allSettled(fades.map((fade) => fade.finished)),
+        new Promise((resolve) => setTimeout(resolve, 400)), // safety net
+      ]);
+      lightbox.removeAttribute('data-closing');
+    }
+    lightbox.close();
   }
+
+  /* Escape and the back gesture go the same way, so they fade out as well */
+  lightbox?.addEventListener('cancel', (e) => {
+    e.preventDefault();
+    closeLightbox();
+  });
 
   /* One srcset candidate with a `w` descriptor plus `sizes` gives the image
      a natural width of exactly `cssWidth`, whatever the file's pixel size.
@@ -313,7 +334,7 @@
     img.srcset = `${url} ${pixelWidth}w`;
   }
 
-  /* The full-size files are large (up to ~2 MB), so the overlay starts with
+  /* The full-size files are large (up to ~2 MB), so the lightbox starts with
      the thumbnail the page has already loaded, laid out at the size the full
      image will take, and swaps to the full image once it has arrived. */
   function lightboxImage(link) {
@@ -348,28 +369,12 @@
     }
 
     const link = closest(e, 'a.img-zoom');
-    if (!link) return;
+    if (!link || !lightbox?.showModal) return; // no <dialog>: the link opens the file
     e.preventDefault();
-
-    lightboxReturnFocus = document.activeElement; // so Escape/close returns here
-
-    const overlay = document.createElement('div');
-    overlay.className = 'lightbox';
-    overlay.setAttribute('role', 'dialog');
-    overlay.setAttribute('aria-modal', 'true');
-    overlay.setAttribute('aria-label', 'Image preview (click or press Escape to close)');
-    overlay.tabIndex = -1;
-    overlay.append(lightboxImage(link));
-    document.body.append(overlay);
-    setBackgroundInert(true);
-    overlay.getBoundingClientRect(); // flush styles so the open transition runs
-    overlay.classList.add('is-open');
-    overlay.focus();
+    lightbox.replaceChildren(lightboxImage(link));
+    lightbox.showModal();
   });
 
-  document.addEventListener('keydown', (e) => {
-    if (e.key === 'Escape') closeLightbox();
-  });
 
   /* ==========================================================
      News (on Home): the newest item carries a "New" badge only

@@ -6,7 +6,11 @@ the theme-toggle moon/sun. No icon fonts ship. {% endcomment %}
 
 <div class="profile-card card">
 
-  <img src="/{{ author.avatar }}" class="profile-card__avatar" alt="{{ author.name }}" width="512" height="512">
+  {% comment %} fetchpriority: the photo is the largest element of the first
+  screen on Home and, on wide screens, on Experience and Publications
+  (measured), so it is fetched ahead of the other images. On Beyond the
+  first photo of the wall is, and carries the same hint. {% endcomment %}
+  <img src="/{{ author.avatar }}" class="profile-card__avatar" alt="{{ author.name }}" width="512" height="512" fetchpriority="high">
 
   <h1 class="profile-card__name">{{ author.name }} <span class="profile-card__name-zh" lang="zh-Hans">张鹏宇</span></h1>
 

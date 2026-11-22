@@ -2,48 +2,86 @@
    DESIGN SYSTEM — tokens, base elements and every component of the
    two-column layout (profile | tabbed content). Single source of truth for
    colors and geometry: change a token here and it propagates everywhere.
-   Dark mode overrides the same tokens under [data-theme="dark"].
+
+   COLOUR SCHEME. The page follows the OS setting unless the visitor pins a
+   scheme with the toggle. The pin lives in <meta name="color-scheme"> in the
+   head ("light dark" = follow the OS; "light" or "dark" = pinned; site.js
+   writes it, the inline script in head.html restores it before first
+   paint). The rules below map the meta to the CSS color-scheme property,
+   which native UI (scrollbars) and light-dark() follow. Nothing here needs
+   JS: without it the meta stays "light dark" and the OS decides.
    ========================================================================== */
 
+/* the root element when the visitor has pinned a scheme */
+$pinned-light: ':root:has(> head > meta[name="color-scheme"][content="light"])';
+$pinned-dark:  ':root:has(> head > meta[name="color-scheme"][content="dark"])';
+
+/* Rules that apply in the dark scheme, however it came about (the OS, or the
+   pin). For what light-dark() cannot do: values that are not colours, and
+   the colours themselves in browsers without light-dark(). With a selector
+   the rules go to that element; without one, to the root. */
+@mixin when-dark($selector: '') {
+  @media (prefers-color-scheme: dark) {
+    :root:not(#{$pinned-light}) #{$selector} { @content; }
+  }
+  #{$pinned-dark} #{$selector} { @content; }
+}
+
+/* the tokens that have a light and a dark value (--NAME-light, --NAME-dark) */
+$scheme-colors: accent, accent-hover, on-accent, link-underline, bg-page,
+                card-bg, card-border, text, muted, border, hover-bg, glass-bg;
+
 :root {
-  /* native UI (scrollbars, form controls) follows the site theme, not the OS */
-  color-scheme: light;
+  color-scheme: light dark;
 
-  /* Colour roles. Text is ink on warm paper; solid controls (active tab, CV
-     button, back-to-top) are ink too; the accent is for links, venue labels
-     and the "New" badge only. Every text/background pair below is ≥ 4.5:1,
-     also under simulated protanopia, deuteranopia and tritanopia, and
-     nothing is told by hue alone: prose links are underlined (the underline
-     itself is ≥ 3:1), labels differ by typeface, the active tab by its fill.
-     The accent hex is also hard-coded in tools/og-card.html: change both,
-     regenerate og-card.png, bump og:image ?v= */
-  --accent:         #8a2c3c;
-  --accent-hover:   #73222f;
-  --on-accent:      #ffffff;   /* text on solid accent fills */
-  --link-underline: #ad6b74;   /* the accent at 70% over the card, precomputed
-                                  (libsass does not compile color-mix) */
+  /* Colour roles, each with its light and its dark value; components use the
+     plain name (--accent), which is put together below. Text is ink on warm
+     paper; solid controls (active tab, CV button, back-to-top) are ink too;
+     the accent is for links, venue labels and the "New" badge only. Every
+     text/background pair is ≥ 4.5:1, also under simulated protanopia,
+     deuteranopia and tritanopia (tools/verify/contrast.py reads the values
+     from here), and nothing is told by hue alone: prose links are underlined
+     (the underline itself is ≥ 3:1), labels differ by typeface, the active
+     tab by its fill. The light accent is also hard-coded in
+     tools/og-card.html: change both, regenerate og-card.png, bump
+     og:image ?v= */
+  --accent-light:         #8a2c3c;
+  --accent-dark:          #f09aa6;
+  --accent-hover-light:   #73222f;
+  --accent-hover-dark:    #f4b1ba;
+  --on-accent-light:      #ffffff;   /* text on solid accent fills */
+  --on-accent-dark:       #0b0c0f;
+  --link-underline-light: #ad6b74;   /* the accent at 70% over the card, */
+  --link-underline-dark:  #b1747b;   /* precomputed for the contrast check */
 
-  --bg-page:        #f4f1ea;
-  --card-bg:        #fffdf8;
-  --card-border:    #d6cdb9;
-  --text:           #26231d;
-  --muted:          #6a6356;
-  --border:         #e7e0d2;   /* hairlines inside cards */
+  --bg-page-light:        #f4f1ea;
+  --bg-page-dark:         #151410;
+  --card-bg-light:        #fffdf8;
+  --card-bg-dark:         #1d1b16;
+  --card-border-light:    #d6cdb9;
+  --card-border-dark:     #3d382d;
+  --text-light:           #26231d;
+  --text-dark:            #e3ddd0;
+  --muted-light:          #6a6356;
+  --muted-dark:           #a69e8d;
+  --border-light:         #e7e0d2;   /* hairlines inside cards */
+  --border-dark:          #2e2a22;
+  --hover-bg-light:       rgba(38, 35, 29, 0.08);
+  --hover-bg-dark:        rgba(227, 221, 208, 0.1);
+  /* translucent tab bar; falls back to --card-bg where backdrop-filter is
+     unsupported or the user reduces transparency */
+  --glass-bg-light:       rgba(255, 253, 248, 0.84);
+  --glass-bg-dark:        rgba(29, 27, 22, 0.84);
 
   --ink:            var(--text);     /* solid controls */
   --on-ink:         var(--card-bg);
-  --hover-bg:       rgba(38, 35, 29, 0.08);
-
   --selection-bg:   var(--accent);
-  --selection-text: #ffffff;
-
-  /* translucent tab bar; falls back to --card-bg where backdrop-filter is
-     unsupported or the user reduces transparency */
-  --glass-bg:       rgba(255, 253, 248, 0.84);
+  --selection-text: var(--on-accent);
 
   /* the ONLY resting shadow: floating chrome (tab bar, lightbox, floating
      buttons) reads as hovering above the content; resting cards and figures
-     are border-only, so "has a shadow" = "floats" */
+     are border-only, so "has a shadow" = "floats". Its dark value differs in
+     shape, not only in colour, so it is set with when-dark below. */
   --shadow-float:   0 1px 2px rgba(60, 50, 30, 0.08), 0 6px 18px rgba(60, 50, 30, 0.08);
   /* transient hover glow on figure links (thumbnails, Beyond photos) */
   --shadow-hover:   0 0 10px rgba(0, 0, 0, 0.25);
@@ -65,41 +103,47 @@
   --ease:           ease;
 }
 
-[data-theme="dark"] {
-  color-scheme: dark;
+/* a pinned scheme overrides the OS setting */
+#{$pinned-light} { color-scheme: light; }
+#{$pinned-dark}  { color-scheme: dark; }
 
-  --accent:         #f09aa6;
-  --accent-hover:   #f4b1ba;
-  --on-accent:      #0b0c0f;
-  --link-underline: #b1747b;
+/* Each colour picks its value by the scheme in use: light-dark() follows
+   color-scheme, so the OS setting and the pin are both covered. */
+@supports (color: light-dark(white, black)) {
+  :root {
+    @each $name in $scheme-colors {
+      --#{$name}: light-dark(var(--#{$name}-light), var(--#{$name}-dark));
+    }
+  }
+}
 
-  --bg-page:        #151410;
-  --card-bg:        #1d1b16;
-  --card-border:    #3d382d;
-  --text:           #e3ddd0;
-  --muted:          #a69e8d;
-  --border:         #2e2a22;
+/* Browsers without light-dark() (before Chrome 123, Firefox 120 and
+   Safari 17.5) get the same result from the media query and the pin. */
+@supports not (color: light-dark(white, black)) {
+  :root {
+    @each $name in $scheme-colors {
+      --#{$name}: var(--#{$name}-light);
+    }
+  }
+  @include when-dark {
+    @each $name in $scheme-colors {
+      --#{$name}: var(--#{$name}-dark);
+    }
+  }
+}
 
-  --hover-bg:       rgba(227, 221, 208, 0.1);
-
-  --selection-bg:   #f09aa6;
-  --selection-text: #0b0c0f;
-
-  --glass-bg:       rgba(29, 27, 22, 0.84);
-
-  --shadow-float:   0 8px 30px rgba(0, 0, 0, 0.45);
+@include when-dark {
+  --shadow-float: 0 8px 30px rgba(0, 0, 0, 0.45);
 }
 
 /* Higher contrast on request: the quiet card and hairline borders get a
    clearly-defined edge. Token-only override, same palette. */
 @media (prefers-contrast: more) {
   :root {
-    --card-border: #8f8672;
-    --border:      #8f8672;
-  }
-  [data-theme="dark"] {
-    --card-border: #6b6452;
-    --border:      #6b6452;
+    --card-border-light: #8f8672;
+    --border-light:      #8f8672;
+    --card-border-dark:  #6b6452;
+    --border-dark:       #6b6452;
   }
 }
 
@@ -148,6 +192,13 @@ h1, h2, h3 { line-height: 1.2; }
 
 p { margin: 0 0 0.5em; }
 
+/* Line breaks. A heading that wraps gets lines of even length; running text
+   does not end a paragraph on a single short word. Set on these elements
+   only, not on everything: the better line breaking costs layout time.
+   Browsers without it wrap as before. */
+h1, h2, h3 { text-wrap: balance; }
+p, li { text-wrap: pretty; }
+
 img {
   max-width: 100%;
   height: auto;
@@ -159,14 +210,19 @@ button {
   cursor: pointer;
 }
 
-/* screen-reader-only text (the PJAX live region) */
+/* Text for screen readers only (the PJAX live region, the theme toggle's
+   action text): kept in the accessibility tree, not rendered. None of it is
+   focusable, so there is no "show while focused" exception. */
 .visually-hidden {
   position: absolute !important;
-  clip: rect(1px, 1px, 1px, 1px);
-  height: 1px !important;
+  clip-path: inset(50%) !important;
+  overflow: hidden !important;
   width: 1px !important;
+  height: 1px !important;
+  margin: -1px !important;
+  padding: 0 !important;
   border: 0 !important;
-  overflow: hidden;
+  white-space: nowrap !important;
 }
 
 a {
@@ -260,13 +316,16 @@ summary:focus-visible {
 /* Honor the OS "reduce motion" setting. Reduced motion does not mean no
    feedback: keep the short opacity/color cross-fades that aid comprehension,
    and make only movement — transforms, slides — instant. Opacity stays in
-   the transition whitelist, so transitionend still fires for the PJAX fade
-   and the lightbox close. */
+   the transition whitelist, so transitionend still fires for the PJAX fade;
+   display and overlay stay too (they only matter where an element asks for
+   them with transition-behavior: the lightbox, which needs them to stay on
+   screen while it fades out). */
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
-  *::after {
-    transition-property: opacity, color, background, background-color, border-color, box-shadow !important;
+  *::after,
+  ::backdrop {
+    transition-property: opacity, color, background, background-color, border-color, box-shadow, display, overlay !important;
     transition-duration: 0.15s !important;
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
@@ -274,7 +333,7 @@ summary:focus-visible {
 }
 
 /* Ease dark↔light switches instead of hard-cutting the whole page. The toggle
-   adds this class for ~260ms around the data-theme flip, so the blanket
+   adds this class for ~260ms around the scheme flip, so the blanket
    transition never lingers to slow down other interactions. Deliberately NOT
    gated on reduced motion: softening a full-viewport brightness jump is
    itself the accessible option. */
@@ -636,20 +695,25 @@ body::after {
   }
 }
 
-/* moon/sun as inline SVGs on currentColor. CSS picks the icon: moon in light
-   mode ("switch to dark"), sun in dark mode. */
+/* moon/sun as inline SVGs on currentColor */
 .theme-toggle__icon {
   display: block;
   width: 1.05em;
   height: 1.05em;
 }
 
-.theme-toggle__icon--sun { display: none; }
+/* The button holds both actions, each an icon with its hidden text ("Switch
+   to dark theme": moon; "Switch to light theme": sun). CSS shows the one
+   that fits the scheme in use; display: none also keeps the other one from
+   screen readers, so the name of the button is always the current action. */
+.theme-toggle__action { display: contents; }
+.theme-toggle__action--light { display: none; }
 
-[data-theme="dark"] {
-  .theme-toggle__icon--sun { display: block; }
-  .theme-toggle__icon--moon { display: none; }
-}
+@include when-dark('.theme-toggle__action--light') { display: contents; }
+@include when-dark('.theme-toggle__action--dark') { display: none; }
+
+/* the button needs JS: do not offer it without */
+.no-js .theme-toggle { display: none; }
 
 /* ==========================================================================
    PROFILE CARD — photo, name, role, CV button, contact links
@@ -846,10 +910,12 @@ body::after {
       /* icons only; the labels stay for screen readers */
       .pc-label {
         position: absolute;
-        clip: rect(1px, 1px, 1px, 1px);
+        clip-path: inset(50%);
+        overflow: hidden;
         width: 1px;
         height: 1px;
-        overflow: hidden;
+        margin: -1px;
+        white-space: nowrap;
       }
     }
   }
@@ -1015,8 +1081,8 @@ body::after {
   }
 }
 
-[data-theme="dark"] .paper-box .paper-box-image img {
-  /* soften the glare of white paper figures on the dark background */
+/* soften the glare of white paper figures on the dark background */
+@include when-dark('.paper-box .paper-box-image img') {
   filter: brightness(0.88);
 }
 
@@ -1027,24 +1093,44 @@ body::after {
   cursor: zoom-in;
 }
 
+/* The lightbox is a native modal <dialog> (in the layout; site.js opens it
+   with showModal()), so it sits in the top layer above everything, with the
+   page behind it inert. The dialog itself is a transparent box the size of
+   the viewport that centres the image; the dimming is its ::backdrop.
+   Closed, it is the transparent, slightly smaller state below; the open
+   state fades in from it (@starting-style) and back out to it (display and
+   overlay are in the transition, so the dialog stays on screen until the
+   fade is over; where a browser cannot do that, site.js sets [data-closing]
+   before it closes the dialog, which plays the same fade). A close mid-open
+   reverses from the current opacity. */
 .lightbox {
+  /* undo the browser's dialog box */
   position: fixed;
   inset: 0;
-  z-index: 100;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  max-height: none;
+  margin: 0;
   padding: 2em;
-  /* dim-to-focus: darken AND optically push the page behind the image back */
-  background: rgba(15, 17, 21, 0.88);
-  -webkit-backdrop-filter: blur(8px) saturate(115%);
-  backdrop-filter: blur(8px) saturate(115%);
+  border: 0;
+  outline: 0; /* focus is on the dialog as a whole: a ring around the viewport says nothing */
+  background: transparent;
+  overflow: hidden;
+  overscroll-behavior: contain; /* scrolling over it does not scroll the page behind */
   cursor: zoom-out;
-  /* transitions, not keyframes: JS toggles .is-open, so a close mid-open
-     reverses from the CURRENT opacity (interruptible) and the exit retraces
-     the entry path (symmetric). site.js removes the node on transitionend. */
   opacity: 0;
-  transition: opacity var(--dur-fast) var(--ease);
+  transition-property: opacity, display, overlay;
+  transition-duration: var(--dur-fast);
+  transition-timing-function: var(--ease);
+  transition-behavior: allow-discrete;
+
+  /* display only while open: set unconditionally it would show the closed dialog */
+  &[open] {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 
   img {
     max-width: 100%;
@@ -1059,16 +1145,41 @@ body::after {
     transition: transform 0.18s var(--ease);
   }
 
-  &.is-open {
-    opacity: 1;
+  /* dim-to-focus: darken AND optically push the page behind the image back */
+  &::backdrop {
+    background: rgba(15, 17, 21, 0.88);
+    -webkit-backdrop-filter: blur(8px) saturate(115%);
+    backdrop-filter: blur(8px) saturate(115%);
+    overflow: hidden; /* a scroll container, so that overscroll-behavior applies */
+    overscroll-behavior: contain;
+    opacity: 0;
+    transition-property: opacity, display, overlay;
+    transition-duration: 0.15s; /* = --dur-fast; literal, older browsers do not inherit custom properties here */
+    transition-timing-function: ease;
+    transition-behavior: allow-discrete;
+  }
+}
 
-    img { transform: scale(1); }
+.lightbox[open]:not([data-closing]) {
+  opacity: 1;
+
+  img { transform: scale(1); }
+  &::backdrop { opacity: 1; }
+}
+
+/* where the open state fades in from */
+@starting-style {
+  .lightbox[open]:not([data-closing]) {
+    opacity: 0;
+
+    img { transform: scale(0.96); }
+    &::backdrop { opacity: 0; }
   }
 }
 
 /* Reduced transparency: solid-ish scrim, no blur. */
 @media (prefers-reduced-transparency: reduce) {
-  .lightbox {
+  .lightbox::backdrop {
     background: rgba(15, 17, 21, 0.94);
     -webkit-backdrop-filter: none;
     backdrop-filter: none;

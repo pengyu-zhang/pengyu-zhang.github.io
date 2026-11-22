@@ -8,27 +8,20 @@
   document.documentElement.className = document.documentElement.className.replace(/\bno-js\b/g, '') + ' js ';
 </script>
 
-<!-- The fonts are self-hosted (@font-face in _sass/_fonts.scss); preload the
-     text face so the swap from the system-font fallback happens as early as
-     possible. Fonts always need crossorigin, even same-origin. -->
-<link rel="preload" href="/assets/fonts/ibm-plex-sans-latin-var.woff2" as="font" type="font/woff2" crossorigin>
-
-<link rel="stylesheet" href="/assets/css/main.css?v={{ site.time | date: '%s' }}">
-
-<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-<link rel="manifest" href="/images/site.webmanifest">
-
-<!-- browser chrome color follows the page background (--bg-page tokens in
-     _theme.scss — keep the hex values in sync). The media split covers the
-     pre-JS OS default; syncThemeColor below sets both to the saved theme, and
-     back to the split when the choice is dropped (called without a theme). -->
+<!-- browser chrome color follows the page background (the --bg-page values in
+     _theme.scss: keep the hex values in sync). The media split follows the
+     OS; syncThemeColor below sets both to a pinned scheme, and back to the
+     split when the pin is dropped (called without a theme). -->
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f1ea">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#151410">
 
-<!-- Apply the saved/OS color theme before first paint (no flash). Must stay
-     inline here; every other script lives in assets/js/site.js. -->
+<!-- Both colour schemes are supported. "light dark" follows the OS; the theme
+     toggle pins one scheme by writing "light" or "dark" here, and _theme.scss
+     maps this meta to the CSS color-scheme property. The inline script
+     restores a saved pin before first paint (no flash), which is why it sits
+     right after the meta and before the stylesheet; every other script lives
+     in assets/js/site.js. Without JS the page simply follows the OS. -->
+<meta name="color-scheme" content="light dark">
 <script>
   (function () {
     window.syncThemeColor = function (theme) {
@@ -40,12 +33,25 @@
     };
     try {
       var saved = localStorage.getItem('theme');
-      var theme = saved || (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
-      document.documentElement.setAttribute('data-theme', theme);
-      if (saved) window.syncThemeColor(saved); // manual choice may differ from the OS
+      if (saved === 'light' || saved === 'dark') {
+        document.querySelector('meta[name="color-scheme"]').content = saved;
+        window.syncThemeColor(saved);
+      }
     } catch (e) {}
   })();
 </script>
+
+<!-- The fonts are self-hosted (@font-face in _sass/_fonts.scss); preload the
+     text face so the swap from the system-font fallback happens as early as
+     possible. Fonts always need crossorigin, even same-origin. -->
+<link rel="preload" href="/assets/fonts/ibm-plex-sans-latin-var.woff2" as="font" type="font/woff2" crossorigin>
+
+<link rel="stylesheet" href="/assets/css/main.css?v={{ site.time | date: '%s' }}">
+
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+<link rel="manifest" href="/images/site.webmanifest">
 
 {% if jekyll.environment == "production" and site.google_analytics %}
 <!-- Google Analytics (GA4). Production builds only, so local previews send nothing. -->

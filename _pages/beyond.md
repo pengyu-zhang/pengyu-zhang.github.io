@@ -9,7 +9,7 @@ description: "A few snapshots from life outside research: road cycling, boulderi
 ## Beyond
 
 <div class="photo-wall">
-  {% include photo.html file="cycling-erhai-trophy.jpg" alt="Finisher trophy after the 126 km ride around Erhai Lake in Dali" width=900 height=1600 eager=true %}
+  {% include photo.html file="cycling-erhai-trophy.jpg" alt="Finisher trophy after the 126 km ride around Erhai Lake in Dali" width=900 height=1600 eager=true priority=true %}
   {% include photo.html file="cycling-erhai-lakeside.jpg" alt="My road bike parked by the Erhai lakeside during the ride" width=1600 height=1200 eager=true %}
   {% include photo.html file="bouldering-gym.jpg" alt="Reaching for the top holds on a boulder problem at the climbing gym" width=611 height=922 %}
   {% include photo.html file="bouldering-uv.jpg" alt="Bouldering under UV blacklight" width=1200 height=1600 %}
