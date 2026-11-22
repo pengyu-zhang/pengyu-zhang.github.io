@@ -22,8 +22,8 @@
 
 <!-- browser chrome color follows the page background (--bg-page tokens in
      _theme.scss — keep the hex values in sync). The media split covers the
-     pre-JS OS default; syncThemeColor below overrides both when a saved or
-     toggled theme differs from the OS. -->
+     pre-JS OS default; syncThemeColor below sets both to the saved theme, and
+     back to the split when the choice is dropped (called without a theme). -->
 <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f4f1ea">
 <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#151410">
 
@@ -32,9 +32,11 @@
 <script>
   (function () {
     window.syncThemeColor = function (theme) {
-      var color = theme === 'dark' ? '#151410' : '#f4f1ea';
       var metas = document.querySelectorAll('meta[name="theme-color"]');
-      for (var i = 0; i < metas.length; i++) metas[i].setAttribute('content', color);
+      for (var i = 0; i < metas.length; i++) {
+        var t = theme || (metas[i].media.indexOf('dark') > -1 ? 'dark' : 'light');
+        metas[i].setAttribute('content', t === 'dark' ? '#151410' : '#f4f1ea');
+      }
     };
     try {
       var saved = localStorage.getItem('theme');

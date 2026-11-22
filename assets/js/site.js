@@ -24,9 +24,12 @@
 
   /* ==========================================================
      Theme. The pre-paint theme init (and syncThemeColor) stays
-     inline in head.html so the first frame is right. A manual
-     choice is saved; until one is made, the page follows the OS,
-     also when the OS switches while the page is open.
+     inline in head.html so the first frame is right. Without a
+     saved choice the page follows the OS, also when the OS
+     switches while the page is open. The toggle saves a choice
+     only when it differs from the OS; toggling back to what the
+     OS asks for drops the saved choice, so the page follows the
+     OS again instead of staying pinned for good.
      ========================================================== */
   {
     let fadeTimer;
@@ -42,16 +45,24 @@
       try { return localStorage.getItem('theme'); } catch (e) { return null; }
     };
 
+    const osDark = window.matchMedia('(prefers-color-scheme: dark)');
+
     document.getElementById('theme-toggle')?.addEventListener('click', () => {
       const next = root.dataset.theme === 'dark' ? 'light' : 'dark';
+      const pinned = next !== (osDark.matches ? 'dark' : 'light');
       applyTheme(next);
-      try { localStorage.setItem('theme', next); } catch (e) {}
-      window.syncThemeColor?.(next); // browser chrome follows
+      try {
+        if (pinned) localStorage.setItem('theme', next);
+        else localStorage.removeItem('theme');
+      } catch (e) {}
+      // browser chrome: the pinned theme, or back to the media split
+      window.syncThemeColor?.(pinned ? next : null);
     });
 
-    // No saved choice: the theme-color metas are still split by media query,
-    // so only the page itself has to follow.
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', (e) => {
+    // No saved choice: the theme-color metas are split by media query, so
+    // only the page itself has to follow. A saved choice is kept even when
+    // the OS comes to match it.
+    osDark.addEventListener('change', (e) => {
       if (!savedTheme()) applyTheme(e.matches ? 'dark' : 'light');
     });
   }
