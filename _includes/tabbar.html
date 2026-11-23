@@ -1,7 +1,7 @@
 <nav class="tabbar" aria-label="Primary">
   <ul class="tabbar__tabs">
     {% for link in site.data.navigation.main %}
-      <li><a class="tabbar__tab{% if page.url == link.url %} is-active{% endif %}" href="{{ link.url }}"{% if page.url == link.url %} aria-current="page"{% endif %}>{{ link.title }}</a></li>
+      <li><a class="tabbar__tab" href="{{ link.url }}"{% if page.url == link.url %} aria-current="page"{% endif %}{% if link.full_load %} data-full-load{% endif %}>{{ link.title }}</a></li>
     {% endfor %}
   </ul>
   {% comment %} The button holds both actions: moon + "Switch to dark theme"

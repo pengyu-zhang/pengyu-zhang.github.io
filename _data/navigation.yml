@@ -12,3 +12,9 @@ main:
 
   - title: "Beyond"
     url: "/beyond/"
+
+  # Feed is a separate site under /feed/ (its own repository and build), so
+  # this tab is an ordinary link: a full page load, not a PJAX swap.
+  - title: "Feed"
+    url: "/feed/"
+    full_load: true

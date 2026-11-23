@@ -72,23 +72,31 @@
   }
 
   /* ==========================================================
-     Link targets. The site's own pages are the tab bar's four
-     URLs; links to them stay in this tab (and go through PJAX
-     below). Everything else — other sites, PDFs, full-size
-     images, the project demo pages — opens in a new tab. Set as
-     attributes so middle-click, the status bar and assistive
-     tech all see the same thing; re-run after every PJAX swap.
+     Link targets. The site's own pages are the URLs of the tab
+     bar; links to them stay in this tab (and go through PJAX
+     below). A tab marked data-full-load (Feed) leads to a
+     separate site under the same origin: its links stay in this
+     tab too, but load as ordinary pages. Everything else — other
+     sites, PDFs, full-size images, the project demo pages —
+     opens in a new tab. Set as attributes so middle-click, the
+     status bar and assistive tech all see the same thing; re-run
+     after every PJAX swap.
      ========================================================== */
-  const tabs = [...document.querySelectorAll('.tabbar__tab')];
+  const tabs = [...document.querySelectorAll('.tabbar__tab:not([data-full-load])')];
   const tabPaths = tabs.map((tab) => tab.pathname);
+  const fullLoadPaths = [...document.querySelectorAll('.tabbar__tab[data-full-load]')]
+    .map((tab) => tab.pathname);
 
   const isSitePage = (a) =>
     a.origin === location.origin && tabPaths.includes(a.pathname);
 
+  const isFullLoadPage = (a) =>
+    a.origin === location.origin && fullLoadPaths.some((path) => a.pathname.startsWith(path));
+
   function markExternalLinks(scope) {
     for (const a of scope.querySelectorAll('a[href]')) {
       if (a.target || a.protocol === 'mailto:') continue;
-      if (isSitePage(a) || (a.origin === location.origin && a.hash)) continue;
+      if (isSitePage(a) || isFullLoadPage(a) || (a.origin === location.origin && a.hash)) continue;
       a.target = '_blank';
       a.rel = a.rel ? `${a.rel} noopener` : 'noopener';
     }
@@ -100,7 +108,7 @@
      _theme.scss) glides from the old tab to the new one, so the
      selection reads as a physical object moving — FLIP: measure
      the active tab, then let the CSS transition play the move.
-     Created here so no-JS visitors keep the static .is-active
+     Created here so no-JS visitors keep the static aria-current
      pill instead (.no-js rule in _theme.scss).
      ========================================================== */
   const tabsList = document.querySelector('.tabbar__tabs');
@@ -114,7 +122,7 @@
       tabIndicator.setAttribute('aria-hidden', 'true');
       tabsList.prepend(tabIndicator);
     }
-    const active = tabsList.querySelector('.tabbar__tab.is-active');
+    const active = tabsList.querySelector('.tabbar__tab[aria-current="page"]');
     if (!active) { tabIndicator.style.opacity = '0'; return; }
     tabIndicator.style.opacity = '';
     /* measure both against the list: wrapped rows on narrow screens make
@@ -137,10 +145,21 @@
   // the web font swapping in changes tab widths — re-measure once fonts settle
   document.fonts.ready.then(() => positionTabIndicator(false));
 
+  /* The bar's height, for the page's top margin on one-column screens
+     (_theme.scss): at a large text size the tabs wrap onto a second row and
+     the fixed bar would otherwise cover the top of the page. The same in
+     Feed's app.js. */
+  const tabbar = document.querySelector('.tabbar');
+  if (tabbar && window.ResizeObserver) {
+    new ResizeObserver(() => {
+      root.style.setProperty('--tabbar-block-size', `${tabbar.offsetHeight}px`);
+      positionTabIndicator(false); // a new row moves the tabs
+    }).observe(tabbar);
+  }
+
   function setActiveTab(pathname) {
     for (const tab of tabs) {
       const active = tab.pathname === pathname;
-      tab.classList.toggle('is-active', active);
       if (active) tab.setAttribute('aria-current', 'page');
       else tab.removeAttribute('aria-current');
     }
